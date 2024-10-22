@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2024 at 04:23 AM
+-- Generation Time: Oct 22, 2024 at 04:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,50 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `community`
---
-
-CREATE TABLE `community` (
-  `community_users_id` int(11) NOT NULL,
-  `community_content` varchar(100) NOT NULL,
-  `community_date` datetime NOT NULL,
-  `community_like` int(50) NOT NULL,
-  `community_comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `exercises`
---
-
-CREATE TABLE `exercises` (
-  `exercises_id` int(11) NOT NULL,
-  `exercises_name` varchar(100) NOT NULL,
-  `exercises_type` varchar(50) NOT NULL,
-  `exercises_duration` int(50) NOT NULL,
-  `exercises_intensity` varchar(50) NOT NULL,
-  `exercises_repetition` int(50) NOT NULL,
-  `exercises_video` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `statistics`
---
-
-CREATE TABLE `statistics` (
-  `statistics_id` int(11) NOT NULL,
-  `statistics_users_id` int(11) NOT NULL,
-  `statistics_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `statistics_achievement` varchar(255) NOT NULL,
-  `statistics_burned_calories` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -75,8 +31,8 @@ CREATE TABLE `users` (
   `users_id` int(11) NOT NULL,
   `users_fullname` varchar(100) NOT NULL,
   `users_email` int(11) NOT NULL,
-  `users_password` varchar(100) NOT NULL,
   `users_username` varchar(50) NOT NULL,
+  `users_password` varchar(255) NOT NULL,
   `users_gender` int(11) NOT NULL,
   `users_age` int(11) NOT NULL,
   `users_birthdate` date DEFAULT current_timestamp(),
@@ -88,26 +44,19 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`users_id`, `users_fullname`, `users_email`, `users_username`, `users_password`, `users_gender`, `users_age`, `users_birthdate`, `users_weight`, `users_height`, `users_goal`, `users_photo`, `users_achievement`) VALUES
+(1, '', 0, 'anna', '123', 0, 0, '2024-10-22', 0, 0, 0, 0, 0),
+(2, '', 0, 'abv', '123', 0, 0, '2024-10-22', 0, 0, 0, 0, 0),
+(3, '', 0, 'cth', '123', 0, 0, '2024-10-22', 0, 0, 0, 0, 0),
+(6, '', 0, 'boku', '321', 0, 0, '2024-10-22', 0, 0, 0, 0, 0),
+(8, '', 0, 'muani', '123', 0, 0, '2024-10-22', 0, 0, 0, 0, 0);
+
+--
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `community`
---
-ALTER TABLE `community`
-  ADD PRIMARY KEY (`community_users_id`);
-
---
--- Indexes for table `exercises`
---
-ALTER TABLE `exercises`
-  ADD PRIMARY KEY (`exercises_id`);
-
---
--- Indexes for table `statistics`
---
-ALTER TABLE `statistics`
-  ADD PRIMARY KEY (`statistics_id`);
 
 --
 -- Indexes for table `users`
@@ -121,28 +70,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `community`
---
-ALTER TABLE `community`
-  MODIFY `community_users_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `exercises`
---
-ALTER TABLE `exercises`
-  MODIFY `exercises_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `statistics`
---
-ALTER TABLE `statistics`
-  MODIFY `statistics_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
