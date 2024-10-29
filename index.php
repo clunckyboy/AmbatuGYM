@@ -103,6 +103,10 @@
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
             transform: scale(1.02);
         }
+
+        .message {
+            color: red;
+        }
     </style>
 
 </head>
@@ -133,7 +137,7 @@
                             <input type="password" class="form-control" name="password" placeholder="password" required>
                         </div>
 
-                        <p> <?= $login_message ?> </p>
+                        <p class="message"> <?= $login_message ?> </p>
 
                         <button type="submit" class="btn btn-custom w-100 mb-3" name="login">Masuk</button>
                     
