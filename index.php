@@ -1,5 +1,5 @@
 <?php
-    include "./services/database.php";
+    include "./database/config.php";
     session_start();
 
     $login_message = "";
@@ -30,103 +30,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/x-icon" href="./ambatugym2.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmbatuGYM Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>AmbatuLogin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
-        /* Background styling */
-        .bg-custom {
-            background-image: url('./images/amba2.jpg');
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh; /* Set the height of the background area */
-            position: relative;
-        }
-
-        /* Overlay that applies the blur effect */
-        .blur-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+            body, html {
             height: 100%;
-            backdrop-filter: blur(20px); /* Apply blur to the background */
-            z-index: 0; /* Push it to the back */
         }
 
-        .rounded-custom{
-            padding: 10px;
-            border-radius: 15px;
-        }
-        /* Translucent card container */
-        .translucent-card {
-            background: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
-            border-radius: 15px; /* Optional: for rounded corners */
-            position: relative;
-            z-index: 1; /* Ensure it stays on top of the blur */
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            width: 80%; 
+            max-width: 600px;
         }
 
-        i{
-            color: red;
+        .left-section {
+            background-color: #FF8000;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .left-section h1 {
+            font-size: 3rem;
+            text-align: center;
+        }
+        .logo img {
+            width: 250px;
+            height: 250px;
+            margin-top: 20px;
+        }
+        .right-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-container {
+            width: 100%;
+            max-width: 300px;
+        }
+        .btn-custom {
+            background-color: #FF8000;
+            color: white;
+            transition: transform 0.1s ease-in-out, box-shadow 0.15s;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.695);
+            text-align: center;
+        }
+        .btn-custom:hover {
+            background-color: #FF8000;
+            border: 1px solid black;
+            transform: scale(1.02);
+            box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.147);
+        }
+
+        .btn-custom:active {
+            background-color: rgb(196, 59, 0);
+            /* transform: scale(0.98); */
+        }
+
+        .form-control {
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.695);
+        }
+
+        .form-control:focus {
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
+            transform: scale(1.02);
         }
     </style>
-</head>
-<body>
-    <section class="h-100 gradient-form bg-custom">
-        <!-- Blurred overlay -->
-        <div class="blur-overlay"></div> 
 
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-xl-10">
-                    <!-- Translucent card to hold form content -->
-                    <div class="card translucent-card rounded-3 text-black">
-                        <div class="row g-0">
-                            <div class="col-lg-6">
-                                <div class="card-body p-md-5 mx-md-4">
-                                    <div class="text-center">
-                                        <h4 class="mt-1 mb-5 pb-1">Welcome to AmbatuGYM</h4>
-                                    </div>
-                                    <form action='index.php' method="POST">
-                                        <!-- <p>Please login to your account</p> -->
-                                        <div data-mdb-input-init class="form-outline mb-4">
-                                            <input type="text" id="form2Example11" class="form-control" placeholder="username" name="username"/>
-                                            <label class="form-label" for="form2Example11">Username</label>
-                                        </div>
-                                        <div data-mdb-input-init class="form-outline mb-4">
-                                            <input type="password" id="form2Example22" class="form-control" placeholder="password" name="password"/>
-                                            <label class="form-label" for="form2Example22">Password</label>
-                                        </div>
-                                        <div class="text-center pt-1 mb-5 pb-1">
-                                            <i> <?= $login_message ?> </i>
-                                            <button class="btn btn-primary btn-block fa-lg mb-3" type="submit" name="login">Login</button>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-center pb-4">
-                                            <p class="mb-0 me-2">Don't have an account?</p>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-center pb-4">
-                                            <button type="button" onclick ="location.href='register.php'" class="btn btn-outline-danger">Create new</button>
-                                        </div>                                    
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 d-flex flex-column align-items-center rounded">
-                                <img src="./images/amba2.jpg" alt="Perrel Brown" class="w-100 rounded-custom shadow">
-                                <div class="text-black px-7 py-2 p-md-6 mx-md-4" style="font-weight: 400;">
-                                    <p class="medium mb-0">Welcome to our comprehensive health and fitness monitoring site! Here, you can effortlessly track and manage various aspects of your well-being. Our platform offers a wide range of tools and resources designed to help you stay on top of your health and fitness goals.</p>
-                                </div>
-                            </div>
-                        </div>
+</head>
+
+<body>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-md-6 left-section">
+                <div class="header-content">
+                    <h1 class="m-2">Reach Your<br>Goals With</h1>
+                    <div class="logo">
+                        <img src="./images/ambatugym2.png" alt="AmbatuGYM Logo">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+            <div class="col-md-6 right-section">
+                <div class="form-container">
+                    <h2 class="mb-4">Login</h2>
+                    
+                    <form  action="index.php" id="form-login" method="POST">
+                        
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="username" placeholder="username" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="password" class="form-control" name="password" placeholder="password" required>
+                        </div>
+
+                        <p> <?= $login_message ?> </p>
+
+                        <button type="submit" class="btn btn-custom w-100 mb-3" name="login">Masuk</button>
+                    
+                    </form>
+                    <p class="text-center">
+                        Belum punya akun? <a href="register.php" class="text-warning">buat akun</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 </body>
 </html>
+
