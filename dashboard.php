@@ -112,7 +112,10 @@
                   <a class="nav-link" href="#">Profil</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Exercise</a>
+                  <a class="nav-link" href="exercises.html">Gallery</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="exercise.html">Exercise</a>
                 </li>
                 <li class="nav-item">
                    <a class="nav-link" href="">Community</a>
