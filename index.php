@@ -139,7 +139,7 @@
                     
                     </form>
                     <p class="text-center">
-                        Belum punya akun? <a href="register1.php" class="text-warning">buat akun</a>
+                        Belum punya akun? <a href="register.php" class="text-warning">buat akun</a>
                     </p>
                 </div>
             </div>

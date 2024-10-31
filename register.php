@@ -193,7 +193,7 @@
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
             <img src="./images/ambatugym2.png" alt="ambatugym" width="50" height="50">
-            <a class="tombol-login" href="index.html"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
+            <a class="tombol-login" href="index.php"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
         </div>
       </nav>
 
