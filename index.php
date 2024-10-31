@@ -30,7 +30,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="./ambatugym2.png">
+    <link rel="icon" type="image/x-icon" href="./images/ambatugym2.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AmbatuLogin</title>
@@ -103,10 +103,6 @@
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
             transform: scale(1.02);
         }
-
-        .message {
-            color: red;
-        }
     </style>
 
 </head>
@@ -137,13 +133,13 @@
                             <input type="password" class="form-control" name="password" placeholder="password" required>
                         </div>
 
-                        <p class="message"> <?= $login_message ?> </p>
+                        <p> <?= $login_message ?> </p>
 
                         <button type="submit" class="btn btn-custom w-100 mb-3" name="login">Masuk</button>
                     
                     </form>
                     <p class="text-center">
-                        Belum punya akun? <a href="register.php" class="text-warning">buat akun</a>
+                        Belum punya akun? <a href="register1.php" class="text-warning">buat akun</a>
                     </p>
                 </div>
             </div>

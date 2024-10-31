@@ -14,89 +14,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmbatuGYM</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<style>
-    /* Background styling */
-.bg-custom {
-    background-image: url('./amba2.jpg');
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh; /* Set the height of the background area */
-    position: relative;
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        .navbar{
+    --bs-navbar-padding-x: 1;
 }
 
-/* Overlay that applies the blur effect */
-.blur-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+.username{
+    color: #FF8800;
+}
+
+.navbar-nav{
+    margin-right: 25px;
+    
+}
+
+.container-fluid{
+    background-color: #FF8800;
+}
+
+.logo img {
+    width:50px;
+    height: 50px;
+    /* margin-top: 20px; */
+}
+
+.hero{
+    display: flex;
+}
+
+.left-section, .right-section{
+    width: 50%;
+}
+
+.right-section{
+    padding-left: 30px;
+    margin-left: 50px;
+}
+
+.container{
     width: 100%;
-    height: 100%;
-    backdrop-filter: blur(20px); /* Apply blur to the background */
-    z-index: 0; /* Push it to the back */
+    display: flex;
+    /* justify-content: center; */
 }
 
-.rounded-custom{
+.nav-item{
+    font-weight: 500;
+}
+
+
+.video-card{
+    background-color: #d9d9d9 ;
+    width: 540px;
+    height: 360px;
+    margin-top: 20px;
+    /* margin-left: 41px; */
+    padding: 30px;
+    justify-content: ;
+    /* margin-left: 50px; */
+    text-align: center;
+    align-items: center;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.stats-card{
+    display: flex;
     padding: 10px;
-    border-radius: 15px;
+    background-color: #d9d9d9;
+    max-width: 540px;
+    border-radius: 10px;
+    align-content: center;
+    margin-bottom: 10px;
 }
-/* Translucent card container */
-.translucent-card {
-    background: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
-    border-radius: 15px; /* Optional: for rounded corners */
-    position: relative;
-    z-index: 1; /* Ensure it stays on top of the blur */
+
+.community-section{
+    height: 275px;
 }
+
+.wadah{
+    height: 245px;
+}
+
+
+
 </style>
+
 </head>
-  <body>
-      <nav class="navbar navbar-expand-lg bg-dark">
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary my-navbar">
         <div class="container-fluid">
-          <a class="navbar-brand text-dark border rounded bg-warning" href="#">AmbatuGYM</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active text-warning" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-warning" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-warning" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                <!-- <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul> -->
-              </li>
-              <!-- <li class="nav-item"> -->
-                <!-- <a class="nav-link disabled text-light" aria-disabled="true">log out</a> -->
-                
-                <form action="dashboard.php" method="POST"><button type="submit" name="logout">Log out</button></form>
-              <!-- </li> -->
+          <a class="navbar-brand logo" href="#"><img src="./images/ambatugym2.png" alt=""></a>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Profil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Exercise</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="">Community</a>
+                </li>
+                <li class="nav-item">
+                    <form method="POST" action="dashboard.php"><button class="nav-link" type="submit" name="logout" style="color: red;">Logout</button></form>
+                 </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn-warning rounded" type="submit">Search</button>
-            </form>
           </div>
         </div>
       </nav>
-      
-      <h2>Selamat datang <?= $_SESSION["username"] ?> </h2>
+    
+    <div class="main-content">
+        <div class="left-section">
+            <h1>Welcome, <span class="username"><?= $_SESSION["username"] ?></span>!</h1>
+            <div class="daily-training">
+                <h3>Daily Training</h3>
+                <div class="kartu">
+                    <h4>Exercise 1</h4>
+                </div>
+                <div class="kartu">
+                    <h4>Exercise 2</h4>
+                </div>
+                <div class="kartu">
+                    <h4>Exercise 3</h4>
+                </div>
+            </div>    
+
+            <div class="community-section">
+                <h3>Community</h3>
+                <div class="wadah">
+                  <div class="isi">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia officiis minima nobis non necessitatibus animi vitae cum quod ullam. In vero quaerat sunt? Veniam, est aspernatur. Reprehenderit deserunt laborum quo?
+                  </div>
+                  <div class="isi">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia officiis minima nobis non necessitatibus animi vitae cum quod ullam. In vero quaerat sunt? Veniam, est aspernatur. Reprehenderit deserunt laborum quo?
+                  </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="right-section">
+            
+            <div class="video-card">
+                <h4>Statistik</h4>
+            </div>
+
+            <div class="stats-card">
+                <img style="width: 30px; margin-right: 5px;" src=".\images\icons8-fire-100.png" alt="">
+                <h6 style="align-items: center; padding-top: 5px;">Calories Burned</h6>
+            </div>
+
+            <div class="stats-card">
+                <img style="width: 30px; margin-right: 5px;" src=".\images\days.png" alt="">
+                <h6 style="align-items: center; padding-top: 5px;">Days Streak</h6>
+            </div>
+
+            <div class="stats-card">
+                <img style="width: 30px; margin-right: 5px;" src=".\images\check.png" alt="">
+                <h6 style="align-items: center; padding-top: 5px;">Exercise Complete</h6>
+            </div>
+
+        </div>
+    </div>    
 
 
 
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
 </html>

@@ -1,4 +1,8 @@
 <?php
+
+//     ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
     include "./database/config.php";
     session_start();
 
@@ -7,131 +11,264 @@
     if(isset($_POST['register'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
+        $email = $_POST['email'];
+        $full_name = $_POST['full-name'];
+        $birthdate = $_POST['birth-date'];
+        $weight = $_POST['weight'];
+        $height = $_POST['height'];
+        $goal = $_POST['goal'];
+        $gender = $_POST['gender'];
 
-        try{
-            $sql = "INSERT INTO users (users_username, users_password)
-            VALUES ('$username', '$password')";
+        // Membuat query tanpa bind_param
+        $sql = "INSERT INTO users (users_username, users_password, users_fullname, users_email, users_birthdate, users_weight, users_height, users_gender, goal) 
+                VALUES ('$username', '$password', '$full_name', '$email', '$birthdate', '$weight', '$height', '$gender', '$goal')";
 
-            if($db->query($sql)){
-                $register_message = "Daftar akun berhasil, silahkan login";
-            } else {
-                $register_message = "Daftar akun gagal, coba lagi";
-            }
-        } catch(mysqli_sql_exception){
-            $register_message = "username sudah digunakan";
+        if ($db->query($sql) === TRUE) {
+            $register_message = "Daftar akun berhasil, silahkan login";
+        } else {
+            $register_message = "Error: " . $db->error;
         }
-        $db->close();
 
-        
+        $db->close();
     }
 
+
+
+    // $register_message = ""; 
+    
+    // if(isset($_POST['register'])){
+    //     $username = $_POST['username'];
+    //     $password = $_POST['password'];
+    //     $email = $_POST['email'];
+    //     $full_name = $_POST['full-name'];
+    //     $birthdate = $_POST['birth-date'];
+    //     $gender = $_POST['gender'];
+    //     $weight = $_POST['weight'];
+    //     $height = $_POST['height'];
+    //     $goal = $_POST['goal'];
+
+    //     // try{
+    //         $sql = "INSERT INTO users (users_username, users_password, users_fullname, users_gender, users_email, users_birthdate, users_weight, users_height, goal)
+    //         VALUES ('$username', '$password', '$full_name', '$gender' '$email', '$birthdate', '$weight', '$height', '$goal')";
+
+    //         if($db->query($sql) === TRUE){
+    //             $register_message = "Daftar akun berhasil, silahkan login";
+    //         } else {
+    //             $register_message = "Daftar akun gagal, coba lagi";
+    //         }
+            // mysqli_sql_exception
+        // } catch(Exception $e){
+            // $e->getMessage();
+            // $register_message = "username sudah digunakan";
+        // }
+        // $db->close();   
+    // }
+
+//     include "./database/config.php";
+//     session_start();
+
+//     $register_message = ""; 
+    
+//     if(isset($_POST['register'])){
+//         $username = $_POST['username'];
+//         $password = $_POST['password'];
+//         $email = $_POST['email'];
+//         $full_name = $_POST['full-name'];
+//         $birthdate = $_POST['birth-date'];
+//         $weight = $_POST['weight'];
+//         $height = $_POST['height'];
+//         $goal = $_POST['goal'];
+//         $gender = $_POST['gender'];
+
+//         try {
+//             $stmt = $db->prepare("INSERT INTO users (users_username, users_password, users_fullname, users_email, users_birthdate, users_weight, users_height, users_gender, goal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+//             $stmt->bind_param("sssssiiss", $username, $password, $full_name, $email, $birthdate, $weight, $height, $gender, $goal);
+
+//             if ($stmt->execute()) {
+//                 $register_message = "Daftar akun berhasil, silahkan login";
+//             } else {
+//                 $register_message = "Daftar akun gagal, coba lagi";
+//             }
+//             $stmt->close();
+//         } catch (Exception $e) {
+//             $register_message = "Error: " . $e->getMessage();
+//         }
+//         $db->close();
+//     }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/x-icon" href="./images/ambatugym2.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmbatuGYM register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link 
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet">
+    <title>AmbatuRegister</title>
+
     <style>
-        body, html {
-            height: 100%;
-        }
-        .h-100 {
-            height: 100% !important;
-        }
-        .bg-custom {
-            background-image: url('./images/amba2.jpg');
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh; /* Set the height of the background area */
-            position: relative;
+        body {
+            background-color: #FF8000;
         }
 
-        /* Overlay that applies the blur effect */
-        .blur-overlay {
-            position: absolute;
+        .navbar {
+            box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.185);
+            position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            backdrop-filter: blur(20px); /* Apply blur to the background */
-            z-index: 0; /* Push it to the back */
         }
 
-        .rounded-custom{
-            padding: 10px;
-            border-radius: 15px;
+        .btn-ambatugym {
+            border: 2px solid #FF8000;
+            color:#FF8000;
+            transition: transform 0.1s ease-in-out, background-color 0.1s;
+            text-align: center;
+        }
+        .btn-ambatugym:hover {
+            background-color: #FF8000;
+        }
+        
+        .form-container {
+            width: 100%;
+            max-width: 300px;
         }
 
-        .translucent-card {
-            background: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
-            border-radius: 15px; /* Optional: for rounded corners */
-            position: relative;
-            z-index: 1; /* Ensure it stays on top of the blur */
+        .form-control::placeholder {
+            color: rgb(167, 167, 167);
         }
 
-        i{
-            color: red;
+        .form-control, .form-select {
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.695);
         }
+        
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
+            transform: scale(1.02);
+        }
+
+        .container-sm {
+            margin-top: 6rem;
+            margin-bottom: 6rem;
+            max-width: 900px;
+            border-radius: 5px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.185);
+        }
+        
+        .btn-custom {
+            width: 120px;
+            height: 50px;
+            font-size: large;
+            background-color: #FF8000;
+            /* color: white; */
+            transition: transform 0.1s ease-in-out, box-shadow 0.15s;
+            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.695);
+        }
+        .btn-custom:hover {
+            background-color: #FF8000;
+            border: 2px solid black;
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
+        }
+        
+        .btn-custom:active {
+            background-color: rgb(196, 59, 0);
+            transform: scale(0.98);
+        }
+
+        .tombol-login{
+            text-decoration: none;
+            color: #FF8000;
+        }
+
+        .tombol-login:hover{
+            color: white;
+        }
+
     </style>
 </head>
 <body>
-    <section class="h-100 bg-custom d-flex align-items-center justify-content-center">
-        <!-- Blurred overlay -->
-        <div class="blur-overlay"></div> 
-
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-6">
-                    <!-- Translucent card to hold form content -->
-                    <div class="card translucent-card rounded-3 text-black rounded-custom">
-                        <div class="row g-0">
-                            <div class="col-lg-12">
-                                <div class="card-body p-md-5 mx-md-4">
-                                    <div class="text-center">
-                                        <h2 class="mt-1 mb-5 pb-1">Register</h2> 
-                                        <p>Make an account!</p>
-                                    </div>
-                                    <form action="register.php" method="POST">  
-                                        <div data-mdb-input-init class="form-group mb-4">
-                                            <input type="username" id="form2Example11" 
-                                            class="form-control" placeholder="username" name="username"/>
-                                            <label class="form-label" for="form2Example11">Username</label>
-                                        </div>
-                                        <!-- <div data-mdb-input-init class="form-group mb-4">
-                                            <input type="email" id="form2Example11" class="form-control" 
-                                            placeholder="Email Address or Phone Number" />
-                                            <label class="form-label" for="form2Example11">Email or Number</label>
-                                        </div> -->
-                                        <div data-mdb-input-init class="form-group mb-4">
-                                            <input type="password" id="form2Example22" class="form-control" 
-                                            placeholder="password" name="password"/>
-                                            <label class="form-label" for="form2Example22">Password</label>
-                                        </div>
-                                        <div class="text-center pt-1 mb-5 pb-1">
-                                            <i> <?= $register_message ?> </i>
-                                            <button class="btn btn-warning btn-block fa-lg mb-3" type="submit" 
-                                            onclick="location.href='main_page.html'" name="register">Register</button>
-                                        </div>
-                                    </form>
-
-                                    <a href="index.php">Login</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <img src="./images/ambatugym2.png" alt="ambatugym" width="50" height="50">
+            <a class="tombol-login" href="index.html"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
         </div>
-    </section>
+      </nav>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" 
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" 
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      <div class="container-sm p-4 bg-body-tertiary">
+        <div class="mb-3">
+            <h1 class="text-center">Buat Akun</h1>
+        </div>
+        <!-- <div class="mb-4"> -->
+        <hr>
+        <h4>Informasi Akun</h4>
+        <form action="register1.php" method="POST">
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">E-mail</label>
+                    <input name="email" type="email" class="form-control" id="inputEmail" placeholder="cth: JohnAmba69@gmail.com" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputUsername" class="form-label">Username</label>
+                    <input name="username" type="username" class="form-control" id="inputUsername" placeholder="Masukkan Username" required>
+                </div>
+                <div class="mb-3">
+                    <i> <?= $register_message ?> </i>
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Harus memiliki huruf, angka, dan karakter spesial! (cth: !@#$%^&*)" aria-describedby="passHelp" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputPasswordConfirm" class="form-label">Password Confirm</label>
+                    <input type="password" class="form-control" id="inputPasswordConfirm" required>
+                </div>
+        
+        <hr>
+            <h4>Data Diri</h4>
+            
+                <div class="mb-3">
+                    <label for="inputFullName" class="form-label">Nama Lengkap</label>
+                    <input name="full-name" type="text" class="form-control" id="inputFullName" placeholder="Masukkan nama lengkap" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputGender" class="form-label">Jenis Kelamin</label>
+                    <select name="gender" class="form-select" taria-label="Default select example">
+                        <option selected>Jenis Kelamin</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="inputDOB" class="form-label">Tanggal Lahir</label>
+                    <input name="birth-date" type="date" class="form-control" id="inputDOB" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputBerat" class="form-label">Berat Badan (KG)</label>
+                    <input name="weight" type="number" class="form-control" id="inputBerat" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputTinggi" class="form-label">Tinggi Badan (CM)</label>
+                    <input name="height" type="number" class="form-control" id="inputTinggi" required>
+                </div>
+                <div class="mb-3">
+                    <label for="inputTujuan" class="form-label">Tujuan (Opsional)</label>
+                    <select name="goal" class="form-select" taria-label="Default select example">
+                        <option value="lose-weight">Menurunkan berat badan</option>
+                        <option value="build_muscle">Membesarkan otot</option>
+                        <option value="maintain">Pelihara stamina</option>
+                    </select>
+                </div>
+                <div class="container text-center mt-4">
+                    <button class="btn btn-custom" name="register" type="submit">Daftar</button>
+                </div>
+            </form>
+            
+      </div>
+      
+
+
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
 </body>
 </html>
