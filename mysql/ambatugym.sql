@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2024 at 05:39 AM
+-- Generation Time: Oct 31, 2024 at 09:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -74,7 +74,7 @@ CREATE TABLE `exercises` (
   `description` text NOT NULL,
   `goal` enum('lose_weight','build_muscle','maintain') NOT NULL,
   `exercise_type` enum('cardio','strength','flexibility','balance') NOT NULL,
-  `exercises_duration` int(50) NOT NULL,
+  `exercises_duration` varchar(50) NOT NULL,
   `video_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -91,13 +91,13 @@ CREATE TABLE `users` (
   `users_username` varchar(50) NOT NULL,
   `users_password` varchar(255) NOT NULL,
   `users_gender` enum('Laki-laki','Perempuan') NOT NULL,
-  `users_age` int(11) NOT NULL,
-  `users_birthdate` date DEFAULT current_timestamp(),
+  `users_age` int(11) DEFAULT NULL,
+  `users_birthdate` date DEFAULT NULL,
   `users_weight` decimal(65,0) NOT NULL,
   `users_height` decimal(65,0) NOT NULL,
   `goal` enum('lose_weight','build_muscle','maintain') NOT NULL,
-  `users_photo` int(11) NOT NULL,
-  `users_badge` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`users_badge`))
+  `users_photo` int(11) DEFAULT NULL,
+  `users_badge` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -107,9 +107,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`users_id`, `users_fullname`, `users_email`, `users_username`, `users_password`, `users_gender`, `users_age`, `users_birthdate`, `users_weight`, `users_height`, `goal`, `users_photo`, `users_badge`) VALUES
 (1, '', 0, 'anna', '123', '', 0, '2024-10-22', 0, 0, '', 0, '0'),
 (2, '', 0, 'abv', '123', '', 0, '2024-10-22', 0, 0, '', 0, '0'),
-(3, '', 0, 'cth', '123', '', 0, '2024-10-22', 0, 0, '', 0, '0'),
-(6, '', 0, 'boku', '321', '', 0, '2024-10-22', 0, 0, '', 0, '0'),
-(8, '', 0, 'muani', '123', '', 0, '2024-10-22', 0, 0, '', 0, '0');
+(9, 'ambaleon', 0, 'muani', '123', 'Perempuan', NULL, '2024-10-30', 10, 100, 'build_muscle', NULL, NULL),
+(10, 'amba', 0, 'amba', '123', 'Laki-laki', NULL, '2024-10-23', 20, 20, '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -245,7 +244,7 @@ ALTER TABLE `exercises`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_badge`
