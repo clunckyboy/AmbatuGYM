@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=brightness_4" />
+
+    <link rel="icon" type="image/x-icon" href="./ambatugymwhite.png">
+    <link rel="stylesheet" href="./Styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AboutuGYM</title>
+
+    <style>
+        body {
+            background: 
+            linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)), 
+            url('./images/bg.jpg');
+        }
+
+        .dark-mode {
+            background: 
+            linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
+            url('./images/bg.jpg');
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="./images/ambatugymwhite.png" 
+        data-light="./images/ambatugymwhite.png" 
+        data-dark="./images/ambatugym2.png" 
+        alt="ambatuLOGO">
+        <div class="navbar-brand">
+            <h2>AmbatuGYM</h2>
+            <button onclick="myFunction()" class="btn-toggle">
+                <span class="material-symbols-outlined">
+                    brightness_4
+                </span>
+            </button>
+        </div>
+        <button class="navbar-toggle" onclick="openNav()">☰</button> <!-- Hamburger icon -->
+            <div class="navbar-links" id="navbarLinks">
+                <a href="#about">About</a>
+                <a href="index.php" class="btn-custom">Log In</a>
+            </div>
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="#about">About</a>
+                <a href="index.php">Log In</a>
+              </div>
+    </nav>
+    
+    <div class="parent" id="about">
+    <div class="container" style="margin-top: 100px; width: 80%;">
+        <div class="text" style="justify-content: center;">
+            <h2>About AmbatuGYM</h2>
+            <p>AmbatuGYM is your go-to platform for health monitoring and fitness tracking, 
+                designed to make staying healthy easier and more enjoyable. 
+                With AmbatuGYM, you can keep track of calories burned, monitor your progress, 
+                and calculate your ideal weight—all while setting and achieving 
+                your daily fitness goals.</p>
+
+            <p>Created by four University of Sumatera Utara students in October 2024, 
+                AmbatuGYM aims to make health monitoring accessible and enjoyable. 
+                Join us in building a healthier world, one workout at a time.</p>
+
+            <div style="margin:100px 30px 30px 0px; " >
+                <a class="btn-custom" href="index.php">Try AmbatuGYM now!</a>
+            </div>
+            
+        </div>
+        
+        <div class="image" style="margin-left:auto; padding:10px;">
+            <img src="./images/ambatugym2.png" alt="ambatuLOGO">
+        </div>
+        
+    </div>
+
+    <div class="container" style="margin-top: 30px; width: 80%; display:block; text-align:center;">
+        <h2>Contributors</h2>
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <div class="name">
+                        <h3>Luthfi Zahran Panggabean</h3>
+                    </div>
+                    <img class="profile-pic" src="./images/profilepics/luthfi.png" alt="Luthfi">
+                    <p>Front-end developer</p>
+                    <a href="https://github.com/BlueElectric05" class="btn-custom-outline">Visit GitHub</a>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="name">
+                        <h3>Susena Yudha Wijaya</h3>
+                    </div>
+                    <img class="profile-pic" src="./images/profilepics/susena.jpg" alt="Susena">
+                    <p>Front-end developer</p>
+                    <a href="https://github.com/susenayw" class="btn-custom-outline">Visit GitHub</a>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="name">
+                        <h3>Michael Valent Satrio Munthe</h3>
+                    </div>
+                    <img class="profile-pic" src="./images/profilepics/michael.png" alt="Michael">
+                    <p>Back-end developer</p>
+                    <a href="https://github.com/michaelmunthe123" class="btn-custom-outline">Visit GitHub</a>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="name">
+                        <h3>Edwin Jonatan Purba</h3>
+                    </div>
+                    <img class="profile-pic" src="./images/profilepics/edwin.jpg" alt="Edwin">
+                    <p>Back-end developer</p>
+                    <a href="https://github.com/clunckyboy" class="btn-custom-outline">Visit GitHub</a>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class="container" style="margin-top: 30px; margin-bottom: 30px; width: 80%; padding-bottom:30px;">
+        <div class="contacts" style="margin-right: auto;">
+            <p>Kapal Laut Sigma.ltd 2024</p>
+            <a href="#" class="contact-links">Discord</a>
+        </div>
+        <div class="contacts" style="margin-left: auto;">
+            <p style="text-align: end;">Contacts:</p>
+            <a href="tel:+6282362858287" class="contact-links" style="text-align: end;">+62 823 6285 8287</a>
+            <a href="mailto:cloverscapeprods@outlook.com" class="contact-links">cloverscapeprods@outlook.com</a>
+        </div>
+    </div>
+    </div>
+
+    <script src="./scripts/about.js"></script>
+</body>
+</html>
