@@ -552,3 +552,73 @@ material-symbols-outlined{
         text-align: center;
     }
 }
+
+/* Navbar Logged in */
+.navbar-logged-in {
+    justify-content: space-between; /* Space out the items */
+}
+
+.navbar-links {
+    display: flex; /* Flexbox layout for navbar links */
+    align-items: center; /* Center items vertically */
+}
+
+.navbar-links a {
+    margin-left: 20px; /* Space between links */
+    color: #f2f2f2; /* Link color */
+}
+
+.navbar-links a:hover {
+    text-decoration: underline; /* Underline on hover for links */
+}
+
+.profile-pic {
+    width: 40px; /* Width of the profile picture container */
+    height: 40px; /* Height of the profile picture container */
+    overflow: hidden; /* Hide overflow to keep it square */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+
+.profile-pic-small {
+    width: 100%; /* Makes the image take full width */
+    height: 100%; /* Makes the image take full height */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+}
+
+/* Fitu toggle di profile*/
+.info-item {
+    display: flex;
+    align-items: center;
+    position: relative; /* Ensure the dropdown is positioned relative to this item */
+}
+
+.info-placeholder {
+    margin-left: 10px;
+}
+
+.toggle-list {
+    display: none; /* Hide the toggle list by default */
+    position: absolute;
+    top: 100%; /* Position it directly below the info item */
+    left: 0; /* Align to the left of the info item */
+    background-color: #f9f9f9; /* Set a light background color for the list */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 10;
+    width: 200px; /* Adjust width as necessary */
+}
+
+.toggle-option {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #333; /* Set text color for the options */
+}
+
+.toggle-option:hover {
+    background-color: #e0e0e0; /* Change background on hover to a slightly darker shade */
+}
+
+.toggle-option.selected {
+    background-color: #d1e7dd; /* Optionally set a background color for the selected option */
+}
