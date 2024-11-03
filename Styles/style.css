@@ -1,13 +1,14 @@
 body{
     margin: 0;
-    background: 
-        linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)), 
-        url('./images/bg.jpg');
     background-size: cover;
     transition: background 0.3s;
     font-family: "Lexend", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /*-------------------NAVBAR----------------------------*/
@@ -99,6 +100,59 @@ body{
     border-radius: 10px;
 }
 
+/*--------------------------------SIDE NAVIGATION----------------------------------------------*/
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.815); /* Black*/
+    backdrop-filter: blur(20px);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.384);
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #5e5e5e;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
 /*---------------------------------------------------------------------------*/
 
 .parent .container {
@@ -159,12 +213,14 @@ p {
 }
 
 .text {
+    max-width: 60%;
     padding-left: 20px;
     padding-right: 20px;
     flex-direction: column;
 }
 
 .text p {
+    text-align: justify;
     font-weight: 300;
 }
 
@@ -210,19 +266,22 @@ p {
     padding: 10px;
 }
 
+.name {
+    min-height: 70px;
+}
+
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between; /* Adjusts spacing in the card to keep items aligned */
     align-items: center;
-    height: 300px;
-    padding: 10px;
+    max-height: 400px;
+    padding: 20px;
     border-radius: 20px;
     background-color: rgb(97, 58, 42);
     text-align: center;
     color: white;
 }
-
 .card h3 {
     margin: 10px 0;
 }
@@ -231,8 +290,15 @@ p {
     margin: 5px 0;
 }
 
+.card h3, .card p, .btn-custom-outline {
+    margin: 10px 0;
+}
+
 /* Adjust layout on screens smaller than 800px */
 @media (max-width: 800px) {
+    .text {
+        max-width: 100%;
+    }
     .row {
         justify-content: center;
     }
@@ -252,14 +318,20 @@ p {
 /*--------------------MISC------------------------------*/
 
 .contact-links {
-    text-align: left;
+    line-height: 1.8;
+    display: flex;
     color: #f2f2f2;
     text-decoration: none;
     font-size: 17px;
+    flex-direction: column;
 }
 
 .contacts {
     padding: 0px 20px 0px 20px;
+}
+
+.contacts p {
+    padding: 0;
 }
 
 .btn-custom {
@@ -272,35 +344,185 @@ p {
     background-color: rgb(97, 58, 42);
     box-shadow: rgba(0, 0, 0, 0);
     transition: transform 0.15s ease-in-out, box-shadow 0.1s;
+    text-decoration: none;
 }
-.btn-custom:hover {
+
+.btn-custom-outline {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    border: 1px solid white;
+    border-radius: 50px;
+    font-family: "Lexend", sans-serif;
+    font-size: 15px;
+    color: white;
+    padding: 10px 20px; /* Adjusted padding for a consistent look */
+    background-color: rgb(97, 58, 42);
+    box-shadow: rgba(0, 0, 0, 0);
+    transition: transform 0.15s ease-in-out, box-shadow 0.1s;
+    text-decoration: none;
+}
+
+.btn-custom:hover, .btn-custom-outline:hover {
     transform: scale(1.03);
     box-shadow: 0px 0px 20px white;
 }
-.btn-custom:active {
+.btn-custom:active, .btn-custom-outline:active {
     transform: scale(0.99);
     box-shadow: 0px 0px 20px rgb(0, 0, 0);
 }
 
+/*-----------------------------------DARK MODE-----------------------------------------------------*/
 .dark-mode {
-    background:
-    linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)),
-    url(./images/bg.jpg);
+    background: 
+        linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
+        url('./images/bg.jpg');
     background-size: cover;
+    color: rgb(0, 0, 0); /* Set default dark mode text color */
+}
+
+
+
+.dark-mode .container,
+.dark-mode .navbar {
+    background-color: rgb(255, 241, 224);
+    color: black;
+    box-shadow: 0px 10px 20px #00000044;
+}
+
+.dark-mode .sidenav {
+    background-color: rgba(255, 255, 255, 0.9); /* Light sidenav background */
     color: rgb(0, 0, 0);
 }
+
+.dark-mode .sidenav a {
+    color: rgb(50, 50, 50); /* Adjust link color */
+}
+
+.dark-mode .card {
+    background-color: rgb(255, 225, 181); /* Light card background */
+    color: rgb(0, 0, 0);
+}
+
+.dark-mode .btn-custom, 
+.dark-mode .btn-custom-outline {
+    background-color: rgb(255, 225, 181); /* Light button background */
+    color: rgb(50, 50, 50);
+    border-color: rgb(50, 50, 50);
+}
+
+.dark-mode .navbar a, 
+.dark-mode .contact-links, 
+.dark-mode .text p, 
+.dark-mode .name, 
+.dark-mode h3, 
+.dark-mode p, 
+.dark-mode .column, 
+.dark-mode .container {
+    color: rgb(30, 30, 30); /* General dark mode text */
+}
+
+/* Additional elements with specific dark mode styles */
+
+.dark-mode .btn-toggle {
+    color: rgb(50, 50, 50);
+}
+.dark-mode .btn-toggle:hover {
+    color: rgb(235, 235, 235);
+}
+
+.dark-mode .navbar a:hover,
+.dark-mode .btn-custom:hover,
+.dark-mode .btn-custom-outline:hover {
+    box-shadow: 0px 10px 20px #00000044;
+}
+
+.dark-mode .navbar-toggle{
+    color: black;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.2s;
+    border-radius: 10px;
+}
+.dark-mode .navbar-toggle:hover{
+    box-shadow: 0px 4px 20px black;
+}
+
+/* Add transition for smooth dark mode toggle */
+body, 
+.container, 
+.navbar, 
+.card, 
+.btn-custom, 
+.btn-custom-outline, 
+.sidenav {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background: 
+        linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
+        url('./images/bg.jpg');
+    background-size: auto;
+    color: rgb(0, 0, 0);
+}
+
+/* Elements with dark mode styles */
+.dark-mode .container,
+.dark-mode .navbar {
+    background-color: rgb(255, 241, 224);
+    color: black;
+    box-shadow: 0px 10px 20px #00000044;
+}
+
+.dark-mode .sidenav {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgb(0, 0, 0);
+}
+
+/* Transition effects on color and background for smooth toggling */
+.dark-mode .card, 
+.dark-mode .btn-custom, 
+.dark-mode .btn-custom-outline, 
+.dark-mode .navbar a, 
+.dark-mode .contact-links, 
+.dark-mode .text p, 
+.dark-mode .name, 
+.dark-mode h3, 
+.dark-mode p, 
+.dark-mode .column, 
+.dark-mode .container {
+    color: rgb(30, 30, 30);
+}
+
+/* Navbar Toggle */
+.dark-mode .navbar-toggle {
+    color: black;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.2s;
+    border-radius: 10px;
+}
+.dark-mode .navbar-toggle:hover {
+    box-shadow: 0px 4px 20px black;
+}
+
+
+/*-----------------------------------------------------------------------------------------------------------*/
+
 
 material-symbols-outlined{
     color: rgb(255, 255, 255);
 }
 
 .btn-toggle {
+    margin: 10px;
     padding: 0;
-    margin: auto;
+    margin-right: auto;
     background-color: transparent;
     color: white;
     border: 0;
-    align-self: center;
     transition: color 0.2s;
 }
 .btn-toggle:hover {
@@ -320,10 +542,6 @@ material-symbols-outlined{
         flex-direction: column;
         width: 100%;
         gap: 10px;
-    }
-
-    .navbar-links.active {
-        display: flex; /* Show links when active */
     }
 
     .btn-custom {
