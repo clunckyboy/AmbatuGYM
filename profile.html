@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
+    <link rel="icon" type="image/x-icon" href="./ambatugymwhite.png">
+    <link rel="stylesheet" href="./Styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmbatuGYM Profile</title>
+
+    <style>
+        body {
+        background: 
+        linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)), 
+        url('./images/bg.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        }
+
+
+        .dark-mode {
+            background: 
+            linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
+            url('./images/bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .profile-card {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: rgba(97, 58, 42, 0.8);
+        border-radius: 20px;
+        padding: 40px; /* Increased padding for extra height */
+        max-width: 1000px; /* Wider width */
+        width: 90%; /* Responsive width */
+        min-height: 300px; /* Set a minimum height */
+        box-shadow: 0px 10px 20px black;
+        color: white;
+        }
+        .profile-pic-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 200px;
+            margin-right: 30px;
+        }
+        .profile-pic-placeholder {
+            width: 100%;
+            padding-top: 133%; /* 3:4 aspect ratio */
+            background-color: #ccc;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .change-pic {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 0.9em;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-info h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .info-label {
+            flex: 1;
+            font-weight: bold;
+            color: #ddd;
+            text-align: left;
+        }
+        .info-placeholder {
+            flex: 2;
+            color: #f0f0f0;
+            text-align: left;
+            padding-left: 10px;
+        }
+        .edit-icon {
+        font-family: "Material Symbols Outlined";
+        font-size: 18px;
+        cursor: pointer;
+        color: #ddd; /* Adjust color as desired */
+        padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-logged-in">
+        <img src="./images/ambatugymwhite.png" 
+             data-light="./images/ambatugymwhite.png" 
+             data-dark="./images/ambatugym2.png" 
+             alt="ambatuLOGO">
+        <div class="navbar-brand">
+            <h2>AmbatuGYM</h2>
+            <button onclick="myFunction()" class="btn-toggle">
+                <span class="material-symbols-outlined">brightness_4</span>
+            </button>
+        </div>
+        <div class="navbar-links">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#exercises">Exercises</a>
+            <a href="#community">Community</a>
+            <div class="profile-pic">
+                <img src="./images/profile-pic.png" alt="Profile Picture" class="profile-pic-small">
+            </div>
+        </div>
+    </nav>
+
+    <div class="profile-card">
+        <div class="profile-pic-section">
+            <div class="profile-pic-placeholder"></div>
+            <span class="change-pic">Change Picture</span>
+        </div>
+        <div class="profile-info">
+            <h2>Profile Information</h2>
+    
+            <div class="info-item">
+                <span class="info-label">E-mail</span>
+                <span class="info-placeholder">example@example.com</span>
+                <span class="edit-icon material-symbols-outlined">edit</span>
+            </div>
+    
+            <div class="info-item">
+                <span class="info-label">Username</span>
+                <span class="info-placeholder">username123</span>
+                <span class="edit-icon material-symbols-outlined">edit</span>
+            </div>
+    
+            <div class="info-item">
+                <span class="info-label">Password</span>
+                <span class="info-placeholder">••••••••</span>
+                <span class="edit-icon material-symbols-outlined">edit</span>
+            </div>
+    
+            <div class="info-item">
+                <span class="info-label">Badge</span>
+                <span class="info-placeholder">🏅 Placeholder Badge</span>
+                <span class="edit-icon material-symbols-outlined">edit</span>
+            </div>
+    
+            <div class="info-item">
+                <span class="info-label" id="objective-label">Objective</span>
+                <span class="info-placeholder" id="objective-placeholder">Select an objective</span>
+                <span class="edit-icon material-symbols-outlined" id="toggle-options">expand_more</span>
+                <div class="toggle-list" id="toggle-list">
+                    <div class="toggle-option" data-value="Building muscles">Building Muscles</div>
+                    <div class="toggle-option" data-value="Losing weight">Losing Weight</div>
+                    <div class="toggle-option" data-value="Maintain stamina">Maintain Stamina</div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./scripts/profile.js"></script>
+</body>
+</html>
