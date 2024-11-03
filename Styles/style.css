@@ -1,0 +1,336 @@
+body{
+    margin: 0;
+    background: 
+        linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)), 
+        url('./images/bg.jpg');
+    background-size: cover;
+    transition: background 0.3s;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+/*-------------------NAVBAR----------------------------*/
+
+@keyframes slideIn {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+.navbar {
+    animation: 0.5s ease-out 0s 1 slideIn;
+
+    box-shadow: -10px 2px 20px black;
+    top: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 70px;
+    position: fixed;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    background-color: rgb(48, 32, 25);
+    color: white;
+    z-index: 10; /* Ensure it stays on top */
+
+}
+
+.navbar img {
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 4px; 
+}
+
+.navbar-brand h1 {
+    margin: 0;
+    font-weight: bold;
+  }
+
+.navbar a {
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.01s ease-in-out;
+
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    box-shadow: 0px 0px 20px white;
+}
+
+.navbar a:active {
+    transform: scale(0.95);
+    background-color: #f2f2f248;
+}
+
+.navbar-links {
+    margin-right: 30px;
+    padding: 10px;
+    display: flex;
+    margin-left: auto;
+    gap: 10px;
+}
+
+.navbar-toggle {
+    display: none;
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+.navbar-toggle:hover {
+    box-shadow: 0px 0px 20px white;
+    border-radius: 10px;
+}
+
+/*---------------------------------------------------------------------------*/
+
+.parent .container {
+    box-shadow: 0px 10px 20px black;
+    border-radius: 20px;
+    display: flex;
+    justify-self: center;
+    max-width: 100%;
+    background-color: rgb(48, 32, 25);
+    padding: 20px;
+    color: white;
+    
+    /* Initial state for animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Delay for each container */
+.parent .container:nth-child(1) {
+    animation-delay: 0s;
+}
+.parent .container:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.parent .container:nth-child(3) {
+    animation-delay: 0.6s;
+}
+/* Continue adding delays for more containers as needed */
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+p {
+    color: white;
+    font-weight: 200;
+}
+
+.text {
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction: column;
+}
+
+.text p {
+    font-weight: 300;
+}
+
+.image {
+    align-items: center;
+}
+
+.image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media (max-width: 600px){
+    .container {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+/*--------------------CARD--------------------------------*/
+
+.profile-pic {
+    border-radius: 100%;
+    max-width: 60%;
+    max-height: 60%;
+    display: block;
+    margin: 0 auto; /* Centers the profile pictures horizontally */
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 20px; /* Adds some space between columns */
+}
+
+.column {
+    flex: 1 1 200px; /* Ensures columns resize while keeping a minimum width */
+    max-width: 300px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(97, 58, 42);
+    text-align: center;
+    color: white;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+/* Adjust layout on screens smaller than 800px */
+@media (max-width: 800px) {
+    .row {
+        justify-content: center;
+    }
+    .column {
+        max-width: 45%; /* Two columns on medium screens */
+    }
+}
+
+/* Stack columns vertically on small screens */
+@media (max-width: 500px) {
+    .column {
+        max-width: 100%; /* Full width on small screens */
+        flex: 1 1 100%;
+    }
+}
+
+/*--------------------MISC------------------------------*/
+
+.contact-links {
+    text-align: left;
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.contacts {
+    padding: 0px 20px 0px 20px;
+}
+
+.btn-custom {
+    margin: auto;
+    border: 0;
+    border-radius: 10px;
+    font-family: "Lexend", sans-serif;
+    color: white;
+    padding: 20px;
+    background-color: rgb(97, 58, 42);
+    box-shadow: rgba(0, 0, 0, 0);
+    transition: transform 0.15s ease-in-out, box-shadow 0.1s;
+}
+.btn-custom:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 0px 20px white;
+}
+.btn-custom:active {
+    transform: scale(0.99);
+    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+}
+
+.dark-mode {
+    background:
+    linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)),
+    url(./images/bg.jpg);
+    background-size: cover;
+    color: rgb(0, 0, 0);
+}
+
+material-symbols-outlined{
+    color: rgb(255, 255, 255);
+}
+
+.btn-toggle {
+    padding: 0;
+    margin: auto;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    align-self: center;
+    transition: color 0.2s;
+}
+.btn-toggle:hover {
+    color: black;
+}
+
+
+@media (max-width: 600px) {
+    .navbar-toggle {
+        display: flex;
+        margin-left: auto;
+        margin-right: 30px;
+    }
+
+    .navbar-links {
+        display: none; /* Hide links by default */
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .navbar-links.active {
+        display: flex; /* Show links when active */
+    }
+
+    .btn-custom {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
