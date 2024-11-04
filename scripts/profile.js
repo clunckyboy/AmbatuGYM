@@ -50,3 +50,13 @@ document.addEventListener('click', (event) => {
     }
 });
 
+
+function logout() {
+    // Clear any session data if needed
+    // For example: localStorage.clear();
+
+    // Redirect to the login page
+    window.location.href = 'login.html';
+}
+
+

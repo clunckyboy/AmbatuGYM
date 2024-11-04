@@ -55,12 +55,22 @@
             margin-right: 30px;
         }
         .profile-pic-placeholder {
-            width: 100%;
-            padding-top: 133%; /* 3:4 aspect ratio */
+            width: 150px; /* Set a fixed width */
+            height: 150px; /* Set a fixed height */
+            border-radius: 50%; /* Makes the image circular */
+            overflow: hidden; /* Ensures the image stays within the circular border */
             background-color: #ccc;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
+        .profile-pic-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Keeps the image aspect ratio */
+        }
+
         .change-pic {
             display: flex;
             align-items: center;
@@ -120,15 +130,18 @@
             <a href="#dashboard">Dashboard</a>
             <a href="#exercises">Exercises</a>
             <a href="#community">Community</a>
-            <div class="profile-pic">
-                <img src="./images/profile-pic.png" alt="Profile Picture" class="profile-pic-small">
+            <div class="profile-container">
+                <img src="images/ambaprofilepicture.png" alt="Profile Picture" class="profile-pic-small">
+                <a href="#" class="logout-button" onclick="logout()">Logout</a>
             </div>
-        </div>
+        </div>        
     </nav>
 
     <div class="profile-card">
         <div class="profile-pic-section">
-            <div class="profile-pic-placeholder"></div>
+            <div class="profile-pic-placeholder">
+                <img src="images/ambaprofilepicture.png" alt="Profile Picture">
+            </div>
             <span class="change-pic">Change Picture</span>
         </div>
         <div class="profile-info">
