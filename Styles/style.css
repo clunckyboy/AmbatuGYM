@@ -575,15 +575,52 @@ material-symbols-outlined{
 .profile-pic {
     width: 40px; /* Width of the profile picture container */
     height: 40px; /* Height of the profile picture container */
-    overflow: hidden; /* Hide overflow to keep it square */
-    border-radius: 5px; /* Slightly rounded corners */
+    overflow: hidden; /* Hide overflow to keep image within bounds */
+    border-radius: 50%; /* Makes the container circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
 }
 
 .profile-pic-small {
-    width: 100%; /* Makes the image take full width */
-    height: 100%; /* Makes the image take full height */
-    object-fit: cover; /* Ensures the image covers the container without distortion */
+    border-radius: 50%;
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
 }
+.logout-button {
+    display: none;
+    position: absolute;
+    top: 50px; /* Position it below the profile picture */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s, transform 0.1s ease-in-out;
+    z-index: 1000; /* Ensures the button appears above other elements */
+}
+
+.profile-container:hover .logout-button {
+    display: block;
+}
+
+.logout-button:hover {
+    box-shadow: 0px 0px 10px red;
+}
+
+.logout-button:active {
+    transform: scale(0.95);
+}
+
 
 /* Fitu toggle di profile*/
 .info-item {
