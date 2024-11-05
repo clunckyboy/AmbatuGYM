@@ -21,7 +21,7 @@
 
             header('location: dashboard.php');
         } else {
-            $login_message = "Akun atau password salah";
+            $login_message = "Incorrect account or password";
         }
     }    
     
@@ -30,15 +30,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="./images/ambatugym2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
+    <link rel="icon" type="image/x-icon" href="./images/ambatugymwhite.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmbatuLogin</title>
+    <title> AmbatuGYM Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
             body, html {
             height: 100%;
+            font-family: "Lexend", sans-serif;
         }
 
         .header-content {
@@ -50,7 +55,7 @@
         }
 
         .left-section {
-            background-color: #FF8000;
+            background-color: #302019;
             color: white;
             display: flex;
             align-items: center;
@@ -66,24 +71,28 @@
             height: 250px;
             margin-top: 20px;
         }
+
         .right-section {
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)),url(./images/bg.jpg);
+
         }
         .form-container {
             width: 100%;
             max-width: 300px;
         }
         .btn-custom {
-            background-color: #FF8000;
+            background-color: #51362a;
             color: white;
             transition: transform 0.1s ease-in-out, box-shadow 0.15s;
             box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.695);
             text-align: center;
         }
         .btn-custom:hover {
-            background-color: #FF8000;
+            background-color: #51362a;
             border: 1px solid black;
             transform: scale(1.02);
             box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.147);
@@ -103,6 +112,7 @@
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
             transform: scale(1.02);
         }
+
     </style>
 
 </head>
@@ -114,7 +124,7 @@
                 <div class="header-content">
                     <h1 class="m-2">Reach Your<br>Goals With</h1>
                     <div class="logo">
-                        <img src="./images/ambatugym2.png" alt="AmbatuGYM Logo">
+                        <img src="./images/ambatugymwhite.png" alt="AmbatuGYM Logo">
                     </div>
                 </div>
             </div>
@@ -133,13 +143,13 @@
                             <input type="password" class="form-control" name="password" placeholder="password" required>
                         </div>
 
-                        <p> <?= $login_message ?> </p>
+                        <p style="color: red;"> <?= $login_message ?> </p>
 
-                        <button type="submit" class="btn btn-custom w-100 mb-3" name="login">Masuk</button>
+                        <button type="submit" class="btn btn-custom w-100 mb-3" name="login">Login</button>
                     
                     </form>
                     <p class="text-center">
-                        Belum punya akun? <a href="register.php" class="text-warning">buat akun</a>
+                        don't have an account yet? <a href="register.php">sign up</a>
                     </p>
                 </div>
             </div>
