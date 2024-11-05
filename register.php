@@ -31,76 +31,16 @@
 
         $db->close();
     }
-
-
-
-    // $register_message = ""; 
-    
-    // if(isset($_POST['register'])){
-    //     $username = $_POST['username'];
-    //     $password = $_POST['password'];
-    //     $email = $_POST['email'];
-    //     $full_name = $_POST['full-name'];
-    //     $birthdate = $_POST['birth-date'];
-    //     $gender = $_POST['gender'];
-    //     $weight = $_POST['weight'];
-    //     $height = $_POST['height'];
-    //     $goal = $_POST['goal'];
-
-    //     // try{
-    //         $sql = "INSERT INTO users (users_username, users_password, users_fullname, users_gender, users_email, users_birthdate, users_weight, users_height, goal)
-    //         VALUES ('$username', '$password', '$full_name', '$gender' '$email', '$birthdate', '$weight', '$height', '$goal')";
-
-    //         if($db->query($sql) === TRUE){
-    //             $register_message = "Daftar akun berhasil, silahkan login";
-    //         } else {
-    //             $register_message = "Daftar akun gagal, coba lagi";
-    //         }
-            // mysqli_sql_exception
-        // } catch(Exception $e){
-            // $e->getMessage();
-            // $register_message = "username sudah digunakan";
-        // }
-        // $db->close();   
-    // }
-
-//     include "./database/config.php";
-//     session_start();
-
-//     $register_message = ""; 
-    
-//     if(isset($_POST['register'])){
-//         $username = $_POST['username'];
-//         $password = $_POST['password'];
-//         $email = $_POST['email'];
-//         $full_name = $_POST['full-name'];
-//         $birthdate = $_POST['birth-date'];
-//         $weight = $_POST['weight'];
-//         $height = $_POST['height'];
-//         $goal = $_POST['goal'];
-//         $gender = $_POST['gender'];
-
-//         try {
-//             $stmt = $db->prepare("INSERT INTO users (users_username, users_password, users_fullname, users_email, users_birthdate, users_weight, users_height, users_gender, goal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-//             $stmt->bind_param("sssssiiss", $username, $password, $full_name, $email, $birthdate, $weight, $height, $gender, $goal);
-
-//             if ($stmt->execute()) {
-//                 $register_message = "Daftar akun berhasil, silahkan login";
-//             } else {
-//                 $register_message = "Daftar akun gagal, coba lagi";
-//             }
-//             $stmt->close();
-//         } catch (Exception $e) {
-//             $register_message = "Error: " . $e->getMessage();
-//         }
-//         $db->close();
-//     }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/x-icon" href="./images/ambatugym2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
+    <link rel="icon" type="image/x-icon" href="./images/ambatugymwhite.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link 
@@ -111,6 +51,9 @@
     <style>
         body {
             background-color: #FF8000;
+            font-family: "Lexend", sans-serif;
+            background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)),url(./images/bg.jpg);
+            color: white;
         }
 
         .navbar {
@@ -118,16 +61,18 @@
             position: fixed;
             top: 0;
             width: 100%;
+            height: 70px;
+            background-color: #302019 !important;
         }
 
         .btn-ambatugym {
-            border: 2px solid #FF8000;
-            color:#FF8000;
+            border: 2px solid #954928;
+            color: #954928;
             transition: transform 0.1s ease-in-out, background-color 0.1s;
             text-align: center;
         }
         .btn-ambatugym:hover {
-            background-color: #FF8000;
+            background-color: #954928;
         }
         
         .form-container {
@@ -155,19 +100,20 @@
             max-width: 900px;
             border-radius: 5px;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.185);
+            background-color: #302019 !important;
         }
         
         .btn-custom {
             width: 120px;
             height: 50px;
             font-size: large;
-            background-color: #FF8000;
+            background-color: #954928;
             /* color: white; */
             transition: transform 0.1s ease-in-out, box-shadow 0.15s;
             box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.695);
         }
         .btn-custom:hover {
-            background-color: #FF8000;
+            background-color: #954928;
             border: 2px solid black;
             transform: scale(1.05);
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
@@ -192,7 +138,10 @@
 <body>
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-            <img src="./images/ambatugym2.png" alt="ambatugym" width="50" height="50">
+            <div style="display: flex;">
+                <img src="./images/ambatugymwhite.png" alt="ambatugym" width="50" height="50">
+                <h2 style="margin: 0; margin-left:10px; padding-top: 5px">AmbatuGYM</h2>
+            </div>    
             <a class="tombol-login" href="index.php"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
         </div>
       </nav>
@@ -204,7 +153,8 @@
         <!-- <div class="mb-4"> -->
         <hr>
         <h4>Informasi Akun</h4>
-        <form action="register1.php" method="POST">
+        <p style="color: green;"><i><?=$register_message?></i></p>
+        <form action="register.php" method="POST">
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">E-mail</label>
                     <input name="email" type="email" class="form-control" id="inputEmail" placeholder="cth: JohnAmba69@gmail.com" required>
@@ -265,10 +215,5 @@
             
       </div>
       
-
-
-    <script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
-    </script>
 </body>
 </html>
