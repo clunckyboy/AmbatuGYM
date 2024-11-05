@@ -59,7 +59,7 @@ foreach ($data as $item) {
             </li>
             <li class="nav-list">
                     <button onclick="toggleDropdown()">
-                        <img src="./images/profile/edwin.jpg" alt="Profile">
+                        <img src="./images/profilepics/edwin.jpg" alt="Profile">
                     </button>
                     <div id="dropdown" class="dropdown-content">
                         <a href="profile.html">Profil</a>
@@ -114,7 +114,7 @@ foreach ($data as $item) {
                         <div class="community-card">
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -124,7 +124,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -134,7 +134,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -144,7 +144,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -154,7 +154,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -164,7 +164,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -174,7 +174,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -184,7 +184,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -194,7 +194,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
@@ -212,7 +212,7 @@ foreach ($data as $item) {
 
                             <div class="comment-card">
                                 <div class="left-comment">
-                                    <img src="./images/profile/edwin.jpg" alt="">
+                                    <img src="./images/profilepics/edwin.jpg" alt="">
                                 </div>
                                 <div class="right-comment">
                                     <p>username</p>
