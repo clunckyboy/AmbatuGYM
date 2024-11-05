@@ -1,5 +1,6 @@
 <?php
-  session_start();
+    include "./database/config.php";
+    session_start();
 
   if(isset($_POST['logout'])){
     session_unset();
@@ -7,189 +8,280 @@
     header("location: index.php");
   }
 
+  $data = [];
+    $url = [];
+
+$result = $db->query("SELECT video_url FROM exercises, users WHERE users.goal = exercises.goal ORDER BY RAND() LIMIT 3");
+
+while ($row = $result->fetch_assoc()) {
+    $data[] = $row; // Mengisi array dengan setiap hasil
+}
+
+// Mengambil video_url dari setiap data yang diambil
+foreach ($data as $item) {
+    $url[] = $item['video_url'];
+}
+
+  
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./images/ambatugymwhite.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
+    <link rel="stylesheet" href="./dashboard.css">
     <title>Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="dashboard.css">
-    <style>
-        .navbar{
-    --bs-navbar-padding-x: 1;
-}
-
-.username{
-    color: #FF8800;
-}
-
-.navbar-nav{
-    margin-right: 25px;
-    
-}
-
-.container-fluid{
-    background-color: #FF8800;
-}
-
-.logo img {
-    width:50px;
-    height: 50px;
-    /* margin-top: 20px; */
-}
-
-.hero{
-    display: flex;
-}
-
-.left-section, .right-section{
-    width: 50%;
-}
-
-.right-section{
-    padding-left: 30px;
-    margin-left: 50px;
-}
-
-.container{
-    width: 100%;
-    display: flex;
-    /* justify-content: center; */
-}
-
-.nav-item{
-    font-weight: 500;
-}
-
-
-.video-card{
-    background-color: #d9d9d9 ;
-    width: 540px;
-    height: 360px;
-    margin-top: 20px;
-    /* margin-left: 41px; */
-    padding: 30px;
-    justify-content: ;
-    /* margin-left: 50px; */
-    text-align: center;
-    align-items: center;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.stats-card{
-    display: flex;
-    padding: 10px;
-    background-color: #d9d9d9;
-    max-width: 540px;
-    border-radius: 10px;
-    align-content: center;
-    margin-bottom: 10px;
-}
-
-.community-section{
-    height: 275px;
-}
-
-.wadah{
-    height: 245px;
-}
-
-
-
-</style>
-
 </head>
+
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary my-navbar">
-        <div class="container-fluid">
-          <a class="navbar-brand logo" href="#"><img src="./images/ambatugym2.png" alt=""></a>
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Profil</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="exercises.html">Gallery</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="exercise.html">Exercise</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="">Community</a>
-                </li>
-                <li class="nav-item">
-                    <form method="POST" action="dashboard.php"><button class="nav-link" type="submit" name="logout" style="color: red;">Logout</button></form>
-                 </li>
-            </ul>
-          </div>
+    <nav class="navbar">
+        <a class="img" href="#"><img src="./images/ambatugymwhite.png" alt=""></a>
+        <div class="brand-text">
+            <h2>AmbatuGYM</h2>
+            <p>Fitness and Health Tracker</p>
         </div>
-      </nav>
-    
-    <div class="main-content">
+        <ul class="navbar-item">
+            <li class="nav-list">
+                <a class="nav-link" href="#">Dashboard</a>
+            </li>
+            <li class="nav-list">
+                <a class="nav-link" href="exercise.html">Exercises</a>
+            </li>
+            <li class="nav-list">
+                <a class="nav-link" href="">Community</a>
+            </li>
+            <li class="nav-list">
+                    <button onclick="toggleDropdown()">
+                        <img src="./images/profile/edwin.jpg" alt="Profile">
+                    </button>
+                    <div id="dropdown" class="dropdown-content">
+                        <a href="profile.html">Profil</a>
+                        <button>Logout</button>     
+                    </div>
+            </li>
+        </ul>
+
+    </nav>
+
+    <main>
         <div class="left-section">
-            <h1>Welcome, <span class="username"><?= $_SESSION["username"] ?></span>!</h1>
-            <div class="daily-training">
-                <h3>Daily Training</h3>
-                <div class="kartu">
-                    <h4>Exercise 1</h4>
+                <div class="welcome">
+                    <h1>Welcome, <span><?=$_SESSION['username']?></span>!</h1>
                 </div>
-                <div class="kartu">
-                    <h4>Exercise 2</h4>
-                </div>
-                <div class="kartu">
-                    <h4>Exercise 3</h4>
-                </div>
-            </div>    
+                <div class="daily-training"></div>
+                    <h2><u>Daily Training</u></h2>
+                    <div class="trainings">
+                        <div class="training-card">
+                            <div class="training-image">
+                                <img src="./latihan/<?=$url[0]?>">
+                            </div>
+                            <div class="check-section">
+                                <h3>nama latihan</h3>
+                                <input type="checkbox">
+                            </div>
+                        </div>
 
-            <div class="community-section">
-                <h3>Community</h3>
-                <div class="wadah">
-                  <div class="isi">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia officiis minima nobis non necessitatibus animi vitae cum quod ullam. In vero quaerat sunt? Veniam, est aspernatur. Reprehenderit deserunt laborum quo?
-                  </div>
-                  <div class="isi">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia officiis minima nobis non necessitatibus animi vitae cum quod ullam. In vero quaerat sunt? Veniam, est aspernatur. Reprehenderit deserunt laborum quo?
-                  </div>
+                        <div class="training-card">
+                            <div class="training-image">
+                                <img src="./latihan/<?=$url[1]?>" alt="">
+                            </div>
+                            <div class="check-section">
+                                <h3>nama latihan</h3>
+                                <input type="checkbox">
+                            </div>
+                        </div>
 
+                        <div class="training-card">
+                            <div class="training-image">
+                                <img src="./latihan/<?=$url[2]?>" alt="">
+                            </div>
+                            <div class="check-section">
+                                <h3>nama latihan</h3>
+                                <input type="checkbox">
+                            </div>
+                        </div>
+                    </div> 
+
+                    <h2><u>Community</u></h2>
+                    <div class="community">
+                        <div class="community-card">
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Very nice website, looking forward to using it</p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Very nice website, looking forward to using it</p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Very nice website, looking forward to using it</p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Very nice website, looking forward to using it</p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto reprehenderit asperiores similique ipsam corrupti nihil quibusdam dolore iusto error totam? Nesciunt accusantium impedit amet eaque dolorem perferendis consectetur, repudiandae sapiente est omnis eveniet debitis dolorum quas asperiores beatae animi pariatur voluptates rem magnam vitae doloribus architecto mollitia non odio. Magni.</p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Very nice website, looking forward to using it</p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Very nice website, looking forward to using it</p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Very nice website, looking forward to using it</p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda recusandae non autem, 
+                                        eum similique consequatur sunt repellat nesciunt tempore quas? Reprehenderit dolore culpa quis aliquid 
+                                        deserunt minima nulla, numquam, odio ut voluptatum repudiandae minus doloremque, magni esse doloribus. 
+                                        Consequatur, nemo, pariatur inventore assumenda nesciunt, est facilis ex ipsam accusantium dignissimos
+                                        commodi itaque eligendi reprehenderit sequi sit facere vel voluptate vero officiis voluptas labore. 
+                                        consequatur quisquam doloribus dolore totam cupiditate adipisci vero, sequi dignissimos voluptates voluptatem
+                                        eligendi quaerat voluptatibus laboriosam beatae quas minus quia aliquid obcaecati dolorem maxime, nostrum odio
+                                        magnam. Aperiam labore soluta vitae impedit debitis exercitationem nemo suscipit.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="comment-card">
+                                <div class="left-comment">
+                                    <img src="./images/profile/edwin.jpg" alt="">
+                                </div>
+                                <div class="right-comment">
+                                    <p>username</p>
+                                    <p class="content">Very nice website, looking forward to using it</p>
+                                </div>
+                            </div>
+
+
+                        </div>
                 </div>
+
             </div>
         </div>
-
-
 
         <div class="right-section">
-            
-            <div class="video-card">
-                <h4>Statistik</h4>
-            </div>
+            <h2><u>Your Statistic</u></h2>
+            <div class="statistic">    
+                <div class="statistic-card">
+                    <div class="statistic-diagram">
+                    
+                    </div>
 
-            <div class="stats-card">
-                <img style="width: 30px; margin-right: 5px;" src=".\images\icons8-fire-100.png" alt="">
-                <h6 style="align-items: center; padding-top: 5px;">Calories Burned</h6>
-            </div>
+                    <div class="mini-stat">
+                        <div class="stat-card">
+                            <div class="value">
+                                <img src="./images/check.png" height="50px" width="50px" alt="exercise completed">
+                                <h2>5</h2>
+                            </div>
+                            <h3>Exercise Completed</h3>
+                        </div>
 
-            <div class="stats-card">
-                <img style="width: 30px; margin-right: 5px;" src=".\images\days.png" alt="">
-                <h6 style="align-items: center; padding-top: 5px;">Days Streak</h6>
-            </div>
+                        <div class="stat-card">
+                            <div class="value">
+                                <img src="./images/days.png" height="50px" width="50px" alt="exercise completed">
+                                <h2>5</h2>
+                            </div>
+                            <h3>Days Streak</h3>
+                        </div>
 
-            <div class="stats-card">
-                <img style="width: 30px; margin-right: 5px;" src=".\images\check.png" alt="">
-                <h6 style="align-items: center; padding-top: 5px;">Exercise Complete</h6>
+                        <div class="stat-card">
+                            <div class="value">
+                                <img src="./images/icons8-fire-100.png" height="50px" width="50px" alt="exercise completed">
+                                <h2>125 <span>cal</span></h2>
+                            </div>
+                            <h3>Calories Burned</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
-    </div>    
+    </main>
 
+    <!-- <script>
+    function toggleDropdown() {
+        document.getElementById("dropdown").classList.toggle("show");
+    }
 
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    // Menutup dropdown jika klik di luar area
+    window.onclick = function(event) {
+        if (!event.target.closest('.nav-list')) {
+            var dropdown = document.getElementById("dropdown");
+            if (dropdown.classList.contains('show')) {
+                dropdown.classList.remove('show');
+            }
+        }
+    }
+    </script> -->
 
 </body>
+
 </html>
