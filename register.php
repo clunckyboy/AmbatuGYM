@@ -1,8 +1,4 @@
 <?php
-
-//     ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
-// error_reporting(E_ALL);
     include "./database/config.php";
     session_start();
 
@@ -18,10 +14,25 @@
         $height = $_POST['height'];
         $goal = $_POST['goal'];
         $gender = $_POST['gender'];
+        $gambar = (function(){
+            $namaFile = $_FILES['gambar']['name'];
+            $ukuranFile = $_FILES['gambar']['size'];
+            $error = $_FILES['gambar']['error'];
+            $tmpName = $_FILES['gambar']['tmp_name'];
+
+            $valid_ext = ['jpg', 'jpeg', 'png'];
+            $ekstensi_gambar = explode('.', $namaFile);
+            $ekstensi_gambar = strtolower(end($ekstensi_gambar));
+            
+            move_uploaded_file($tmpName, './user_pp/'.$namaFile);
+            
+            return $namaFile;
+            
+        }) ();
 
         // Membuat query tanpa bind_param
-        $sql = "INSERT INTO users (users_username, users_password, users_fullname, users_email, users_birthdate, users_weight, users_height, users_gender, goal) 
-                VALUES ('$username', '$password', '$full_name', '$email', '$birthdate', '$weight', '$height', '$gender', '$goal')";
+        $sql = "INSERT INTO users (users_username, users_password, users_fullname, users_email, users_birthdate, users_weight, users_height, users_gender, goal, users_photo) 
+                VALUES ('$username', '$password', '$full_name', '$email', '$birthdate', '$weight', '$height', '$gender', '$goal', '$gambar')";
 
         if ($db->query($sql) === TRUE) {
             $register_message = "Daftar akun berhasil, silahkan login";
@@ -49,6 +60,11 @@
     <title>AmbatuRegister</title>
 
     <style>
+
+        html{
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: #FF8000;
             font-family: "Lexend", sans-serif;
@@ -154,7 +170,7 @@
         <hr>
         <h4>Informasi Akun</h4>
         <p style="color: green;"><i><?=$register_message?></i></p>
-        <form action="register.php" method="POST">
+        <form action="" method="POST" id="form" enctype="multipart/form-data" autocomplete="off">
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">E-mail</label>
                     <input name="email" type="email" class="form-control" id="inputEmail" placeholder="cth: JohnAmba69@gmail.com" required>
@@ -164,18 +180,23 @@
                     <input name="username" type="username" class="form-control" id="inputUsername" placeholder="Masukkan Username" required>
                 </div>
                 <div class="mb-3">
-                    <i> <?= $register_message ?> </i>
                     <label for="inputPassword" class="form-label">Password</label>
                     <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Harus memiliki huruf, angka, dan karakter spesial! (cth: !@#$%^&*)" aria-describedby="passHelp" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputPasswordConfirm" class="form-label">Password Confirm</label>
+                    <p id="confirmMessage" style="color: red; margin: 0; display: none;">Password tidak sama</p>
                     <input type="password" class="form-control" id="inputPasswordConfirm" required>
                 </div>
         
         <hr>
             <h4>Data Diri</h4>
-            
+
+                <div class="mb-3">
+                    <label for="foto-profil" style="margin-bottom: 5px;">Masukkann foto profil</label>
+                    <br>
+                    <input type="file" name="gambar" id="" accept=".jpg, .jpeg, .png" required>
+                </div>
                 <div class="mb-3">
                     <label for="inputFullName" class="form-label">Nama Lengkap</label>
                     <input name="full-name" type="text" class="form-control" id="inputFullName" placeholder="Masukkan nama lengkap" required>
@@ -183,7 +204,7 @@
                 <div class="mb-3">
                     <label for="inputGender" class="form-label">Jenis Kelamin</label>
                     <select name="gender" class="form-select" taria-label="Default select example">
-                        <option selected>Jenis Kelamin</option>
+                        <option value="" disabled selected>Jenis Kelamin</option>
                         <option value="Laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
                     </select>
@@ -201,8 +222,9 @@
                     <input name="height" type="number" class="form-control" id="inputTinggi" required>
                 </div>
                 <div class="mb-3">
-                    <label for="inputTujuan" class="form-label">Tujuan (Opsional)</label>
-                    <select name="goal" class="form-select" taria-label="Default select example">
+                    <label for="inputTujuan" class="form-label">Tujuan</label>
+                    <select name="goal" class="form-select" aria-label="Default select example">
+                        <option value="" disabled selected>Pilih Tujuan</option>
                         <option value="lose-weight">Menurunkan berat badan</option>
                         <option value="build_muscle">Membesarkan otot</option>
                         <option value="maintain">Pelihara stamina</option>
@@ -211,9 +233,42 @@
                 <div class="container text-center mt-4">
                     <button class="btn btn-custom" name="register" type="submit">Daftar</button>
                 </div>
-            </form>
+        </form>
             
       </div>
+    
+    <script>
+        const password = document.getElementById('inputPassword');
+        const confirmPassword = document.getElementById('inputPasswordConfirm');
+        const message = document.getElementById('confirmMessage');
+        const form = document.getElementById('form');
+
+        function validatePassword(){
+            if (password.value === '' || confirmPassword.value === ''){
+                message.style.display = 'none';
+                return;
+            }
+
+            if (password.value !== confirmPassword.value){
+                message.style.display = 'block';
+                return false;
+            }
+            else {
+                message.style.display = 'none'
+                return true;
+            }
+        }
+
+        password.addEventListener('input', validatePassword);
+        confirmPassword.addEventListener('input', validatePassword)
+
+        form.addEventListener('submit', function(event) {
+            if (!validatePassword()) {
+                event.preventDefault();
+                alert('Password dan konfirmasi password tidak cocok.');
+            }
+        });
+    </script>
       
 </body>
 </html>
