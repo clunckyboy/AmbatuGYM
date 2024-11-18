@@ -24,7 +24,7 @@ html {
 
 .navbar {
     animation: 0.5s ease-out 0s 1 slideIn;
-
+    
     box-shadow: -10px 2px 20px black;
     top: 0;
     padding-left: 20px;
@@ -61,7 +61,7 @@ html {
 .navbar a {
     box-shadow: 0px 0px 5px rgba(255, 255, 255, 0);
     border-radius: 10px;
-    transition: box-shadow 0.2s, transform 0.01s ease-in-out;
+    transition: background-color 0.2s , transform 0.01s ease-in-out;
 
     color: #f2f2f2;
     text-align: center;
@@ -71,7 +71,7 @@ html {
 }
 
 .navbar a:hover {
-    box-shadow: 0px 0px 20px white;
+    background-color: rgb(97, 58, 42);
 }
 
 .navbar a:active {
@@ -569,7 +569,7 @@ material-symbols-outlined{
 }
 
 .navbar-links a:hover {
-    text-decoration: underline; /* Underline on hover for links */
+    text-decoration: none; /* Underline on hover for links */
 }
 
 .profile-pic {
