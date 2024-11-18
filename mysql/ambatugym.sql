@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2024 at 09:40 AM
+-- Generation Time: Nov 05, 2024 at 06:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,11 +72,38 @@ CREATE TABLE `exercises` (
   `exercise_id` int(11) NOT NULL,
   `exercise_name` varchar(100) NOT NULL,
   `description` text NOT NULL,
+  `repetisi` varchar(55) NOT NULL,
+  `kalori_terbakar` int(255) NOT NULL,
   `goal` enum('lose_weight','build_muscle','maintain') NOT NULL,
-  `exercise_type` enum('cardio','strength','flexibility','balance') NOT NULL,
-  `exercises_duration` varchar(50) NOT NULL,
   `video_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `exercises`
+--
+
+INSERT INTO `exercises` (`exercise_id`, `exercise_name`, `description`, `repetisi`, `kalori_terbakar`, `goal`, `video_url`) VALUES
+(1, 'Burpee', 'Dimulai dengan berdiri, kemudian turun ke posisi squat dengan tangan menyentuh lantai. Lakukan push-up dengan melompatkan kaki ke belakang, lalu kembali ke posisi squat, dan lompat tinggi ke udara sambil mengangkat tangan. Latihan ini melatih seluruh tubuh, termasuk otot inti, kaki, dada, dan meningkatkan detak jantung secara signifikan.', '20 x 3', 150, 'lose_weight', 'turun_berat/burpee.gif'),
+(2, 'Jumping Jack', 'Berdiri dengan kaki rapat dan tangan di samping. Lompat dan buka kaki ke samping sambil mengangkat tangan di atas kepala, lalu kembali ke posisi awal. Latihan ini meningkatkan stamina dan kekuatan kardio, serta membantu pembakaran kalori yang cepat.', '50 x 3', 90, 'lose_weight', 'turun_berat/jumpingjack.gif'),
+(3, 'Mountain Climbers', 'Dari posisi plank, tarik lutut kanan ke arah dada, lalu kembalikan dan ganti dengan lutut kiri. Gerakan ini dilakukan cepat seperti \"memanjat\". Mountain climbers mengaktifkan otot perut, lengan, bahu, dan kaki, serta efektif untuk meningkatkan pembakaran kalori.', '40 x 3', 135, 'lose_weight', 'turun_berat/mountainclimber.gif'),
+(4, 'High Knees', 'Berdiri tegak dan angkat lutut kanan setinggi mungkin, lalu ganti dengan lutut kiri, dilakukan secara cepat. High knees melatih otot inti, kaki, dan meningkatkan detak jantung, sehingga efektif dalam membakar kalori.', '50 x 3', 105, 'lose_weight', 'turun_berat/highknee.gif'),
+(5, 'Skater Hop', 'Dari posisi berdiri, lompat ke samping kanan dengan kaki kiri diangkat, lalu lompat ke samping kiri dengan kaki kanan diangkat, seolah-olah melakukan gerakan seperti pemain skating. Latihan ini melatih otot kaki, pinggul, dan meningkatkan koordinasi serta kardio.\r\n\r\n', '30 x 3', 120, 'lose_weight', 'turun_berat/skaterhop.gif'),
+(6, 'Bodyweight Squats', 'Berdiri dengan kaki selebar bahu, turunkan tubuh hingga paha sejajar dengan lantai seolah duduk di kursi, lalu kembali berdiri. Squats melatih otot paha, bokong, dan betis, serta meningkatkan kekuatan inti dan pembakaran kalori.', '25 x 3', 90, 'lose_weight', 'turun_berat/bodyweightsquat.gif'),
+(7, 'Plank to Push-Up', 'Dimulai dari posisi plank, angkat tubuh ke posisi push-up, lalu turunkan kembali ke plank. Latihan ini melatih otot inti, dada, lengan, dan bahu, serta meningkatkan ketahanan dan kekuatan otot tubuh bagian atas dan inti.', '15 x 3 ', 90, 'lose_weight', 'turun_berat/plankpushup.gif'),
+(8, 'Push-Up', 'Dimulai dengan posisi plank dan tangan di bawah bahu, turunkan tubuh hingga dada mendekati lantai, lalu dorong kembali ke posisi awal. Push-up melatih otot dada, tricep, bahu, dan meningkatkan kekuatan tubuh bagian atas.', '15 x 3', 75, 'build_muscle', 'besar_otot/pushup.gif'),
+(9, 'Pull-Up', 'Dengan memegang palang di atas kepala, tarik tubuh ke atas hingga dagu melewati palang, lalu turunkan kembali. Pull-up adalah latihan berat badan untuk menguatkan punggung, bicep, dan bahu, serta meningkatkan kekuatan tubuh bagian atas.', '10 x 3', 60, 'build_muscle', 'besar_otot/pullup.gif'),
+(10, 'Bench Press ', 'Berbaring di bangku, dorong barbel atau dumbel ke atas hingga tangan lurus, lalu turunkan hingga mendekati dada. Latihan ini sangat efektif untuk melatih otot dada, bahu, dan tricep, serta membangun massa otot tubuh bagian atas.', '12 x 3', 105, 'build_muscle', 'besar_otot/benchpress.gif'),
+(11, 'Bicep Curl', 'Berdiri tegak sambil memegang dumbel di kedua tangan, angkat dumbel ke arah bahu dengan melipat siku, lalu turunkan perlahan. Latihan ini menargetkan otot bicep dan membantu dalam pembentukan otot lengan.', '12 x 3', 45, 'build_muscle', 'besar_otot/bicepcurl.gif'),
+(12, 'Dumbbell Shoulder Press', 'Duduk atau berdiri dengan dumbel di kedua tangan sejajar dengan bahu, dorong dumbel ke atas hingga tangan lurus, lalu turunkan ke posisi awal. Shoulder press melatih otot bahu, tricep, dan punggung atas, membantu memperbesar dan memperkuat bahu.', '12 x 3', 60, 'build_muscle', 'besar_otot/dumbellshoulderpress.gif'),
+(13, 'Deadlift', 'Dengan berdiri dan barbel di depan, tekuk lutut sedikit, lalu angkat barbel dengan menjaga punggung lurus hingga berdiri tegak, kemudian turunkan kembali. Deadlift sangat efektif untuk melatih punggung bawah, paha, bokong, dan hamstring, serta memperkuat otot inti.', '10 x 3', 120, 'build_muscle', 'besar_otot/deadlift.gif'),
+(14, 'Lunges', 'Dengan dumbel di kedua tangan, maju dengan satu kaki dan tekuk kedua lutut hingga lutut belakang hampir menyentuh lantai, lalu kembali ke posisi awal. Lunges melatih otot paha, bokong, dan betis, serta memperkuat otot kaki secara keseluruhan.\r\n\r\n', '12 x 3', 60, 'build_muscle', 'besar_otot/lunges.gif'),
+(15, 'Jogging di tempat', 'Jogging di tempat dilakukan dengan cara berlari ringan tanpa berpindah tempat. Angkat lutut secara bergantian, dan ayunkan lengan untuk menjaga keseimbangan. Latihan ini berfungsi meningkatkan daya tahan kardio dan mengaktifkan otot kaki.', '5mnt x 3 ', 150, 'maintain', 'pelihara_stamina/joginplace.gif'),
+(16, 'Jump Rope', 'Lakukan lompatan kecil dengan kedua kaki sambil memutar tali di atas kepala dan di bawah kaki. Gerakan ini meningkatkan detak jantung dan membakar banyak kalori, serta memperkuat otot kaki, betis, dan meningkatkan koordinasi.', '1mnt x 3', 135, 'maintain', 'pelihara_stamina/jumprope.gif'),
+(17, 'Butt Kick', 'Dalam gerakan ini, posisi berdiri tegak dengan kaki selebar pinggul. Lakukan lompatan ringan, secara bergantian menendang tumit ke arah bokong. Ini adalah latihan kardio yang meningkatkan fleksibilitas kaki dan daya tahan tubuh, terutama melatih hamstring dan otot betis.', '1mnt x 3', 100, 'maintain', 'pelihara_stamina/buttkick.gif'),
+(18, 'Bear Crawl', 'Dari posisi merangkak, maju dengan menggunakan tangan dan kaki, menjaga tubuh rendah ke lantai. Gerakan ini melatih kekuatan tubuh bagian atas, perut, dan koordinasi. Bear crawl juga meningkatkan daya tahan tubuh dengan mengaktifkan hampir semua otot.', '30dtk x 3', 90, 'maintain', 'pelihara_stamina/bearcrawl.gif'),
+(19, 'Russian Twist', 'Duduk dengan lutut ditekuk, miringkan badan sedikit ke belakang, dan putar tubuh dari sisi ke sisi sambil memegang tangan di depan dada atau menambah beban dengan dumbel. Latihan ini sangat efektif untuk melatih otot inti, khususnya bagian perut obliques, dan meningkatkan kekuatan serta stabilitas inti.', '25 x 3', 45, 'maintain', 'pelihara_stamina/russiantwist.gif'),
+(20, 'Step-Up', 'Dengan bangku atau pijakan di depan, naikkan satu kaki ke atas bangku, kemudian dorong tubuh ke atas hingga kaki lurus. Turunkan dan ganti dengan kaki lainnya. Latihan ini melatih kekuatan kaki dan meningkatkan detak jantung, serta membantu daya tahan kardio.', '20 x 3', 75, 'maintain', 'pelihara_stamina/stepup.gif'),
+(21, 'Plank Hold', 'Mulai dengan posisi push-up, namun tahan tubuh tetap lurus dengan bertumpu pada siku dan ujung kaki. Pastikan tubuh tetap lurus dari kepala hingga kaki, dan tahan posisi ini. Plank efektif untuk menguatkan otot inti, lengan, dan punggung, serta meningkatkan stabilitas tubuh.\r\n\r\n', '1mnt x 3', 60, 'maintain', 'pelihara_stamina/plankhold.gif');
 
 -- --------------------------------------------------------
 
@@ -105,10 +132,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`users_id`, `users_fullname`, `users_email`, `users_username`, `users_password`, `users_gender`, `users_age`, `users_birthdate`, `users_weight`, `users_height`, `goal`, `users_photo`, `users_badge`) VALUES
-(1, '', 0, 'anna', '123', '', 0, '2024-10-22', 0, 0, '', 0, '0'),
-(2, '', 0, 'abv', '123', '', 0, '2024-10-22', 0, 0, '', 0, '0'),
-(9, 'ambaleon', 0, 'muani', '123', 'Perempuan', NULL, '2024-10-30', 10, 100, 'build_muscle', NULL, NULL),
-(10, 'amba', 0, 'amba', '123', 'Laki-laki', NULL, '2024-10-23', 20, 20, '', NULL, NULL);
+(11, 'Tester', 0, 'tester', 'tester', 'Laki-laki', NULL, '2024-11-04', 90, 90, '', NULL, NULL),
+(12, 'testing2', 0, 'testing2', 'testing', 'Laki-laki', NULL, '2024-07-05', 90, 100, 'maintain', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -238,13 +263,13 @@ ALTER TABLE `community_post`
 -- AUTO_INCREMENT for table `exercises`
 --
 ALTER TABLE `exercises`
-  MODIFY `exercise_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `exercise_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_badge`

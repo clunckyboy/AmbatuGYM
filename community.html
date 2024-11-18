@@ -1,0 +1,299 @@
+<!-- <?php
+    date_default_timezone_set('Asia/Jakarta')
+?> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=brightness_4"/>
+    <link rel="icon" type="image/x-icon" href="./images/ambatugymwhite.png">
+    <link rel="stylesheet" href="./Styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community</title>
+
+    <style>
+        body {
+            background: 
+            linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)), 
+            url('./images/bg.jpg');
+        }
+
+        .dark-mode {
+            background: 
+                linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
+                url('./images/bg.jpg');
+        }
+
+        .comment-box {
+            background-color: rgb(97, 58, 42);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+    
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    
+        .comment-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    
+        .comment-content {
+            font-size: 0.9em;
+            color: #ffffff;
+        }
+    
+        .comment-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #ffffffad;
+        }
+    
+        .like-count {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 15px;
+        }
+
+        .dark-mode .like-count {
+            color: rgba(0, 0, 0, 0.764);
+        }
+    
+        .comment-form-section textarea {
+            width: 95%;
+            height: 150px;
+            border-radius: 10px;
+            border: 1px solid rgb(97, 58, 42);
+            padding: 10px;
+            font-size: 15px;
+            margin-bottom: 10px;
+            background-color: black;
+            color: white;
+            transition: transform 0.2s;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0);
+            resize: none;
+        }
+        .comment-form-section textarea:focus{
+            transform: scale(1.03);
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.524);
+        }
+
+        .comments-section, .comment-form-section {
+            padding: 20px;
+            border-radius: 10px;
+        }
+    
+        .comments-section {
+            padding: 20px;
+            border-radius: 10px;
+            overflow-y: scroll;
+            height: 550px; /* Adjust height as needed */
+        }
+    
+        .comment-form-section {
+            flex: 1;
+        }
+        .dark-mode .comment-box, .dark-mode .comment-content {
+            background-color: rgb(255, 225, 181); /* Light card background */
+            color: rgb(0, 0, 0);
+        }
+
+        .dark-mode .comment-form-section textarea {
+            color: black;
+            font-family: "Lexend", sans-serif;
+            font-optical-sizing: auto;
+            font-style: normal;
+            background-color: rgb(255, 225, 181);
+            border: 1px solid rgb(97, 58, 42);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0);
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .dark-mode .comment-form-section textarea:focus {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.483);
+        }
+
+        /* Scrollbar customization */
+        .comments-section::-webkit-scrollbar {
+            width: 10px; /* Width of the scrollbar */
+        }
+
+        .comments-section::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.397); 
+            border-radius: 10px;
+        }
+
+        .comments-section::-webkit-scrollbar-thumb {
+            background-color: rgba(97, 58, 42, 0.8); 
+            border-radius: 10px;
+        }
+
+        .comments-section::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(97, 58, 42, 1); /* Scrollbar color on hover */
+        }
+
+        .thumb-up {
+            border-radius: 10px;
+            border: 0;
+            background-color: rgb(48, 32, 25);
+            padding: 4px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .dark-mode .thumb-up {
+            background-color: rgb(255, 241, 224);
+        }
+        .thumb-up:hover {
+            background-color:rgb(122, 85, 69);
+            transform: scale(1.04)\;
+        }
+        .thumb-up:active {
+            background-color: rgb(0, 0, 0);
+            transform: scale(0.96);
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="./images/ambatugymwhite.png" 
+        data-light="./images/ambatugymwhite.png" 
+        data-dark="./images/ambatugym2.png" 
+        alt="ambatuLOGO">
+        <div class="navbar-brand">
+            <h2>AmbatuGYM</h2>
+            <button onclick="myFunction()" class="btn-toggle">
+                <span class="material-symbols-outlined">
+                    brightness_4
+                </span>
+            </button>
+        </div>
+        <button class="navbar-toggle" onclick="openNav()">☰</button> <!-- Hamburger icon -->
+            <div class="navbar-links" id="navbarLinks">
+                <a href="dashboard.php">Dashboard</a>
+                <a href="exercise.html">Exercises</a>
+                <a href="#community">Community</a>
+                <div class="profile-container">
+                    <img src="images/ambaprofilepicture.png" alt="Profile Picture" class="profile-pic-small">
+                </div>
+                <a href="#" class="btn-custom" onclick="logout()">Logout</a>
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="dashboard.php">Dashboard</a>
+                <a href="exercise.html">Exercises</a>
+                <a href="#community">Community</a>
+                <a href="#" class="btn-custom" onclick="logout()">Logout</a>
+              </div>
+    </nav>
+    
+    <div class="parent" id="community">
+        <div class="container" style="margin-top: 100px; margin-bottom: 20px">
+            <div class="comments-section">
+                <h1>Community</h1>
+        
+                <!-- Comment Box 1 -->
+                <div class="comment-box">
+                    <div class="comment-header">
+                        <img src="https://via.placeholder.com/40" alt="User Icon">
+                        <span>lorem</span>
+                    </div>
+                    <div class="comment-content">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi delectus tempore, voluptatum aliquam minima praesentium.
+                    </div>
+                    <div class="comment-footer">
+                        <span class="like-count">12
+                            <button class="thumb-up" onclick="liked()"> 
+                                <span>
+                                👍
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+        
+                <!-- Comment Box 2 -->
+                <div class="comment-box">
+                    <div class="comment-header">
+                        <img src="https://via.placeholder.com/40" alt="User Icon">
+                        <span>lorem</span>
+                    </div>
+                    <div class="comment-content">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi delectus tempore, voluptatum aliquam minima praesentium.
+                    </div>
+                    <div class="comment-footer">
+                        <span class="like-count">5 
+                            <button class="thumb-up" onclick="liked()"> 
+                                <span>
+                                👍
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="comment-box">
+                    <div class="comment-header">
+                        <img src="https://via.placeholder.com/40" alt="User Icon">
+                        <span>lorem</span>
+                    </div>
+                    <div class="comment-content">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi delectus tempore, voluptatum aliquam minima praesentium.
+                    </div>
+                    <div class="comment-footer">
+                        <span class="like-count">5 
+                            <button class="thumb-up" onclick="liked()"> 
+                                <span>
+                                👍
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="comment-box">
+                    <div class="comment-header">
+                        <img src="https://via.placeholder.com/40" alt="User Icon">
+                        <span>lorem</span>
+                    </div>
+                    <div class="comment-content">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi delectus tempore, voluptatum aliquam minima praesentium.
+                    </div>
+                    <div class="comment-footer">
+                        <span class="like-count">5
+                            <button class="thumb-up" onclick="liked()"> 
+                                <span>
+                                👍
+                                </span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        
+
+            <div class="comment-form-section">
+                <h1>Beri Komentar</h1>
+                <textarea id="commentInput" class="form" placeholder="Say something!"></textarea>
+                <button id="submitCommentBtn" class="btn-custom" style="width: 100%;">Post!</button>
+            </div>
+        </div>
+
+    <script src="./scripts/about.js"></script>
+    <script src="./scripts/comment.js"></script>
+</body>
+</html>

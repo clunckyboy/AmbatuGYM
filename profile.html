@@ -38,7 +38,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        background-color: rgba(97, 58, 42, 0.8);
+        background-color: rgba(97, 58, 42, 1);
         border-radius: 20px;
         padding: 40px; /* Increased padding for extra height */
         max-width: 1000px; /* Wider width */
@@ -127,14 +127,17 @@
             </button>
         </div>
         <div class="navbar-links">
-            <a href="#dashboard">Dashboard</a>
-            <a href="#exercises">Exercises</a>
-            <a href="#community">Community</a>
-            <div class="profile-container">
-                <img src="images/ambaprofilepicture.png" alt="Profile Picture" class="profile-pic-small">
-                <a href="#" class="logout-button" onclick="logout()">Logout</a>
+            <a href="">Dashboard</a>
+            <a href="">Exercises</a>
+            <a href="community.html">Community</a>
+            <div class="profile-container" style="position: relative;"> <!-- Ensure the container is relatively positioned -->
+                <img id="profilePic" src="images/ambaprofilepicture.png" alt="Profile Picture" class="profile-pic-small">
+                <div id="profileTooltip" class="profile-tooltip" style="display: none;"> <!-- Keep tooltip hidden by default -->
+                    <a href="#" class="profile-button" onclick="Profile()">Profile</a>
+                    <a href="#" class="logout-button" onclick="logout()">Logout</a>
+                </div>
             </div>
-        </div>        
+        </div>
     </nav>
 
     <div class="profile-card">
@@ -184,7 +187,6 @@
             </div>
         </div>
     </div>
-
     <script src="./scripts/profile.js"></script>
 </body>
 </html>
