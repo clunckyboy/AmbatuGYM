@@ -49,13 +49,13 @@ foreach ($data as $item) {
         </div>
         <ul class="navbar-item">
             <li class="nav-list">
-                <a class="nav-link" href="#">Dashboard</a>
+                <a class="nav-link" href="#dashboard">Dashboard</a>
             </li>
             <li class="nav-list">
                 <a class="nav-link" href="exercise.html">Exercises</a>
             </li>
             <li class="nav-list">
-                <a class="nav-link" href="">Community</a>
+                <a class="nav-link" href="community.html">Community</a>
             </li>
             <li class="nav-list">
                     <button onclick="toggleDropdown()">
@@ -72,11 +72,11 @@ foreach ($data as $item) {
 
     <main>
         <div class="left-section">
-                <div class="welcome">
+                <div class="welcome" id="dashboard">
                     <h1>Welcome, <span><?=$_SESSION['username']?></span>!</h1>
                 </div>
-                <div class="daily-training"></div>
-                    <h2><u>Daily Training</u></h2>
+                <div class="daily-training card">
+                    <h2>Daily Training</h2>
                     <div class="trainings">
                         <div class="training-card">
                             <div class="training-image">
@@ -84,7 +84,7 @@ foreach ($data as $item) {
                             </div>
                             <div class="check-section">
                                 <h3>nama latihan</h3>
-                                <input type="checkbox">
+                                <input type="checkbox" class="check-box">
                             </div>
                         </div>
 
@@ -94,7 +94,7 @@ foreach ($data as $item) {
                             </div>
                             <div class="check-section">
                                 <h3>nama latihan</h3>
-                                <input type="checkbox">
+                                <input type="checkbox" class="check-box">
                             </div>
                         </div>
 
@@ -104,14 +104,16 @@ foreach ($data as $item) {
                             </div>
                             <div class="check-section">
                                 <h3>nama latihan</h3>
-                                <input type="checkbox">
+                                <input type="checkbox" class="check-box">
                             </div>
                         </div>
                     </div> 
+                    </div>
 
-                    <h2><u>Community</u></h2>
+                    
                     <div class="community">
                         <div class="community-card">
+                        <h2 style="margin-bottom: 20px;">Community</h2>
                             <div class="comment-card">
                                 <div class="left-comment">
                                     <img src="./images/profilepics/edwin.jpg" alt="">
@@ -228,9 +230,9 @@ foreach ($data as $item) {
         </div>
 
         <div class="right-section">
-            <h2><u>Your Statistic</u></h2>
             <div class="statistic">    
                 <div class="statistic-card">
+                <h2 style="padding-left:20px;">Your Statistic</h2>
                     <div class="statistic-diagram">
                     
                     </div>
