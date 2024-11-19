@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/x-icon" href="./images/ambatugymwhite.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
     <link rel="icon" type="image/x-icon" href="./ambatugymwhite.png">
-    <link rel="stylesheet" href="./Styles/style.css">
+    <link rel="stylesheet" href="./Styles/profile.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmbatuGYM Profile</title>
+    <title>Profile</title>
 
     <style>
         body {
@@ -35,25 +36,37 @@
         }
 
         .profile-card {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        background-color: rgba(97, 58, 42, 1);
-        border-radius: 20px;
-        padding: 40px; /* Increased padding for extra height */
-        max-width: 1000px; /* Wider width */
-        width: 90%; /* Responsive width */
-        min-height: 300px; /* Set a minimum height */
-        box-shadow: 0px 10px 20px black;
-        color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background-color:rgb(48, 32, 25);
+            border-radius: 20px;
+            padding: 10px 40px 0px 20px; /* Increased padding for extra height */
+            max-width: 1000px; /* Wider width */
+            width: 90%; /* Responsive width */
+            min-height: 300px; /* Set a minimum height */
+            box-shadow: 0px 10px 20px black;
+            color: white;
+            transition: background-color 0.2s ease-in-out;
         }
+
+        .dark-mode .profile-card {
+            background-color: rgb(255, 241, 224);
+            color: black;
+        }
+
         .profile-pic-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 200px;
+            width: 20%;
             margin-right: 30px;
         }
+
+        .dark-mode .change-pic {
+            color: black;
+        }
+
         .profile-pic-placeholder {
             width: 150px; /* Set a fixed width */
             height: 150px; /* Set a fixed height */
@@ -88,11 +101,20 @@
             text-align: left;
         }
         .info-item {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgb(97, 58, 42);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            transition: background-color 0.2s ease-in-out;
             margin: 10px 0;
         }
+
+        .dark-mode .info-item {
+            background-color:  rgb(255, 225, 181);
+        }
+
         .info-label {
             flex: 1;
             font-weight: bold;
@@ -105,6 +127,11 @@
             text-align: left;
             padding-left: 10px;
         }
+
+        .dark-mode .info-placeholder, .dark-mode .info-label, .dark-mode .edit-icon{
+            color: black;
+        }
+
         .edit-icon {
         font-family: "Material Symbols Outlined";
         font-size: 18px;
@@ -112,6 +139,7 @@
         color: #ddd; /* Adjust color as desired */
         padding-left: 10px;
         }
+        
     </style>
 </head>
 <body>

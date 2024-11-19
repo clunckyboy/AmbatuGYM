@@ -50,13 +50,37 @@ document.addEventListener('click', (event) => {
     }
 });
 
+function Profile() {
+    window.location.href = 'profile.html';
+}
 
 function logout() {
-    // Clear any session data if needed
-    // For example: localStorage.clear();
-
-    // Redirect to the login page
     window.location.href = 'login.html';
 }
 
+const profilePic = document.getElementById('profilePic');
+const profileTooltip = document.getElementById('profileTooltip');
+
+// Toggle tooltip on profile picture click
+profilePic.addEventListener('click', function(event) {
+    event.stopPropagation(); // Prevent event bubbling to document
+    const rect = profilePic.getBoundingClientRect();
+    profileTooltip.style.top = `${rect.bottom + window.scrollY + 5}px`; // Position below the profile picture
+    profileTooltip.style.left = `${rect.left}px`; // Align horizontally with the profile picture
+    profileTooltip.style.display = profileTooltip.style.display === 'block' ? 'none' : 'block'; // Toggle display
+});
+
+// Hide tooltip when clicking outside
+document.addEventListener('click', function() {
+    profileTooltip.style.display = 'none';
+});
+
+// Profile and Logout functions
+function Profile() {
+    window.location.href = 'profile.html';
+}
+
+function logout() {
+    window.location.href = 'login.html';
+}
 
