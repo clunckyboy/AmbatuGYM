@@ -383,7 +383,9 @@ p {
     color: rgb(0, 0, 0); /* Set default dark mode text color */
 }
 
-
+.dark-mode .navbar a:hover {
+    background-color: rgb(255, 225, 181) ;
+}
 
 .dark-mode .container,
 .dark-mode .navbar {
@@ -659,3 +661,4 @@ material-symbols-outlined{
 .toggle-option.selected {
     background-color: #d1e7dd; /* Optionally set a background color for the selected option */
 }
+
