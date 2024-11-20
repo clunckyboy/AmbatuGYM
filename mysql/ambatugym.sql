@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2024 at 06:36 AM
+-- Generation Time: Nov 20, 2024 at 02:08 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,7 @@ CREATE TABLE `badge` (
 CREATE TABLE `comment` (
   `comment_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `users_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `comment` text NOT NULL,
   `comment_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -112,28 +112,20 @@ INSERT INTO `exercises` (`exercise_id`, `exercise_name`, `description`, `repetis
 --
 
 CREATE TABLE `users` (
-  `users_id` int(11) NOT NULL,
-  `users_fullname` varchar(100) NOT NULL,
-  `users_email` int(11) NOT NULL,
-  `users_username` varchar(50) NOT NULL,
-  `users_password` varchar(255) NOT NULL,
-  `users_gender` enum('Laki-laki','Perempuan') NOT NULL,
-  `users_age` int(11) DEFAULT NULL,
-  `users_birthdate` date DEFAULT NULL,
-  `users_weight` decimal(65,0) NOT NULL,
-  `users_height` decimal(65,0) NOT NULL,
-  `goal` enum('lose_weight','build_muscle','maintain') NOT NULL,
-  `users_photo` int(11) DEFAULT NULL,
-  `users_badge` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
+  `user_id` int(11) NOT NULL,
+  `fullname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `gender` enum('Laki-laki','Perempuan') NOT NULL,
+  `age` int(11) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `weight` decimal(65,0) NOT NULL,
+  `height` decimal(65,0) NOT NULL,
+  `goal` varchar(100) NOT NULL,
+  `profile_photo` varchar(100) DEFAULT NULL,
+  `badge` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`users_id`, `users_fullname`, `users_email`, `users_username`, `users_password`, `users_gender`, `users_age`, `users_birthdate`, `users_weight`, `users_height`, `goal`, `users_photo`, `users_badge`) VALUES
-(11, 'Tester', 0, 'tester', 'tester', 'Laki-laki', NULL, '2024-11-04', 90, 90, '', NULL, NULL),
-(12, 'testing2', 0, 'testing2', 'testing', 'Laki-laki', NULL, '2024-07-05', 90, 100, 'maintain', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -192,8 +184,9 @@ ALTER TABLE `badge`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`comment_id`),
+  ADD UNIQUE KEY `post_id_2` (`post_id`),
   ADD KEY `post_id` (`post_id`),
-  ADD KEY `users_id` (`users_id`);
+  ADD KEY `users_id` (`user_id`);
 
 --
 -- Indexes for table `community_post`
@@ -212,8 +205,8 @@ ALTER TABLE `exercises`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`users_id`),
-  ADD UNIQUE KEY `users_username` (`users_username`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `users_username` (`username`);
 
 --
 -- Indexes for table `user_badge`
@@ -269,7 +262,7 @@ ALTER TABLE `exercises`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `users_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `user_badge`
@@ -292,33 +285,33 @@ ALTER TABLE `user_workout_progress`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `community_post` (`post_id`),
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`);
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `community_post`
 --
 ALTER TABLE `community_post`
-  ADD CONSTRAINT `community_post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`users_id`);
+  ADD CONSTRAINT `community_post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `user_badge`
 --
 ALTER TABLE `user_badge`
-  ADD CONSTRAINT `user_badge_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`),
+  ADD CONSTRAINT `user_badge_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`user_id`),
   ADD CONSTRAINT `user_badge_ibfk_2` FOREIGN KEY (`badge_id`) REFERENCES `badge` (`badge_id`);
 
 --
 -- Constraints for table `user_stat`
 --
 ALTER TABLE `user_stat`
-  ADD CONSTRAINT `user_stat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`users_id`);
+  ADD CONSTRAINT `user_stat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `user_workout_progress`
 --
 ALTER TABLE `user_workout_progress`
   ADD CONSTRAINT `p` FOREIGN KEY (`exercise_id`) REFERENCES `exercises` (`exercise_id`),
-  ADD CONSTRAINT `user id relation` FOREIGN KEY (`users_id`) REFERENCES `users` (`users_id`);
+  ADD CONSTRAINT `user id relation` FOREIGN KEY (`users_id`) REFERENCES `users` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
