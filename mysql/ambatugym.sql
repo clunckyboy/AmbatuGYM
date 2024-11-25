@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2024 at 02:08 AM
+-- Generation Time: Nov 25, 2024 at 09:53 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -126,6 +126,17 @@ CREATE TABLE `users` (
   `profile_photo` varchar(100) DEFAULT NULL,
   `badge` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `fullname`, `email`, `username`, `password`, `gender`, `age`, `birthdate`, `weight`, `height`, `goal`, `profile_photo`, `badge`) VALUES
+(37, 'Peter Parker', 'peter@gmail.com', 'peterparker', 'abcde', 'Laki-laki', NULL, '2024-11-02', 75, 180, 'build_muscle', 'cropped-1920-1080-1080594.png', NULL),
+(38, 'Christina', 'christina@gmail.com', 'christina', '09876', 'Perempuan', NULL, '2024-11-03', 60, 170, 'maintain', 'Cyberpunk Nightcity 1x1.png', NULL),
+(39, 'inari', 'inari@gmail.com', 'inari', 'fedcba', 'Perempuan', NULL, '2024-11-05', 55, 165, 'lose_weight', 'inari kon.jpg', NULL),
+(40, 'edwin purba', 'edwin@gmail.com', 'edwin', '12345', 'Laki-laki', NULL, '2024-11-20', 70, 175, 'build_muscle', 'Chess ngnl.jpg', NULL),
+(43, 'Yanami Anna', 'yanamianna@gmail.com', 'anna', '12345', 'Perempuan', NULL, '2005-11-29', 60, 170, 'maintain', '674402e8e2e90.jpeg', NULL);
 
 -- --------------------------------------------------------
 
@@ -262,7 +273,7 @@ ALTER TABLE `exercises`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `user_badge`
