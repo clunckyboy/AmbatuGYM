@@ -1,8 +1,10 @@
 <?php
-// if(!isset($_SESSION["admin_login"])){
-//     header('location: login.php');
-//     exit;
-// }
+session_start();
+
+if(!isset($_SESSION["admin_login"])){
+    header('location: login.php');
+    exit;
+}
 
 require "database/config.php";
 
