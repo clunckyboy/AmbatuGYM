@@ -1,6 +1,6 @@
 <?php
-// if(!isset($_POST["login"])){
-//     header('location: index.php');
+// if(!isset($_SESSION["admin_login"])){
+//     header('location: login.php');
 //     exit;
 // }
 
@@ -103,7 +103,7 @@ $data = query("SELECT * FROM users");
             <h1>Halaman Admin AmbatuGYM</h1>
         </div>
         <div class="kanan">
-            <a href="index.php" class="login">Kembali ke halaman login</a>
+            <a href="./logic/logout.php" class="login">Kembali ke halaman login</a>
         </div>
     </div>
     
@@ -124,7 +124,7 @@ $data = query("SELECT * FROM users");
             <tr>
                 <td><?= $i; ?></td>
                 <td>
-                    <a href="" style="color: blue;">Ubah</a> |
+                    <!-- <a href="" style="color: blue;">Ubah</a> | -->
                     <a href="./logic/hapus.php?id=<?=$row["user_id"];?>" onclick="return confirm('Yakin untuk menghapus data ini ?')" style="color: red;">Hapus</a>          
                 </td>
                 <td><img src="./user_pp/<?= $row["profile_photo"]; ?>" width="60px"></td>

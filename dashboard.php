@@ -1,17 +1,21 @@
 <?php
-    include "./database/config.php";
     session_start();
 
-    if(isset($_POST['logout'])){
-        session_unset();
-        session_destroy();
-        header("location: index.php");
+    if ( !isset($_SESSION["is_login"]) ){
+        header("location: login.php");
+        exit;
     }
-
+    
+    include "./database/config.php";
+    
     $data = [];
     $url = [];
 
-    $result = $db->query("SELECT video_url FROM exercises, users WHERE users.goal = exercises.goal ORDER BY RAND() LIMIT 3");
+    $goal = $_SESSION["user"]["goal"];
+    $username = $_SESSION["user"]["username"];
+    $photo = $_SESSION["user"]["profile_photo"];
+
+    $result = $db->query("SELECT DISTINCT video_url FROM exercises WHERE '$goal' = exercises.goal ORDER BY RAND() LIMIT 3");
 
     while ($row = $result->fetch_assoc()) {
         $data[] = $row; // Mengisi array dengan setiap hasil
@@ -34,7 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
-    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="./styles/dashboard.css">
     <title>Dashboard</title>
 </head>
 
@@ -56,10 +60,10 @@
                 <a class="nav-link" href="community.html">Community</a>
             </li>
             <li class="nav-list">
-                <img src="./images/profile/edwin.jpg" alt="Profile" onclick="toggleDropdown()" class="profile-pic">
+                <img src="./user_pp/<?= $photo ?> " alt="Profile" onclick="toggleDropdown()" class="profile-pic">
                 <div id="dropdown" class="dropdown-content">
-                    <a href="./profile.html">Profil</a>
-                    <a href="index.php" id="logout">Logout</a>
+                    <a href="./profile.php">Profil</a>
+                    <a href="./logic/logout.php" id="logout">Logout</a>
                 </div>
             </li>
         </ul>
@@ -69,7 +73,7 @@
     <main>
         <div class="left-section">
             <div class="welcome" id="dashboard">
-                <h1>Welcome, <span><?=$_SESSION['username']?></span>!</h1>
+                <h1>Welcome, <span><?= $username ?></span>!</h1>
             </div>
             <div class="daily-training card">
                 <h2>Daily Training</h2>
@@ -121,7 +125,7 @@
                     <h2 style="margin-bottom: 20px;">Community</h2>
                     <div class="comment-card">
                         <div class="left-comment">
-                            <img src="./images/profile/edwin.jpg" alt="">
+                            <img src="./images/profilepics/edwin.jpg" alt="">
                         </div>
                         <div class="right-comment">
                             <div class="container-info">
@@ -139,31 +143,31 @@
             <div class="statistic">    
                 <div class="statistic-card">
                     <h2 style="padding-left: 20px;">Your Statistic</h2>
-                    <div class="statistic-diagram">
-                    </div>
+                    <!-- <div class="statistic-diagram">
+                    </div> -->
                     <div class="mini-stat">
                         <div class="stat-card">
+                            <h3>Exercise Completed</h3>
                             <div class="value">
                                 <img src="./images/check.png" height="50px" width="50px" alt="exercise completed">
                                 <h2>5</h2>
                             </div>
-                            <h3>Exercise Completed</h3>
                         </div>
 
                         <div class="stat-card">
+                            <h3>Days Streak</h3>
                             <div class="value">
                                 <img src="./images/days.png" height="50px" width="50px" alt="exercise completed">
                                 <h2>5</h2>
                             </div>
-                            <h3>Days Streak</h3>
                         </div>
 
                         <div class="stat-card">
+                            <h3>Calories Burned</h3>
                             <div class="value">
                                 <img src="./images/icons8-fire-100.png" height="50px" width="50px" alt="exercise completed">
                                 <h2>125 <span>cal</span></h2>
                             </div>
-                            <h3>Calories Burned</h3>
                         </div>
                     </div>
                 </div>

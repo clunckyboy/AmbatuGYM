@@ -23,14 +23,17 @@
             $valid_ext = ['jpg', 'jpeg', 'png'];
             $ekstensi_gambar = explode('.', $namaFile);
             $ekstensi_gambar = strtolower(end($ekstensi_gambar));
+
+            $namaFileBaru = uniqid();
+            $namaFileBaru .= '.';
+            $namaFileBaru .= $ekstensi_gambar;
             
-            move_uploaded_file($tmpName, './user_pp/'.$namaFile);
+            move_uploaded_file($tmpName, './user_pp/'.  $namaFileBaru);
             
-            return $namaFile;
+            return $namaFileBaru;
             
         }) ();
 
-        // Membuat query tanpa bind_param
         $sql = "INSERT INTO users (username, password, fullname, email, birthdate, weight, height, gender, goal, profile_photo) 
                 VALUES ('$username', '$password', '$fullname', '$email', '$birthdate', '$weight', '$height', '$gender', '$goal', '$gambar')";
 
@@ -159,7 +162,7 @@
                 <img src="./images/ambatugymwhite.png" alt="ambatugym" width="50" height="50">
                 <h2 style="margin: 0; margin-left:10px; padding-top: 5px">AmbatuGYM</h2>
             </div>    
-            <a class="tombol-login" href="index.php"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
+            <a class="tombol-login" href="login.php"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
         </div>
       </nav>
 
