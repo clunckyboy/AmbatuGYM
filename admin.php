@@ -17,8 +17,19 @@ function query($query){
     }
     return $rows;
 }
+ 
 
-$data = query("SELECT * FROM users");
+//pagination
+$result = mysqli_query($db, "SELECT * FROM users");
+$jumlahData = count(query("SELECT * FROM users"));
+$jumlahPage = ceil($jumlahData / 5);
+$halamanAktif = (isset($_GET["hal"])) ? $_GET["hal"] : 1;
+$awalData = (5 * $halamanAktif) - 5;
+
+// jika halaman aktif =
+
+$data = query("SELECT * FROM users LIMIT $awalData, 5"); //limit 0, 5 : dimulai dari indeks ke-0, sebanyak 5 data
+
 
 ?>
 
@@ -82,14 +93,16 @@ $data = query("SELECT * FROM users");
 
         main{
             margin: 10px;
+            margin-bottom: 30px;
         }
 
         table{
             margin: auto;
+            margin-top: 0;
         }
 
         th, td{
-            padding: 7px;
+            padding: 0 7px;
             text-align: center;
         }
 
@@ -109,7 +122,8 @@ $data = query("SELECT * FROM users");
         </div>
     </div>
     
-    <main>
+    <main>        
+        
         <table border="1" cellspacing="0">
 
             <tr>
@@ -138,6 +152,26 @@ $data = query("SELECT * FROM users");
             <?php endforeach;  ?>
         
         </table>
+        <br>
+        <!-- Navigasi -->
+        <div style="margin-left: 50px; font-size:large;">
+            <?php if( $halamanAktif > 1 ) : ?>
+                <a href="?hal=<?= $halamanAktif - 1; ?>" style="text-decoration: none;">&laquo</a>
+            <?php endif; ?>  
+
+            <?php for( $i = 1; $i <= $jumlahPage; $i++ ): ?>
+                <?php if($i == $halamanAktif) : ?>
+                    <a href="?hal=<?= $i ?>" style="font-weight: bold; text-decoration: none; color: blue;"> <?=$i;?> </a>
+                <?php else : ?>
+                    <a href="?hal=<?= $i ?>" style="text-decoration: none;"> <?=$i;?> </a> 
+                <?php endif; ?>
+            <?php endfor; ?>
+            
+            <?php if( $halamanAktif < $jumlahPage ) : ?>
+                <a href="?hal=<?= $halamanAktif + 1; ?>" style="text-decoration: none;">&raquo</a>
+            <?php endif; ?>
+        </div>
+
     </main>
 
 
