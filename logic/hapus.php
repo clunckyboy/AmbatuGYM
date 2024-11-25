@@ -1,4 +1,6 @@
 <?php
+    session_start();
+    
     require '../database/config.php';
     $id = $_GET["id"];
 
@@ -11,3 +13,4 @@
         ";       
     }
 ?>
+
