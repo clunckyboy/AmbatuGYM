@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 09:53 AM
+-- Generation Time: Nov 28, 2024 at 04:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -51,16 +51,24 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `community_post`
+-- Table structure for table `community`
 --
 
-CREATE TABLE `community_post` (
+CREATE TABLE `community` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `content` text NOT NULL,
   `post_date` timestamp NULL DEFAULT NULL,
-  `likes_count` int(255) NOT NULL
+  `likes_count` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `community`
+--
+
+INSERT INTO `community` (`post_id`, `user_id`, `content`, `post_date`, `likes_count`) VALUES
+(4, 38, 'minimalisir', '2024-11-26 12:58:15', 0),
+(5, 43, 'I Nate Higger', '2024-11-26 13:01:25', 0);
 
 -- --------------------------------------------------------
 
@@ -124,6 +132,9 @@ CREATE TABLE `users` (
   `height` decimal(65,0) NOT NULL,
   `goal` varchar(100) NOT NULL,
   `profile_photo` varchar(100) DEFAULT NULL,
+  `exercise_complete` int(100) NOT NULL DEFAULT 0,
+  `day_streak` int(100) NOT NULL DEFAULT 0,
+  `calories_burn` int(11) NOT NULL DEFAULT 0,
   `badge` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -131,12 +142,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `fullname`, `email`, `username`, `password`, `gender`, `age`, `birthdate`, `weight`, `height`, `goal`, `profile_photo`, `badge`) VALUES
-(37, 'Peter Parker', 'peter@gmail.com', 'peterparker', 'abcde', 'Laki-laki', NULL, '2024-11-02', 75, 180, 'build_muscle', 'cropped-1920-1080-1080594.png', NULL),
-(38, 'Christina', 'christina@gmail.com', 'christina', '09876', 'Perempuan', NULL, '2024-11-03', 60, 170, 'maintain', 'Cyberpunk Nightcity 1x1.png', NULL),
-(39, 'inari', 'inari@gmail.com', 'inari', 'fedcba', 'Perempuan', NULL, '2024-11-05', 55, 165, 'lose_weight', 'inari kon.jpg', NULL),
-(40, 'edwin purba', 'edwin@gmail.com', 'edwin', '12345', 'Laki-laki', NULL, '2024-11-20', 70, 175, 'build_muscle', 'Chess ngnl.jpg', NULL),
-(43, 'Yanami Anna', 'yanamianna@gmail.com', 'anna', '12345', 'Perempuan', NULL, '2005-11-29', 60, 170, 'maintain', '674402e8e2e90.jpeg', NULL);
+INSERT INTO `users` (`user_id`, `fullname`, `email`, `username`, `password`, `gender`, `age`, `birthdate`, `weight`, `height`, `goal`, `profile_photo`, `exercise_complete`, `day_streak`, `calories_burn`, `badge`) VALUES
+(38, 'Christina', 'christina@gmail.com', 'christina', '09876', 'Perempuan', NULL, '2024-11-03', 60, 170, 'maintain', 'Cyberpunk Nightcity 1x1.png', 0, 0, 0, NULL),
+(39, 'inari', 'inari@gmail.com', 'inari', 'fedcba', 'Perempuan', NULL, '2024-11-05', 55, 165, 'lose_weight', 'inari kon.jpg', 0, 0, 0, NULL),
+(40, 'edwin purba', 'edwin@gmail.com', 'edwin', '12345', 'Laki-laki', NULL, '2024-11-20', 70, 175, 'build_muscle', 'Chess ngnl.jpg', 0, 0, 0, NULL),
+(43, 'Yanami Anna', 'haga@gmail.com', 'konami', '12345', 'Perempuan', NULL, '2005-11-29', 60, 170, 'build_muscle', '67471d347b82e.jpg', 0, 0, 0, NULL),
+(44, 'ayam', 'ayam@outlook.com', 'ayam', '12345', 'Perempuan', NULL, '2024-11-25', 90, 100, 'build_muscle', '674464c7e1bbd.jpg', 0, 0, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,11 +211,10 @@ ALTER TABLE `comment`
   ADD KEY `users_id` (`user_id`);
 
 --
--- Indexes for table `community_post`
+-- Indexes for table `community`
 --
-ALTER TABLE `community_post`
-  ADD PRIMARY KEY (`post_id`),
-  ADD KEY `user_id` (`user_id`);
+ALTER TABLE `community`
+  ADD PRIMARY KEY (`post_id`);
 
 --
 -- Indexes for table `exercises`
@@ -258,10 +268,10 @@ ALTER TABLE `comment`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `community_post`
+-- AUTO_INCREMENT for table `community`
 --
-ALTER TABLE `community_post`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `community`
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `exercises`
@@ -273,7 +283,7 @@ ALTER TABLE `exercises`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `user_badge`
@@ -295,14 +305,14 @@ ALTER TABLE `user_workout_progress`
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `community_post` (`post_id`),
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `community` (`post_id`),
   ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `community_post`
+-- Constraints for table `community`
 --
-ALTER TABLE `community_post`
-  ADD CONSTRAINT `community_post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE `community`
+  ADD CONSTRAINT `community_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `user_badge`
