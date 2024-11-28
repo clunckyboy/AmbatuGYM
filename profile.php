@@ -9,6 +9,11 @@ if ( !isset($_SESSION["is_login"]) ){
 
 include "./database/config.php";
 
+$user = $_SESSION["user"];
+$photo = $_SESSION["user"]["profile_photo"];
+$goals = $_SESSION["user"]["goal"];
+$username = $_SESSION["user"]["username"];
+$register_message = "";
 
 function query($query){
     global $db;
@@ -22,7 +27,7 @@ function query($query){
 
 if (isset($_POST['submit'])){
     global $db;
-    $id = $_POST["id"];
+    $id = $_SESSION["user"]["user_id"];
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['password']);
     $email = htmlspecialchars($_POST['email']);
@@ -62,18 +67,24 @@ if (isset($_POST['submit'])){
                 profile_photo = '$gambar'
                 WHERE user_id = $id  
             ";
+
+    if ($db->query($query) === TRUE) {
+        $_SESSION["user"]["email"] = $email;
+        $_SESSION["user"]["profile_photo"] = $gambar;
+        $_SESSION["user"]["goal"] = $goal; 
+        $_SESSION["user"]["username"] = $username;
+        $register_message = "Profile changed successfully";
+
+    } else {
+        $register_message = "Error: " . $db->error;
+    }
+
+    $user = $_SESSION["user"];
+    $photo = $_SESSION["user"]["profile_photo"];
+    $goals = $_SESSION["user"]["goal"];
+    $username = $_SESSION["user"]["username"];
+
 }
-
-$user = $_SESSION["user"];
-$photo = $_SESSION["user"]["profile_photo"];
-
-
-
-//query data berdasarkan id user
-
-// $user = query("SELECT * FROM users WHERE user_id = $id")[0];
-
-
 ?>
 
 <!DOCTYPE html>
@@ -92,16 +103,14 @@ $photo = $_SESSION["user"]["profile_photo"];
 
     <style>
         body {
-        background: 
-        linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)), 
-        url('./images/bg.jpg');
-        background-size: cover;
-        background-attachment: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        margin: 0;
+            background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)), url('./images/bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
         }
 
 
@@ -114,6 +123,7 @@ $photo = $_SESSION["user"]["profile_photo"];
         }
 
         .profile-card {
+            /* padding-left: 2px; */
             margin-top: 75px;
             height: 490px;
             display: flex;
@@ -122,7 +132,7 @@ $photo = $_SESSION["user"]["profile_photo"];
             background-color:rgb(48, 32, 25);
             border-radius: 20px;
             padding: 10px 40px 0px 20px; /* Increased padding for extra height */
-            max-width: 1000px; /* Wider width */
+            /* max-width: 1000px; */
             width: 90%; /* Responsive width */
             min-height: 300px; /* Set a minimum height */
             box-shadow: 0px 10px 20px black;
@@ -139,8 +149,12 @@ $photo = $_SESSION["user"]["profile_photo"];
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 20%;
-            margin-right: 30px;
+            margin-right: 20px;
+            margin-left: 20px;
+            /* width: 20%; */
+
+
+            /* margin-right: 30px; */
         }
 
         .dark-mode .change-pic {
@@ -148,21 +162,57 @@ $photo = $_SESSION["user"]["profile_photo"];
         }
 
         .profile-pic-placeholder {
-            width: 150px; /* Set a fixed width */
-            height: 150px; /* Set a fixed height */
+            width: 200px; /* Set a fixed width */
+            height: 200px; /* Set a fixed height */
             border-radius: 50%; /* Makes the image circular */
             overflow: hidden; /* Ensures the image stays within the circular border */
             background-color: #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin-bottom: 10px;
         }
 
         .profile-pic-placeholder img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Keeps the image aspect ratio */
+            object-fit: cover; 
         }
+
+        .gambar {
+            /* Sembunyikan teks bawaan "No file chosen" */
+            /* color: transparent;  */
+            display: block;
+            width: 95px;
+            justify-self: center;
+            /* justify-content: center; */
+        }
+
+        .gambar::file-selector-button {
+            /* Kustomisasi tombol "Choose File" */
+            display: block;
+            margin-bottom: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            font-family: "Lexend";
+            left: 30px;
+        }
+
+        .gambar::file-selector-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Atur ulang ukuran elemen input agar tombol sesuai */
+        /* .gambar {
+            width: fit-content;
+            padding: 0;
+            border: none;
+        } */
 
         .change-pic {
             display: flex;
@@ -172,17 +222,19 @@ $photo = $_SESSION["user"]["profile_photo"];
             cursor: pointer;
             text-decoration: underline;
         }
+
         .profile-info {
             text-align: center;
             flex: 1;
         }
+
         .profile-info h2 {
             font-size: 1.8em;
             margin-bottom: 20px;
             text-align: left;
         }
         .info-item {
-            padding: 20px;
+            padding: 10px 20px;
             border-radius: 10px;
             background-color: rgb(97, 58, 42);
             display: flex;
@@ -192,12 +244,23 @@ $photo = $_SESSION["user"]["profile_photo"];
             margin: 10px 0;
         }
 
+        .info-item input{
+            font-family: inherit;
+            font-size: large;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid rgb(97, 58, 42);;
+            background-color: rgb(97, 58, 42);
+            color: white;
+        }
+
         .dark-mode .info-item {
             background-color:  rgb(255, 225, 181);
         }
 
         .info-label {
-            flex: 1;
+            /* flex: 1; */
+            width: 77.57px;
             font-weight: bold;
             color: #ddd;
             text-align: left;
@@ -219,6 +282,17 @@ $photo = $_SESSION["user"]["profile_photo"];
             cursor: pointer;
             color: #ddd; /* Adjust color as desired */
             padding-left: 10px;
+        }
+
+        .form-select{
+            font-family: inherit;
+            font-size: large;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid rgb(97, 58, 42);;
+            background-color: rgb(97, 58, 42);
+            color: white;
+            width: 245.33px;
         }
 
         .submit{
@@ -258,11 +332,11 @@ $photo = $_SESSION["user"]["profile_photo"];
             <a href="dashboard.php">Dashboard</a>
             <a href="exercise.html">Exercises</a>
             <a href="community.html">Community</a>
-            <div class="profile-container" style="position: relative;"> <!-- Ensure the container is relatively positioned -->
-                <img id="profilePic" src="./user_pp/<?= $photo; ?> " alt="Profile Picture" class="profile-pic-small">
-                <div id="profileTooltip" class="profile-tooltip" style="display: none;"> <!-- Keep tooltip hidden by default -->
-                    <a href="" class="profile-button" onclick="Profile()">Profile</a>
-                    <a href="./logic/logout.php" class="logout-button" onclick="logout()">Logout</a>
+            <div class="profile-container" > <!-- Ensure the container is relatively positioned -->
+                <img id="profilePic" src="./user_pp/<?= $photo; ?> " onclick="toggleDropdown()" class="profile-pic-small">
+                <div id="dropdown" class="dropdown-content">
+                    <a href="./profile.php">Profil</a>
+                    <a href="./logic/logout.php" id="logout">Logout</a>
                 </div>
             </div>
         </div>
@@ -270,7 +344,7 @@ $photo = $_SESSION["user"]["profile_photo"];
     
     <div class="profile-card">
         <div class="profile-pic-section">
-            <form action="" method="POST" enctype="multipart/form-data" autocomplete="off">
+            <form action="profile.php" method="POST" enctype="multipart/form-data" autocomplete="off">
                 <input type="hidden" name="id" value="<?= $user["user_id"]; ?>">
                 <input type="hidden" name="gambarLama" value="<?= $photo ?>">
                 <div class="profile-pic-placeholder">
@@ -280,10 +354,11 @@ $photo = $_SESSION["user"]["profile_photo"];
         </div>
         <div class="profile-info">
             <h2>Profile Information</h2>
+            <p style="color: green;"><?= $register_message ?></p>
 
                 <div class="info-item">
                     <span class="info-label">E-mail</span>
-                    <input type="text" name="email" id="email" required value="<?= $user["email"] ?>">
+                    <input type="email" name="email" id="email" required value="<?= $user["email"] ?>">
                     <!-- <span class="info-placeholder">example@example.com</span> -->
                     <span class="edit-icon material-symbols-outlined">edit</span>
                 </div>
@@ -297,30 +372,26 @@ $photo = $_SESSION["user"]["profile_photo"];
         
                 <div class="info-item">
                     <span class="info-label">Password</span>
-                    <input type="password" name="password" id="password" required value="<?= $user["password"] ?>">
+                    <input  type="password" name="password" id="password" required value="<?= $user["password"] ?>">
                     <!-- <span class="info-placeholder">••••••••</span> -->
                     <span class="edit-icon material-symbols-outlined">edit</span>
                 </div>
         
                 <div class="info-item">
-                    <span class="info-label">Badge</span>
-                    <input type="text" name="badge" id="badge" required value="<?= $user["badge"] ?>">
-                    <!-- <span class="info-placeholder">🏅 Placeholder Badge</span> -->
+                    <span class="info-label" id="objective-label">Goal</span>
+                    <!-- <span class="info-placeholder" id="objective-placeholder">Select an objective</span> -->
+                    <!-- <span class="edit-icon material-symbols-outlined" id="toggle-options">expand_more</span> -->
+                    <select name="goal" class="form-select" aria-label="Default select example" required>
+                        <option value="" disabled <?= $goals == '' ? 'selected' : ''; ?>>Choose a goal</option>
+                        <option value="lose_weight" <?= $goals == 'lose_weight' ? 'selected' : ''; ?>>Lose Weight</option>
+                        <option value="build_muscle" <?= $goals == 'build_muscle' ? 'selected' : ''; ?>>Build Muscle</option>
+                        <option value="maintain" <?= $goals == 'maintain' ? 'selected' : ''; ?>>Maintain</option>
+                    </select>              
                     <span class="edit-icon material-symbols-outlined">edit</span>
-                </div>
-        
-                <div class="info-item">
-                    <span class="info-label" id="objective-label">Objective</span>
-                    <span class="info-placeholder" id="objective-placeholder">Select an objective</span>
-                    <span class="edit-icon material-symbols-outlined" id="toggle-options">expand_more</span>
-                    <div class="toggle-list" id="toggle-list">
-                        <div class="toggle-option" data-value="Building muscles">Building Muscles</div>
-                        <div class="toggle-option" data-value="Losing weight">Losing Weight</div>
-                        <div class="toggle-option" data-value="Maintain stamina">Maintain Stamina</div>
-                    </div>                    
+
                 </div>
 
-                <button class="submit" name="submit" type="submit">Submit</button>
+                <button class="submit" name="submit" type="submit" onclick="confirm('You Sure ?')">Submit</button>
 
             </form>    
         </div>

@@ -8,23 +8,48 @@
     
     include "./database/config.php";
     
-    $data = [];
-    $url = [];
-
-    $goal = $_SESSION["user"]["goal"];
+    $current_date = date("Y-m-d");
+    $last_update = $_SESSION["last_update"] ?? null;
+    
+    if ($last_update !== $current_date) {
+        // Ambil data latihan acak sesuai goal
+        $goal = $_SESSION["user"]["goal"];
+        $result = $db->query("SELECT * FROM exercises 
+                            WHERE goal = '$goal' 
+                            GROUP BY exercise_name 
+                            ORDER BY RAND() LIMIT 3");
+    
+        // Simpan data latihan ke dalam sesi
+        while ($row = $result->fetch_assoc()) {
+            $exercise[] = $row;
+        }
+    
+        $_SESSION["daily_training"] = $exercise; // Simpan ke sesi
+        $_SESSION["last_update"] = $current_date; // Perbarui waktu terakhir update
+    } else {
+        // Ambil data latihan dari sesi jika sudah ada
+        $exercise = $_SESSION["daily_training"];
+    }
+    
     $username = $_SESSION["user"]["username"];
     $photo = $_SESSION["user"]["profile_photo"];
+    $complete = $_SESSION["user"]["exercise_complete"];
+    $daystreak = $_SESSION["user"]["day_streak"];
+    $calorie = $_SESSION["user"]["calories_burn"];
 
-    $result = $db->query("SELECT DISTINCT video_url FROM exercises WHERE '$goal' = exercises.goal ORDER BY RAND() LIMIT 3");
+    // MENGAMBIL DATA COMMUNITY
+    $result = $db->query("SELECT users.profile_photo AS foto,
+                                users.username AS username, 
+                                community.content AS komentar, 
+                                DATE_FORMAT(community.post_date, '%m/%d %H:%i:%s') AS tanggal 
+                                FROM community, users 
+                                WHERE users.user_id = community.user_id  
+                                ORDER BY community.post_date DESC LIMIT 5");
 
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row; // Mengisi array dengan setiap hasil
+    while ($row = $result->fetch_assoc()){
+        $comment[] = $row; 
     }
-
-    // Mengambil video_url dari setiap data yang diambil
-    foreach ($data as $item) {
-        $url[] = $item['video_url'];
-    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -42,8 +67,9 @@
     <title>Dashboard</title>
 </head>
 
-<body >
-    <nav class="navbar" id="top">
+<body>
+    <nav class="navbar">
+        <!-- <a href="./logic/logout.php">logout</a> -->
         <a class="img" href="#top"><img src="./images/ambatugymwhite.png" alt=""></a>
         <div class="brand-text">
             <h2>AmbatuGYM</h2>
@@ -54,87 +80,120 @@
                 <a class="nav-link" href="#dashboard">Dashboard</a>
             </li>
             <li class="nav-list">
-                <a class="nav-link" href="exercise.html">Exercises</a>
+                <a class="nav-link" href="exercise.php">Exercises</a>
             </li>
             <li class="nav-list">
                 <a class="nav-link" href="community.html">Community</a>
             </li>
             <li class="nav-list">
-                <img src="./user_pp/<?= $photo ?> " alt="Profile" onclick="toggleDropdown()" class="profile-pic">
+                <img src="./user_pp/<?= $photo ?> " onclick="toggleDropdown()" class="profile-pic">
                 <div id="dropdown" class="dropdown-content">
                     <a href="./profile.php">Profil</a>
                     <a href="./logic/logout.php" id="logout">Logout</a>
                 </div>
             </li>
         </ul>
-
     </nav>
 
     <main>
         <div class="left-section">
             <div class="welcome" id="dashboard">
-                <h1>Welcome, <span><?= $username ?></span>!</h1>
+                <h1 id="top">Welcome, <span><?= $username ?></span>!</h1>
             </div>
             <div class="daily-training card">
                 <h2>Daily Training</h2>
                 <div class="trainings">
 
-                    <button class="training-card">
+                    <button class="training-card" onclick="openPopup0()">
                         <div class="training-image">
-                            <img src="./latihan/<?=$url[0]?>">
+                            <img src="./latihan/<?= $exercise[0]['video_url']; ?>">
                         </div>
-                        <div class="check-section">
-                            <h3>nama latihan</h3>
-                            <input type="checkbox" class="check-box">
-                        </div>
+                        <h3><?= $exercise[0]['exercise_name']; ?></h3>
                     </button>
 
-                    <button class="training-card">
+                    <button class="training-card" onclick="openPopup1()">
                         <div class="training-image">
-                            <img src="./latihan/<?=$url[1]?>" alt="">
+                            <img src="./latihan/<?= $exercise[1]['video_url']; ?>" >
                         </div>
-                        <div class="check-section">
-                            <h3>nama latihan</h3>
-                            <input type="checkbox" class="check-box">
-                        </div>
+                        <h3><?= $exercise[1]['exercise_name']; ?></h3>
                     </button>
 
-                    <button class="training-card">
+                    <button class="training-card" onclick="openPopup2()">
                         <div class="training-image">
-                            <img src="./latihan/<?=$url[2]?>" alt="">
+                            <img src="./latihan/<?= $exercise[2]['video_url']; ?>">
                         </div>
-                        <div class="check-section">
-                            <h3>nama latihan</h3>
-                            <input type="checkbox" class="check-box">
-                        </div>
+                        <h3><?= $exercise[2]['exercise_name']; ?></h3>      
                     </button>
                 </div>
             </div> 
 
-            <div class="popup" id="popup">
+        <!-- Modal untuk pop up -->
+            <div class="popup" id="popup0">
                 <div class="popup-content">
-                    <span class="close" onclick="closePopup()">&times;</span>
-                    <h2>Nama Latihan</h2>
-                    <img src="./latihan/<?=$url[2]?>" alt="">
-                    <p>Ini adalah konten pop-up yang sama untuk semua elemen.</p>
+                    <span class="close" onclick="closePopup0()">&times;</span>
+                    <h2><?= $exercise[0]['exercise_name']; ?></h2>
+                    <img src="./latihan/<?= $exercise[0]['video_url']; ?>">
+                    <p><?= $exercise[0]['description']; ?></p>
+                    <div class="details">
+                        <div class="detail">
+                            <h4>Repetition &ensp;&ensp;&ensp;&ensp;&ensp; : <?= $exercise[0]["repetisi"]; ?></h4>
+                            <h4>Calories Burned : <?= $exercise[0]["kalori_terbakar"]; ?><span> Cal</span></h4>
+                        </div>
+                        <button>Done</button>
                     </div>
+                </div>
+            </div>
+
+            <div class="popup" id="popup1">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup1()">&times;</span>
+                    <h2><?= $exercise[1]['exercise_name']; ?></h2>
+                    <img src="./latihan/<?= $exercise[1]['video_url']; ?>" >
+                    <p><?= $exercise[1]['description']; ?></p>
+                    <div class="details">
+                        <div class="detail">
+                            <h4>Repetition &ensp;&ensp;&ensp;&ensp;&ensp; : <?= $exercise[1]["repetisi"]; ?></h4>
+                            <h4>Calories Burned : <?= $exercise[1]["kalori_terbakar"]; ?><span> Cal</span></h4>
+                        </div>
+                        <button>Done</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="popup" id="popup2">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup2()">&times;</span>
+                    <h2><?= $exercise[2]['exercise_name']; ?></h2>
+                    <img src="./latihan/<?= $exercise[2]['video_url']; ?>" >
+                    <p><?= $exercise[2]['description']; ?></p>
+                    <div class="details">
+                        <div class="detail">
+                            <h4>Repetition &ensp;&ensp;&ensp;&ensp;&ensp; : <?= $exercise[2]["repetisi"]; ?></h4>
+                            <h4>Calories Burned : <?= $exercise[2]["kalori_terbakar"]; ?><span> Cal</span></h4>
+                        </div>
+                        <button>Done</button>
+                    </div>
+                </div>
             </div>
             
             <div class="community">
                 <div class="community-card">
                     <h2 style="margin-bottom: 20px;">Community</h2>
+
+                    <?php foreach($comment as $komen) : ?>
                     <div class="comment-card">
                         <div class="left-comment">
-                            <img src="./images/profilepics/edwin.jpg" alt="">
+                            <img src="./user_pp/<?= $komen["foto"]; ?>" alt="">
                         </div>
                         <div class="right-comment">
                             <div class="container-info">
-                                <p></p>
-                                <p>11/11/2024</p>
+                                <p><?= $komen["username"]; ?></p>
+                                <p><?= $komen["tanggal"]; ?></p>
                             </div>
-                            <p class="content">Very nice website, looking forward to using it Lorem ipsum, dolor sit amet consectetur adipisicing elit. Asperiores recusandae repellendus quo dolor minus, deserunt voluptatibus eos ab iure sed. Sint ipsum placeat laudantium facere aliquam aut sit, quaerat quisquam sapiente accusantium officiis debitis optio assumenda, facilis, odit itaque? Dolore similique, ipsum nemo necessitatibus labore hic nobis adipisci fugiat assumenda, ipsa optio minus saepe dicta. Adipisci vel quae dolor esse nisi cumque fugit quos. Id ex illum, harum, culpa sunt alias quos ipsam rerum ut temporibus voluptates, vel recusandae debitis soluta! Expedita quod ducimus labore? Numquam quos enim quo fugiat. Delectus, commodi ea! Consequatur, earum distinctio quae reprehenderit blanditiis soluta.</p>
+                            <p class="content"> <?= $komen["komentar"]; ?> </p>
                         </div>
                     </div>
+                    <?php endforeach;  ?>
                 </div>
             </div>
         </div>
@@ -150,7 +209,7 @@
                             <h3>Exercise Completed</h3>
                             <div class="value">
                                 <img src="./images/check.png" height="50px" width="50px" alt="exercise completed">
-                                <h2>5</h2>
+                                <h2><?= $complete; ?></h2>
                             </div>
                         </div>
 
@@ -158,7 +217,7 @@
                             <h3>Days Streak</h3>
                             <div class="value">
                                 <img src="./images/days.png" height="50px" width="50px" alt="exercise completed">
-                                <h2>5</h2>
+                                <h2><?= $daystreak; ?></h2>
                             </div>
                         </div>
 
@@ -166,7 +225,7 @@
                             <h3>Calories Burned</h3>
                             <div class="value">
                                 <img src="./images/icons8-fire-100.png" height="50px" width="50px" alt="exercise completed">
-                                <h2>125 <span>cal</span></h2>
+                                <h2><?= $complete; ?> <span>Cal</span></h2>
                             </div>
                         </div>
                     </div>
@@ -194,18 +253,29 @@
         }
 
         //function untuk pop up daily training
-        function openPopup() {
-        document.getElementById('popup').style.display = 'flex';
+        function openPopup0() {
+            document.getElementById('popup0').style.display = 'flex';
         }
 
-        function closePopup() {
-        document.getElementById('popup').style.display = 'none';
+        function openPopup1() {
+            document.getElementById('popup1').style.display = 'flex';
         }
 
-        document.querySelectorAll('.training-card').forEach(item => {
-        item.addEventListener('click', openPopup);
-        });
+        function openPopup2() {
+            document.getElementById('popup2').style.display = 'flex';
+        }
 
+        function closePopup0() {
+            document.getElementById('popup0').style.display = 'none';
+        }
+
+        function closePopup1() {
+            document.getElementById('popup1').style.display = 'none';
+        }
+
+        function closePopup2() {
+            document.getElementById('popup2').style.display = 'none';
+        }
 
 
     </script>

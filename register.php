@@ -38,7 +38,7 @@
                 VALUES ('$username', '$password', '$fullname', '$email', '$birthdate', '$weight', '$height', '$gender', '$goal', '$gambar')";
 
         if ($db->query($sql) === TRUE) {
-            $register_message = "Daftar akun berhasil, silahkan login";
+            $register_message = "Account registration successful, please log in";
         } else {
             $register_message = "Error: " . $db->error;
         }
