@@ -1,0 +1,673 @@
+body{
+    margin: 0;
+    background-size: cover;
+    transition: background 0.3s;
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/*-------------------NAVBAR----------------------------*/
+
+@keyframes slideIn {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  #logout {
+    color: red;
+}
+
+.navbar {
+    animation: 0.5s ease-out 0s 1 slideIn;
+    
+    box-shadow: -10px 2px 20px black;
+    top: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 70px;
+    position: fixed;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    background-color: rgb(48, 32, 25);
+    color: white;
+    z-index: 10; /* Ensure it stays on top */
+
+}
+
+.navbar img {
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 4px; 
+}
+
+.navbar-brand h1 {
+    margin: 0;
+    font-weight: bold;
+  }
+
+.navbar a {
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0);
+    border-radius: 10px;
+    transition: background-color 0.2s , transform 0.01s ease-in-out;
+
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar a:hover {
+    background-color: rgb(97, 58, 42);
+}
+
+.navbar a:active {
+    transform: scale(0.95);
+    background-color: #f2f2f248;
+}
+
+.navbar-links {
+    margin-right: 30px;
+    padding: 10px;
+    display: flex;
+    margin-left: auto;
+    gap: 10px;
+}
+
+.navbar-toggle {
+    display: none;
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+.navbar-toggle:hover {
+    box-shadow: 0px 0px 20px white;
+    border-radius: 10px;
+}
+
+/*--------------------------------SIDE NAVIGATION----------------------------------------------*/
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.815); /* Black*/
+    backdrop-filter: blur(20px);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.384);
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #5e5e5e;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+/*---------------------------------------------------------------------------*/
+
+.container {
+    box-shadow: 0px 10px 20px black;
+    border-radius: 20px;
+    display: flex;
+    justify-self: center;
+    width: 95%;
+    height: 100%;
+    /* max-width: 100%; */
+    background-color: rgb(48, 32, 25);
+    /* padding: 20px; */
+    color: white;
+    
+    /* Initial state for animation */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Delay for each container */
+.parent .container:nth-child(1) {
+    animation-delay: 0s;
+}
+.parent .container:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.parent .container:nth-child(3) {
+    animation-delay: 0.6s;
+}
+/* Continue adding delays for more containers as needed */
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+p {
+    color: white;
+    font-weight: 200;
+}
+
+.text {
+    max-width: 60%;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction: column;
+}
+
+.text p {
+    text-align: justify;
+    font-weight: 300;
+}
+
+.image {
+    align-items: center;
+}
+
+.image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@media (max-width: 600px){
+    .container {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+/*--------------------CARD--------------------------------*/
+
+.profile-pic {
+    border-radius: 100%;
+    max-width: 60%;
+    max-height: 60%;
+    display: block;
+    margin: 0 auto; /* Centers the profile pictures horizontally */
+}
+
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 20px; /* Adds some space between columns */
+}
+
+.column {
+    flex: 1 1 200px; /* Ensures columns resize while keeping a minimum width */
+    max-width: 300px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.name {
+    min-height: 70px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Adjusts spacing in the card to keep items aligned */
+    align-items: center;
+    max-height: 400px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgb(97, 58, 42);
+    text-align: center;
+    color: white;
+}
+.card h3 {
+    margin: 10px 0;
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+.card h3, .card p, .btn-custom-outline {
+    margin: 10px 0;
+}
+
+/* Adjust layout on screens smaller than 800px */
+@media (max-width: 800px) {
+    .text {
+        max-width: 100%;
+    }
+    .row {
+        justify-content: center;
+    }
+    .column {
+        max-width: 45%; /* Two columns on medium screens */
+    }
+}
+
+/* Stack columns vertically on small screens */
+@media (max-width: 500px) {
+    .column {
+        max-width: 100%; /* Full width on small screens */
+        flex: 1 1 100%;
+    }
+}
+
+/*--------------------MISC------------------------------*/
+
+.contact-links {
+    line-height: 1.8;
+    display: flex;
+    color: #f2f2f2;
+    text-decoration: none;
+    font-size: 17px;
+    flex-direction: column;
+}
+
+.contacts {
+    padding: 0px 20px 0px 20px;
+}
+
+.contacts p {
+    padding: 0;
+}
+
+.btn-custom {
+    /* margin: auto; */
+    border: 0;
+    border-radius: 10px;
+    font-family: "Lexend", sans-serif;
+    color: white;
+    width: 96%;
+    padding: 20px;
+    background-color: rgb(97, 58, 42);
+    box-shadow: rgba(0, 0, 0, 0);
+    transition: transform 0.15s ease-in-out, box-shadow 0.1s;
+    text-decoration: none;
+    /* justify-self: center; */
+}
+
+.btn-custom-outline {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    border: 1px solid white;
+    border-radius: 50px;
+    font-family: "Lexend", sans-serif;
+    font-size: 15px;
+    color: white;
+    padding: 10px 20px; /* Adjusted padding for a consistent look */
+    background-color: rgb(97, 58, 42);
+    box-shadow: rgba(0, 0, 0, 0);
+    transition: transform 0.15s ease-in-out, box-shadow 0.1s;
+    text-decoration: none;
+}
+
+.btn-custom:hover, .btn-custom-outline:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 0px 20px white;
+}
+.btn-custom:active, .btn-custom-outline:active {
+    transform: scale(0.99);
+    box-shadow: 0px 0px 20px rgb(0, 0, 0);
+}
+
+/*-----------------------------------DARK MODE-----------------------------------------------------*/
+.dark-mode {
+    background: 
+        linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
+        url('./images/bg.jpg');
+    background-size: cover;
+    color: rgb(0, 0, 0); /* Set default dark mode text color */
+}
+
+.dark-mode .navbar a:hover {
+    background-color: rgb(255, 225, 181) ;
+}
+
+.dark-mode .container,
+.dark-mode .navbar {
+    background-color: rgb(255, 241, 224);
+    color: black;
+    box-shadow: 0px 10px 20px #00000044;
+}
+
+.dark-mode .sidenav {
+    background-color: rgba(255, 255, 255, 0.9); /* Light sidenav background */
+    color: rgb(0, 0, 0);
+}
+
+.dark-mode .sidenav a {
+    color: rgb(50, 50, 50); /* Adjust link color */
+}
+
+.dark-mode .card {
+    background-color: rgb(255, 225, 181); /* Light card background */
+    color: rgb(0, 0, 0);
+}
+
+.dark-mode .btn-custom, 
+.dark-mode .btn-custom-outline {
+    background-color: rgb(255, 225, 181); /* Light button background */
+    color: rgb(50, 50, 50);
+    border-color: rgb(50, 50, 50);
+}
+
+.dark-mode .navbar a, 
+.dark-mode .contact-links, 
+.dark-mode .text p, 
+.dark-mode .name, 
+.dark-mode h3, 
+.dark-mode p, 
+.dark-mode .column, 
+.dark-mode .container {
+    color: rgb(30, 30, 30); /* General dark mode text */
+}
+
+/* Additional elements with specific dark mode styles */
+
+.dark-mode .btn-toggle {
+    color: rgb(50, 50, 50);
+}
+.dark-mode .btn-toggle:hover {
+    color: rgb(235, 235, 235);
+}
+
+.dark-mode .navbar a:hover,
+.dark-mode .btn-custom:hover,
+.dark-mode .btn-custom-outline:hover {
+    box-shadow: 0px 10px 20px #00000044;
+}
+
+.dark-mode .navbar-toggle{
+    color: black;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.2s;
+    border-radius: 10px;
+}
+.dark-mode .navbar-toggle:hover{
+    box-shadow: 0px 4px 20px black;
+}
+
+/* Add transition for smooth dark mode toggle */
+body, 
+.container, 
+.navbar, 
+.card, 
+.btn-custom, 
+.btn-custom-outline, 
+.sidenav {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background: 
+        linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
+        url('./images/bg.jpg');
+    background-size: auto;
+    color: rgb(0, 0, 0);
+}
+
+/* Elements with dark mode styles */
+.dark-mode .container,
+.dark-mode .navbar {
+    background-color: rgb(255, 241, 224);
+    color: black;
+    box-shadow: 0px 10px 20px #00000044;
+}
+
+.dark-mode .sidenav {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgb(0, 0, 0);
+}
+
+/* Transition effects on color and background for smooth toggling */
+.dark-mode .card, 
+.dark-mode .btn-custom, 
+.dark-mode .btn-custom-outline, 
+.dark-mode .navbar a, 
+.dark-mode .contact-links, 
+.dark-mode .text p, 
+.dark-mode .name, 
+.dark-mode h3, 
+.dark-mode p, 
+.dark-mode .column, 
+.dark-mode .container {
+    color: rgb(30, 30, 30);
+}
+
+/* Navbar Toggle */
+.dark-mode .navbar-toggle {
+    color: black;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.2s;
+    border-radius: 10px;
+}
+.dark-mode .navbar-toggle:hover {
+    box-shadow: 0px 4px 20px black;
+}
+
+
+/*-----------------------------------------------------------------------------------------------------------*/
+
+
+material-symbols-outlined{
+    color: rgb(255, 255, 255);
+}
+
+.btn-toggle {
+    margin: 10px;
+    padding: 0;
+    margin-right: auto;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    transition: color 0.2s;
+}
+.btn-toggle:hover {
+    color: black;
+}
+
+
+@media (max-width: 600px) {
+    .navbar-toggle {
+        display: flex;
+        margin-left: auto;
+        margin-right: 30px;
+    }
+
+    .navbar-links {
+        display: none; /* Hide links by default */
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .btn-custom {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+/* Navbar Logged in */
+.navbar-logged-in {
+    justify-content: space-between; /* Space out the items */
+}
+
+.navbar-links {
+    display: flex; /* Flexbox layout for navbar links */
+    align-items: center; /* Center items vertically */
+}
+
+.navbar-links > a {
+    margin-left: 20px; /* Space between links */
+    color: #f2f2f2; /* Link color */
+}
+
+.navbar-links a:hover {
+    text-decoration: none; /* Underline on hover for links */
+}
+
+.profile-pic {
+    width: 40px; /* Width of the profile picture container */
+    height: 40px; /* Height of the profile picture container */
+    overflow: hidden; /* Hide overflow to keep image within bounds */
+    border-radius: 50%; /* Makes the container circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-pic-small {
+    border-radius: 50%;
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
+    cursor: pointer;
+}
+.logout-button {
+    display: none;
+    position: absolute;
+    top: 50px; /* Position it below the profile picture */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s, transform 0.1s ease-in-out;
+    z-index: 1000; /* Ensures the button appears above other elements */
+}
+
+.profile-container:hover .logout-button {
+    display: block;
+}
+
+.logout-button:hover {
+    box-shadow: 0px 0px 10px red;
+}
+
+.logout-button:active {
+    transform: scale(0.95);
+}
+
+
+/* Fitu toggle di profile*/
+.info-item {
+    display: flex;
+    align-items: center;
+    position: relative; /* Ensure the dropdown is positioned relative to this item */
+}
+
+.info-placeholder {
+    margin-left: 10px;
+}
+
+.toggle-list {
+    display: none; /* Hide the toggle list by default */
+    position: absolute;
+    top: 100%; /* Position it directly below the info item */
+    left: 0; /* Align to the left of the info item */
+    background-color: #f9f9f9; /* Set a light background color for the list */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 10;
+    width: 200px; /* Adjust width as necessary */
+}
+
+.toggle-option {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #333; /* Set text color for the options */
+}
+
+.toggle-option:hover {
+    background-color: #e0e0e0; /* Change background on hover to a slightly darker shade */
+}
+
+.toggle-option.selected {
+    background-color: #d1e7dd; /* Optionally set a background color for the selected option */
+}
+

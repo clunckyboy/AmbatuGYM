@@ -1,6 +1,37 @@
-<!-- <?php
-    date_default_timezone_set('Asia/Jakarta')
-?> -->
+<?php
+    session_start();
+
+    if ( !isset($_SESSION["is_login"]) ){
+        header("location: login.php");
+        exit;
+    }
+    
+    require "./database/config.php";
+     
+    function query($query){
+        global $db;
+        $result = mysqli_query($db, $query);
+        $rows = [];
+        while ($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    $komen = query("SELECT
+                        community.post_id AS id,
+                        users.profile_photo AS foto,
+                        users.username AS username, 
+                        community.content AS komentar, 
+                        DATE_FORMAT(community.post_date, '%m/%d %H:%i:%s') AS tanggal, 
+                        community.likes_count AS likes
+                    FROM community, users 
+                    WHERE users.user_id = community.user_id  
+                    ORDER BY community.post_date DESC");
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +42,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=brightness_4"/>
     <link rel="icon" type="image/x-icon" href="./images/ambatugymwhite.png">
-    <link rel="stylesheet" href="./Styles/style.css">
+    <link rel="stylesheet" href="./Styles/community.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community</title>
@@ -21,6 +52,8 @@
             background: 
             linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)), 
             url('./images/bg.jpg');
+            background-attachment: fixed;
+            background-size: cover;
         }
 
         .dark-mode {
@@ -29,19 +62,70 @@
                 url('./images/bg.jpg');
         }
 
+        .dropdown-content {
+            display: none;
+            position: fixed;
+            right: 10px;
+            top: 70px;
+            background-color: #302019;
+            min-width: 90px;
+            border-radius: 5px;
+            z-index: 100;
+        }
+
+        .dropdown-content a {
+            text-align: center;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+        }
+
+
+        .dropdown-content a:hover {
+            background-color: #613a2a;
+        }
+
+        .show {
+            display: block;
+        }
+
+
+
+
+
+        /* COMMUNITY CARD */
+
+
+
+        .container{
+            margin-bottom: 20px;
+            margin-top: 90px;
+            margin-right : 20px;
+            margin-left : 20px;
+            padding-top: 0;
+            height: 480px;
+            align-items: center;
+        }
+
         .comment-box {
             background-color: rgb(97, 58, 42);
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 15px;
+            width: 95%;
+            height: fit-content;
+            /* width: 100%; */
         }
     
         .comment-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 10px;
+            /* gap: 10px; */
             font-weight: bold;
             margin-bottom: 10px;
+            text-align: center;
         }
     
         .comment-header img {
@@ -49,10 +133,26 @@
             height: 40px;
             border-radius: 50%;
         }
+
+        .profile{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile p{
+            margin: 0;
+            text-align: center;
+            font-weight: bold;
+        }
     
         .comment-content {
             font-size: 0.9em;
             color: #ffffff;
+            font-weight: 200;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            white-space: normal;
         }
     
         .comment-footer {
@@ -76,7 +176,7 @@
         }
     
         .comment-form-section textarea {
-            width: 95%;
+            width: 90%;
             height: 150px;
             border-radius: 10px;
             border: 1px solid rgb(97, 58, 42);
@@ -95,20 +195,29 @@
         }
 
         .comments-section, .comment-form-section {
-            padding: 20px;
             border-radius: 10px;
         }
     
         .comments-section {
             padding: 20px;
+            width: 75%;
+            padding-right: 20px;
             border-radius: 10px;
             overflow-y: scroll;
-            height: 550px; /* Adjust height as needed */
+            /* height: 550px; */
+            /* height: 300px; */
+            height: 87%
+            /* overflow-x: hidden; */
         }
     
         .comment-form-section {
-            flex: 1;
+            /* flex: 1; */
+            margin: 0 auto;
+            padding: 20px;
+            width: 30%;
+            /* height: 87%;  */
         }
+
         .dark-mode .comment-box, .dark-mode .comment-content {
             background-color: rgb(255, 225, 181); /* Light card background */
             color: rgb(0, 0, 0);
@@ -186,110 +295,66 @@
         <button class="navbar-toggle" onclick="openNav()">☰</button> <!-- Hamburger icon -->
             <div class="navbar-links" id="navbarLinks">
                 <a href="dashboard.php">Dashboard</a>
-                <a href="exercise.html">Exercises</a>
+                <a href="exercise.php">Exercises</a>
                 <a href="#community">Community</a>
                 <div class="profile-container">
-                    <img src="images/ambaprofilepicture.png" alt="Profile Picture" class="profile-pic-small">
+                    <img src="./user_pp/<?= $_SESSION['user']['profile_photo'] ?>" alt="Profile Picture" class="profile-pic-small" onclick="toggleDropdown()">
+                    <div id="dropdown" class="dropdown-content">
+                        <a href="./profile.php">Profil</a>
+                        <a href="./logic/logout.php" id="logout">Logout</a>
+                    </div>
                 </div>
-                <a href="#" class="btn-custom" onclick="logout()">Logout</a>
             <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <a href="dashboard.php">Dashboard</a>
-                <a href="exercise.html">Exercises</a>
+                <a href="exercise.php">Exercises</a>
                 <a href="#community">Community</a>
-                <a href="#" class="btn-custom" onclick="logout()">Logout</a>
+                <a href="./logic/logout.php" class="btn-custom" onclick="logout()">Logout</a>
               </div>
     </nav>
     
     <div class="parent" id="community">
-        <div class="container" style="margin-top: 100px; margin-bottom: 20px">
+        <div class="container">
+            
             <div class="comments-section">
                 <h1>Community</h1>
-        
-                <!-- Comment Box 1 -->
-                <div class="comment-box">
-                    <div class="comment-header">
-                        <img src="https://via.placeholder.com/40" alt="User Icon">
-                        <span>lorem</span>
-                    </div>
-                    <div class="comment-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi delectus tempore, voluptatum aliquam minima praesentium.
-                    </div>
-                    <div class="comment-footer">
-                        <span class="like-count">12
-                            <button class="thumb-up" onclick="liked()"> 
-                                <span>
-                                👍
-                                </span>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-        
-                <!-- Comment Box 2 -->
-                <div class="comment-box">
-                    <div class="comment-header">
-                        <img src="https://via.placeholder.com/40" alt="User Icon">
-                        <span>lorem</span>
-                    </div>
-                    <div class="comment-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi delectus tempore, voluptatum aliquam minima praesentium.
-                    </div>
-                    <div class="comment-footer">
-                        <span class="like-count">5 
-                            <button class="thumb-up" onclick="liked()"> 
-                                <span>
-                                👍
-                                </span>
-                            </button>
-                        </span>
-                    </div>
-                </div>
 
+                <?php foreach ($komen as $comment): ?>
                 <div class="comment-box">
                     <div class="comment-header">
-                        <img src="https://via.placeholder.com/40" alt="User Icon">
-                        <span>lorem</span>
+                        <div class="profile">                        
+                            <img src="./user_pp/<?= $comment["foto"]; ?>" alt="User Icon">
+                            <p><?= $comment["username"]; ?></p>
+                        </div>
+                        <p><?= $comment["tanggal"]; ?></p>
                     </div>
                     <div class="comment-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi delectus tempore, voluptatum aliquam minima praesentium.
+                        <?= $comment["komentar"]; ?>
                     </div>
                     <div class="comment-footer">
-                        <span class="like-count">5 
-                            <button class="thumb-up" onclick="liked()"> 
-                                <span>
-                                👍
-                                </span>
-                            </button>
+                        <span class="like-count"> <?= $comment["likes"] ?>
+                            <a href="./logic/like.php?id=<?= $comment["id"] ?>">
+                                <button class="thumb-up" onclick="liked()"> 
+                                    <span>
+                                    👍
+                                    </span>
+                                </button>
+                            </a>
                         </span>
                     </div>
                 </div>
+                <?php endforeach; ?>
 
-                <div class="comment-box">
-                    <div class="comment-header">
-                        <img src="https://via.placeholder.com/40" alt="User Icon">
-                        <span>lorem</span>
-                    </div>
-                    <div class="comment-content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis eligendi delectus tempore, voluptatum aliquam minima praesentium.
-                    </div>
-                    <div class="comment-footer">
-                        <span class="like-count">5
-                            <button class="thumb-up" onclick="liked()"> 
-                                <span>
-                                👍
-                                </span>
-                            </button>
-                        </span>
-                    </div>
-                </div>
             </div>
         
 
             <div class="comment-form-section">
-                <h1>Beri Komentar</h1>
-                <textarea id="commentInput" class="form" placeholder="Say something!"></textarea>
-                <button id="submitCommentBtn" class="btn-custom" style="width: 100%;">Post!</button>
+                    <h1>Add a Comment !</h1>
+                    <form action="./logic/comment.php" method="POST" autocomplete="off">
+                        <textarea id="commentInput" name="comment" class="form" placeholder="Say something!" rows="10" cols="50" maxlength="700" required></textarea>
+                        <button type="submit" name="submit" class="btn-custom">Post!</button>
+                    </form>
+
             </div>
         </div>
 
@@ -297,3 +362,4 @@
     <script src="./scripts/comment.js"></script>
 </body>
 </html>
+
