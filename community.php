@@ -18,7 +18,9 @@
         return $rows;
     }
 
-    $komen = query("SELECT users.profile_photo AS foto,
+    $komen = query("SELECT
+                        community.post_id AS id,
+                        users.profile_photo AS foto,
                         users.username AS username, 
                         community.content AS komentar, 
                         DATE_FORMAT(community.post_date, '%m/%d %H:%i:%s') AS tanggal, 
@@ -331,11 +333,13 @@
                     </div>
                     <div class="comment-footer">
                         <span class="like-count"> <?= $comment["likes"] ?>
-                            <button class="thumb-up" onclick="liked()"> 
-                                <span>
-                                👍
-                                </span>
-                            </button>
+                            <a href="./logic/like.php?id=<?= $comment["id"] ?>">
+                                <button class="thumb-up" onclick="liked()"> 
+                                    <span>
+                                    👍
+                                    </span>
+                                </button>
+                            </a>
                         </span>
                     </div>
                 </div>
