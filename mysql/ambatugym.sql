@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2024 at 04:58 AM
+-- Generation Time: Nov 29, 2024 at 04:43 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,17 +58,9 @@ CREATE TABLE `community` (
   `post_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `content` text NOT NULL,
-  `post_date` timestamp NULL DEFAULT NULL,
+  `post_date` timestamp NULL DEFAULT current_timestamp(),
   `likes_count` int(255) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `community`
---
-
-INSERT INTO `community` (`post_id`, `user_id`, `content`, `post_date`, `likes_count`) VALUES
-(4, 38, 'minimalisir', '2024-11-26 12:58:15', 0),
-(5, 43, 'I Nate Higger', '2024-11-26 13:01:25', 0);
 
 -- --------------------------------------------------------
 
@@ -91,27 +83,27 @@ CREATE TABLE `exercises` (
 --
 
 INSERT INTO `exercises` (`exercise_id`, `exercise_name`, `description`, `repetisi`, `kalori_terbakar`, `goal`, `video_url`) VALUES
-(1, 'Burpee', 'Dimulai dengan berdiri, kemudian turun ke posisi squat dengan tangan menyentuh lantai. Lakukan push-up dengan melompatkan kaki ke belakang, lalu kembali ke posisi squat, dan lompat tinggi ke udara sambil mengangkat tangan. Latihan ini melatih seluruh tubuh, termasuk otot inti, kaki, dada, dan meningkatkan detak jantung secara signifikan.', '20 x 3', 150, 'lose_weight', 'turun_berat/burpee.gif'),
-(2, 'Jumping Jack', 'Berdiri dengan kaki rapat dan tangan di samping. Lompat dan buka kaki ke samping sambil mengangkat tangan di atas kepala, lalu kembali ke posisi awal. Latihan ini meningkatkan stamina dan kekuatan kardio, serta membantu pembakaran kalori yang cepat.', '50 x 3', 90, 'lose_weight', 'turun_berat/jumpingjack.gif'),
-(3, 'Mountain Climbers', 'Dari posisi plank, tarik lutut kanan ke arah dada, lalu kembalikan dan ganti dengan lutut kiri. Gerakan ini dilakukan cepat seperti \"memanjat\". Mountain climbers mengaktifkan otot perut, lengan, bahu, dan kaki, serta efektif untuk meningkatkan pembakaran kalori.', '40 x 3', 135, 'lose_weight', 'turun_berat/mountainclimber.gif'),
-(4, 'High Knees', 'Berdiri tegak dan angkat lutut kanan setinggi mungkin, lalu ganti dengan lutut kiri, dilakukan secara cepat. High knees melatih otot inti, kaki, dan meningkatkan detak jantung, sehingga efektif dalam membakar kalori.', '50 x 3', 105, 'lose_weight', 'turun_berat/highknee.gif'),
-(5, 'Skater Hop', 'Dari posisi berdiri, lompat ke samping kanan dengan kaki kiri diangkat, lalu lompat ke samping kiri dengan kaki kanan diangkat, seolah-olah melakukan gerakan seperti pemain skating. Latihan ini melatih otot kaki, pinggul, dan meningkatkan koordinasi serta kardio.\r\n\r\n', '30 x 3', 120, 'lose_weight', 'turun_berat/skaterhop.gif'),
-(6, 'Bodyweight Squats', 'Berdiri dengan kaki selebar bahu, turunkan tubuh hingga paha sejajar dengan lantai seolah duduk di kursi, lalu kembali berdiri. Squats melatih otot paha, bokong, dan betis, serta meningkatkan kekuatan inti dan pembakaran kalori.', '25 x 3', 90, 'lose_weight', 'turun_berat/bodyweightsquat.gif'),
-(7, 'Plank to Push-Up', 'Dimulai dari posisi plank, angkat tubuh ke posisi push-up, lalu turunkan kembali ke plank. Latihan ini melatih otot inti, dada, lengan, dan bahu, serta meningkatkan ketahanan dan kekuatan otot tubuh bagian atas dan inti.', '15 x 3 ', 90, 'lose_weight', 'turun_berat/plankpushup.gif'),
-(8, 'Push-Up', 'Dimulai dengan posisi plank dan tangan di bawah bahu, turunkan tubuh hingga dada mendekati lantai, lalu dorong kembali ke posisi awal. Push-up melatih otot dada, tricep, bahu, dan meningkatkan kekuatan tubuh bagian atas.', '15 x 3', 75, 'build_muscle', 'besar_otot/pushup.gif'),
-(9, 'Pull-Up', 'Dengan memegang palang di atas kepala, tarik tubuh ke atas hingga dagu melewati palang, lalu turunkan kembali. Pull-up adalah latihan berat badan untuk menguatkan punggung, bicep, dan bahu, serta meningkatkan kekuatan tubuh bagian atas.', '10 x 3', 60, 'build_muscle', 'besar_otot/pullup.gif'),
-(10, 'Bench Press ', 'Berbaring di bangku, dorong barbel atau dumbel ke atas hingga tangan lurus, lalu turunkan hingga mendekati dada. Latihan ini sangat efektif untuk melatih otot dada, bahu, dan tricep, serta membangun massa otot tubuh bagian atas.', '12 x 3', 105, 'build_muscle', 'besar_otot/benchpress.gif'),
-(11, 'Bicep Curl', 'Berdiri tegak sambil memegang dumbel di kedua tangan, angkat dumbel ke arah bahu dengan melipat siku, lalu turunkan perlahan. Latihan ini menargetkan otot bicep dan membantu dalam pembentukan otot lengan.', '12 x 3', 45, 'build_muscle', 'besar_otot/bicepcurl.gif'),
-(12, 'Dumbbell Shoulder Press', 'Duduk atau berdiri dengan dumbel di kedua tangan sejajar dengan bahu, dorong dumbel ke atas hingga tangan lurus, lalu turunkan ke posisi awal. Shoulder press melatih otot bahu, tricep, dan punggung atas, membantu memperbesar dan memperkuat bahu.', '12 x 3', 60, 'build_muscle', 'besar_otot/dumbellshoulderpress.gif'),
-(13, 'Deadlift', 'Dengan berdiri dan barbel di depan, tekuk lutut sedikit, lalu angkat barbel dengan menjaga punggung lurus hingga berdiri tegak, kemudian turunkan kembali. Deadlift sangat efektif untuk melatih punggung bawah, paha, bokong, dan hamstring, serta memperkuat otot inti.', '10 x 3', 120, 'build_muscle', 'besar_otot/deadlift.gif'),
-(14, 'Lunges', 'Dengan dumbel di kedua tangan, maju dengan satu kaki dan tekuk kedua lutut hingga lutut belakang hampir menyentuh lantai, lalu kembali ke posisi awal. Lunges melatih otot paha, bokong, dan betis, serta memperkuat otot kaki secara keseluruhan.\r\n\r\n', '12 x 3', 60, 'build_muscle', 'besar_otot/lunges.gif'),
-(15, 'Jogging di tempat', 'Jogging di tempat dilakukan dengan cara berlari ringan tanpa berpindah tempat. Angkat lutut secara bergantian, dan ayunkan lengan untuk menjaga keseimbangan. Latihan ini berfungsi meningkatkan daya tahan kardio dan mengaktifkan otot kaki.', '5mnt x 3 ', 150, 'maintain', 'pelihara_stamina/joginplace.gif'),
-(16, 'Jump Rope', 'Lakukan lompatan kecil dengan kedua kaki sambil memutar tali di atas kepala dan di bawah kaki. Gerakan ini meningkatkan detak jantung dan membakar banyak kalori, serta memperkuat otot kaki, betis, dan meningkatkan koordinasi.', '1mnt x 3', 135, 'maintain', 'pelihara_stamina/jumprope.gif'),
-(17, 'Butt Kick', 'Dalam gerakan ini, posisi berdiri tegak dengan kaki selebar pinggul. Lakukan lompatan ringan, secara bergantian menendang tumit ke arah bokong. Ini adalah latihan kardio yang meningkatkan fleksibilitas kaki dan daya tahan tubuh, terutama melatih hamstring dan otot betis.', '1mnt x 3', 100, 'maintain', 'pelihara_stamina/buttkick.gif'),
-(18, 'Bear Crawl', 'Dari posisi merangkak, maju dengan menggunakan tangan dan kaki, menjaga tubuh rendah ke lantai. Gerakan ini melatih kekuatan tubuh bagian atas, perut, dan koordinasi. Bear crawl juga meningkatkan daya tahan tubuh dengan mengaktifkan hampir semua otot.', '30dtk x 3', 90, 'maintain', 'pelihara_stamina/bearcrawl.gif'),
-(19, 'Russian Twist', 'Duduk dengan lutut ditekuk, miringkan badan sedikit ke belakang, dan putar tubuh dari sisi ke sisi sambil memegang tangan di depan dada atau menambah beban dengan dumbel. Latihan ini sangat efektif untuk melatih otot inti, khususnya bagian perut obliques, dan meningkatkan kekuatan serta stabilitas inti.', '25 x 3', 45, 'maintain', 'pelihara_stamina/russiantwist.gif'),
-(20, 'Step-Up', 'Dengan bangku atau pijakan di depan, naikkan satu kaki ke atas bangku, kemudian dorong tubuh ke atas hingga kaki lurus. Turunkan dan ganti dengan kaki lainnya. Latihan ini melatih kekuatan kaki dan meningkatkan detak jantung, serta membantu daya tahan kardio.', '20 x 3', 75, 'maintain', 'pelihara_stamina/stepup.gif'),
-(21, 'Plank Hold', 'Mulai dengan posisi push-up, namun tahan tubuh tetap lurus dengan bertumpu pada siku dan ujung kaki. Pastikan tubuh tetap lurus dari kepala hingga kaki, dan tahan posisi ini. Plank efektif untuk menguatkan otot inti, lengan, dan punggung, serta meningkatkan stabilitas tubuh.\r\n\r\n', '1mnt x 3', 60, 'maintain', 'pelihara_stamina/plankhold.gif');
+(1, 'Burpee', 'Start by standing, then lower into a squat position with your hands touching the floor. Do a push-up by jumping your feet back, then return to a squat position, and jump high into the air while raising your arms. This exercise works the entire body, including the core muscles, legs, chest, and increases the heart rate significantly.', '20 x 3', 150, 'lose_weight', 'turun_berat/burpee.gif'),
+(2, 'Jumping Jack', 'Stand with your feet together and your hands at your sides. Jump and open your legs to the side while raising your arms above your head, then return to the starting position. This exercise increases stamina and cardio strength, and helps burn calories quickly.', '50 x 3', 90, 'lose_weight', 'turun_berat/jumpingjack.gif'),
+(3, 'Mountain Climbers', 'From a plank position, pull your right knee towards your chest, then return it and replace it with your left knee. This movement is done quickly like \"climbing\". Mountain climbers activate the abdominal muscles, arms, shoulders and legs, and are effective in increasing calorie burning.', '40 x 3', 135, 'lose_weight', 'turun_berat/mountainclimber.gif'),
+(4, 'High Knees', 'Stand straight and lift your right knee as high as possible, then replace it with your left knee, do it quickly. High knees train the core muscles, legs, and increase heart rate, so they are effective in burning calories.', '50 x 3', 105, 'lose_weight', 'turun_berat/highknee.gif'),
+(5, 'Skater Hop', 'From a standing position, jump to the right side with your left foot raised, then jump to the left side with your right foot raised, as if doing a figure skating movement. This exercise trains the leg muscles, hips, and improves coordination and cardio.', '30 x 3', 120, 'lose_weight', 'turun_berat/skaterhop.gif'),
+(6, 'Bodyweight Squats', 'Stand with your feet shoulder-width apart, lower your body until your thighs are parallel to the floor as if sitting on a chair, then return to standing. Squats work the thighs, buttocks, and calves, and increase core strength and calorie burning.', '25 x 3', 90, 'lose_weight', 'turun_berat/bodyweightsquat.gif'),
+(7, 'Plank to Push-Up', 'Starting from a plank position, lift your body to a push-up position, then lower it back to a plank. This exercise works the core, chest, arms and shoulders, and increases endurance and strength of the upper body and core muscles.', '15 x 3 ', 90, 'lose_weight', 'turun_berat/plankpushup.gif'),
+(8, 'Push-Up', 'Starting in a plank position and hands under your shoulders, lower your body until your chest is close to the floor, then push back to the starting position. Push-ups train your chest muscles, triceps, shoulders and increase upper body strength.', '15 x 3', 75, 'build_muscle', 'besar_otot/pushup.gif'),
+(9, 'Pull-Up', 'Holding the bar above your head, pull your body up until your chin is over the bar, then lower it back down. Pull-ups are a bodyweight exercise to strengthen the back, biceps, and shoulders, and increase upper body strength.', '10 x 3', 60, 'build_muscle', 'besar_otot/pullup.gif'),
+(10, 'Bench Press ', 'Lie on a bench, push the barbell or dumbbells up until your arms are straight, then lower them until they approach your chest. This exercise is very effective for training the chest, shoulders and triceps muscles, as well as building upper body muscle mass.', '12 x 3', 105, 'build_muscle', 'besar_otot/benchpress.gif'),
+(11, 'Bicep Curl', 'Stand straight while holding dumbbells in both hands, lift the dumbbells towards your shoulders by folding your elbows, then lower them slowly. This exercise targets the bicep muscles and helps in building arm muscles.', '12 x 3', 45, 'build_muscle', 'besar_otot/bicepcurl.gif'),
+(12, 'Dumbbell Shoulder Press', 'Sit or stand with dumbbells in both hands at shoulder level, push the dumbbells up until your arms are straight, then lower them to the starting position. The shoulder press works the shoulder muscles, triceps and upper back, helping to enlarge and strengthen the shoulders.', '12 x 3', 60, 'build_muscle', 'besar_otot/dumbellshoulderpress.gif'),
+(13, 'Deadlift', 'Standing with the barbell in front of you, bend your knees slightly, then lift the barbell keeping your back straight until you stand up straight, then lower it back down. Deadlifts are very effective for working the lower back, thighs, buttocks, and hamstrings, as well as strengthening the core muscles.', '10 x 3', 120, 'build_muscle', 'besar_otot/deadlift.gif'),
+(14, 'Lunges', 'With dumbbells in both hands, step forward on one leg and bend both knees until the back knee almost touches the floor, then return to the starting position. Lunges work the thighs, buttocks, and calves, and strengthen the leg muscles as a whole.', '12 x 3', 60, 'build_muscle', 'besar_otot/lunges.gif'),
+(15, 'Jog in Place', 'Jogging in place is done by running lightly without moving. Alternately raise your knees, and swing your arms to maintain balance. This exercise functions to increase cardio endurance and activate leg muscles.', '5mnt x 3 ', 150, 'maintain', 'pelihara_stamina/joginplace.gif'),
+(16, 'Jump Rope', 'Do small jumps with both feet while rotating the rope above your head and under your feet. This movement increases your heart rate and burns a lot of calories, as well as strengthening your leg muscles, calves and improving coordination.', '1mnt x 3', 135, 'maintain', 'pelihara_stamina/jumprope.gif'),
+(17, 'Butt Kick', 'In this movement, stand straight with your feet hip-width apart. Do light jumps, alternately kicking your heels towards your buttocks. This is a cardio exercise that improves leg flexibility and endurance, especially working the hamstrings and calf muscles.', '1mnt x 3', 100, 'maintain', 'pelihara_stamina/buttkick.gif'),
+(18, 'Bear Crawl', 'From a crawling position, move forward using your hands and feet, keeping your body low to the floor. This movement trains upper body strength, abdominals and coordination. Bear crawls also increase endurance by activating almost all muscles.', '30dtk x 3', 90, 'maintain', 'pelihara_stamina/bearcrawl.gif'),
+(19, 'Russian Twist', 'Sit with your knees bent, tilt your body back slightly, and twist your body from side to side while holding your hands in front of your chest or adding weight with dumbbells. This exercise is very effective for working the core muscles, especially the abdominal obliques, and increasing core strength and stability.', '25 x 3', 45, 'maintain', 'pelihara_stamina/russiantwist.gif'),
+(20, 'Step-Up', 'With a bench or step in front of you, raise one leg onto the bench, then push your body up until your leg is straight. Lower and switch to the other leg. This exercise trains leg strength and increases heart rate, as well as helping cardio endurance.', '20 x 3', 75, 'maintain', 'pelihara_stamina/stepup.gif'),
+(21, 'Plank Hold', 'Start in a push-up position, but keep your body straight by resting on your elbows and toes. Make sure your body remains straight from head to toe, and hold this position. Planks are effective for strengthening core, arm and back muscles, as well as increasing body stability.', '1mnt x 3', 60, 'maintain', 'pelihara_stamina/plankhold.gif');
 
 -- --------------------------------------------------------
 
@@ -145,7 +137,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `fullname`, `email`, `username`, `password`, `gender`, `age`, `birthdate`, `weight`, `height`, `goal`, `profile_photo`, `exercise_complete`, `day_streak`, `calories_burn`, `badge`) VALUES
 (38, 'Christina', 'christina@gmail.com', 'christina', '09876', 'Perempuan', NULL, '2024-11-03', 60, 170, 'maintain', 'Cyberpunk Nightcity 1x1.png', 0, 0, 0, NULL),
 (39, 'inari', 'inari@gmail.com', 'inari', 'fedcba', 'Perempuan', NULL, '2024-11-05', 55, 165, 'lose_weight', 'inari kon.jpg', 0, 0, 0, NULL),
-(40, 'edwin purba', 'edwin@gmail.com', 'edwin', '12345', 'Laki-laki', NULL, '2024-11-20', 70, 175, 'build_muscle', 'Chess ngnl.jpg', 0, 0, 0, NULL),
+(40, 'edwin purba', 'edwin@gmail.com', 'edwin', '12345', 'Laki-laki', NULL, '2024-11-20', 70, 175, 'build_muscle', 'Chess ngnl.jpg', 4, 1, 330, NULL),
 (43, 'Yanami Anna', 'haga@gmail.com', 'konami', '12345', 'Perempuan', NULL, '2005-11-29', 60, 170, 'build_muscle', '67471d347b82e.jpg', 0, 0, 0, NULL),
 (44, 'ayam', 'ayam@outlook.com', 'ayam', '12345', 'Perempuan', NULL, '2024-11-25', 90, 100, 'build_muscle', '674464c7e1bbd.jpg', 0, 0, 0, NULL);
 
@@ -271,7 +263,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `community`
 --
 ALTER TABLE `community`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `exercises`
