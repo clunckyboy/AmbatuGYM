@@ -330,8 +330,8 @@ if (isset($_POST['submit'])){
         </div>
         <div class="navbar-links">
             <a href="dashboard.php">Dashboard</a>
-            <a href="exercise.html">Exercises</a>
-            <a href="community.html">Community</a>
+            <a href="exercise.php">Exercises</a>
+            <a href="community.php">Community</a>
             <div class="profile-container" > <!-- Ensure the container is relatively positioned -->
                 <img id="profilePic" src="./user_pp/<?= $photo; ?> " onclick="toggleDropdown()" class="profile-pic-small">
                 <div id="dropdown" class="dropdown-content">
@@ -391,7 +391,7 @@ if (isset($_POST['submit'])){
 
                 </div>
 
-                <button class="submit" name="submit" type="submit" onclick="confirm('You Sure ?')">Submit</button>
+                <button class="submit" name="submit" type="submit" onclick="confirm('You Sure ?')">Change</button>
 
             </form>    
         </div>
