@@ -189,11 +189,6 @@ body{
     z-index: 1;
 }
 
-.category-button:hover + .category-options,
-.category-options:hover {
-    /* display: block; */
-}
-
 .category-options p {
     justify-content: end;
     font-size: 10px;
