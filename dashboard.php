@@ -36,6 +36,7 @@
     $complete = $_SESSION["user"]["exercise_complete"];
     $daystreak = $_SESSION["user"]["day_streak"];
     $calorie = $_SESSION["user"]["calories_burn"];
+    $comment = [];
 
     // MENGAMBIL DATA COMMUNITY
     $result = $db->query("SELECT users.profile_photo AS foto,
@@ -83,7 +84,7 @@
                 <a class="nav-link" href="exercise.php">Exercises</a>
             </li>
             <li class="nav-list">
-                <a class="nav-link" href="community.html">Community</a>
+                <a class="nav-link" href="community.php">Community</a>
             </li>
             <li class="nav-list">
                 <img src="./user_pp/<?= $photo ?> " onclick="toggleDropdown()" class="profile-pic">
@@ -139,7 +140,9 @@
                             <h4>Repetition &ensp;&ensp;&ensp;&ensp;&ensp; : <?= $exercise[0]["repetisi"]; ?></h4>
                             <h4>Calories Burned : <?= $exercise[0]["kalori_terbakar"]; ?><span> Cal</span></h4>
                         </div>
-                        <button>Done</button>
+                        <a href="./logic/exercise_done.php?id=<?= $exercise[0]['exercise_id']; ?>&calorie=<?= $exercise[0]['kalori_terbakar']; ?>">
+                            <button>Done</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -155,7 +158,9 @@
                             <h4>Repetition &ensp;&ensp;&ensp;&ensp;&ensp; : <?= $exercise[1]["repetisi"]; ?></h4>
                             <h4>Calories Burned : <?= $exercise[1]["kalori_terbakar"]; ?><span> Cal</span></h4>
                         </div>
-                        <button>Done</button>
+                        <a href="./logic/exercise_done.php?id=<?= $exercise[1]['exercise_id']; ?>&calorie=<?= $exercise[1]['kalori_terbakar']; ?>">
+                            <button>Done</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -171,7 +176,9 @@
                             <h4>Repetition &ensp;&ensp;&ensp;&ensp;&ensp; : <?= $exercise[2]["repetisi"]; ?></h4>
                             <h4>Calories Burned : <?= $exercise[2]["kalori_terbakar"]; ?><span> Cal</span></h4>
                         </div>
-                        <button>Done</button>
+                        <a href="./logic/exercise_done.php?id=<?= $exercise[2]['exercise_id']; ?>&calorie=<?= $exercise[2]['kalori_terbakar']; ?>">
+                            <button>Done</button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -225,7 +232,7 @@
                             <h3>Calories Burned</h3>
                             <div class="value">
                                 <img src="./images/icons8-fire-100.png" height="50px" width="50px" alt="exercise completed">
-                                <h2><?= $complete; ?> <span>Cal</span></h2>
+                                <h2><?= $calorie; ?> <span>Cal</span></h2>
                             </div>
                         </div>
                     </div>
