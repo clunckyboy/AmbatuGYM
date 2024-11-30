@@ -34,9 +34,9 @@ showExercise('leg-raise');
 
 // Daftar latihan untuk setiap kategori
 const exercisesByCategory = {
-    "kategori-1": ["Burpee", "Jumping Jack", "Mountain Climber", "High Knees", "Skater Jump", "Bodyweight Squat"],
-    "kategori-2": ["Push-Up", "Pull-Up", "Bench Press", "Bicep Curl", "Dumbbell Shoulder Press", "Deadlift"],
-    "kategori-3": ["Jogging di Tempat", "Jump Rope", "Bodyweight Lunges", "Bear Crawl", "Russian Twists", "Step-Up"]
+    "kategori-1": ["Burpee", "Jumping Jack", "Mountain Climber", "High Knees", "Skater Jump", "Bodyweight Squat", "plank-to-pushup"],
+    "kategori-2": ["Push-Up", "Pull-Up", "Bench Press", "Bicep Curl", "Dumbbell Shoulder Press", "Deadlift", "lunges"],
+    "kategori-3": ["Jogging di Tempat", "Jump Rope", "Bodyweight Lunges", "Bear Crawl", "Russian Twists", "Step-Up", "plankhold"]
 };
 
 
