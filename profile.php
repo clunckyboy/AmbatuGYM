@@ -97,6 +97,8 @@ if (isset($_POST['submit'])){
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&display=swap">
     <link rel="icon" type="image/x-icon" href="./ambatugymwhite.png">
     <link rel="stylesheet" href="./Styles/profile.css">
+    <link rel="stylesheet" href="./Styles/navbar.css">
+    <link rel="stylesheet" href="./Styles/community.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
@@ -112,236 +114,43 @@ if (isset($_POST['submit'])){
             min-height: 100vh;
             margin: 0;
         }
-
-
-        .dark-mode {
-            background: 
-            linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
-            url('./images/bg.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-        }
-
-        .profile-card {
-            /* padding-left: 2px; */
-            margin-top: 75px;
-            height: 490px;
-            display: flex;
-            /* flex-direction: row; */
-            align-items: center;
-            background-color:rgb(48, 32, 25);
-            border-radius: 20px;
-            padding: 10px 40px 0px 20px; /* Increased padding for extra height */
-            /* max-width: 1000px; */
-            width: 90%; /* Responsive width */
-            min-height: 300px; /* Set a minimum height */
-            box-shadow: 0px 10px 20px black;
-            color: white;
-            transition: background-color 0.2s ease-in-out;
-        }
-
-        .dark-mode .profile-card {
-            background-color: rgb(255, 241, 224);
-            color: black;
-        }
-
-        .profile-pic-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-right: 20px;
-            margin-left: 20px;
-            /* width: 20%; */
-
-
-            /* margin-right: 30px; */
-        }
-
-        .dark-mode .change-pic {
-            color: black;
-        }
-
-        .profile-pic-placeholder {
-            width: 200px; /* Set a fixed width */
-            height: 200px; /* Set a fixed height */
-            border-radius: 50%; /* Makes the image circular */
-            overflow: hidden; /* Ensures the image stays within the circular border */
-            background-color: #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        .profile-pic-placeholder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-        }
-
-        .gambar {
-            /* Sembunyikan teks bawaan "No file chosen" */
-            /* color: transparent;  */
-            display: block;
-            width: 95px;
-            justify-self: center;
-            /* justify-content: center; */
-        }
-
-        .gambar::file-selector-button {
-            /* Kustomisasi tombol "Choose File" */
-            display: block;
-            margin-bottom: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 5px 5px;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            font-family: "Lexend";
-            left: 30px;
-        }
-
-        .gambar::file-selector-button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Atur ulang ukuran elemen input agar tombol sesuai */
-        /* .gambar {
-            width: fit-content;
-            padding: 0;
-            border: none;
-        } */
-
-        .change-pic {
-            display: flex;
-            align-items: center;
-            color: white;
-            font-size: 0.9em;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .profile-info {
-            text-align: center;
-            flex: 1;
-        }
-
-        .profile-info h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .info-item {
-            padding: 10px 20px;
-            border-radius: 10px;
-            background-color: rgb(97, 58, 42);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background-color 0.2s ease-in-out;
-            margin: 10px 0;
-        }
-
-        .info-item input{
-            font-family: inherit;
-            font-size: large;
-            padding: 10px;
-            border-radius: 5px;
-            border: 2px solid rgb(97, 58, 42);;
-            background-color: rgb(97, 58, 42);
-            color: white;
-        }
-
-        .dark-mode .info-item {
-            background-color:  rgb(255, 225, 181);
-        }
-
-        .info-label {
-            /* flex: 1; */
-            width: 77.57px;
-            font-weight: bold;
-            color: #ddd;
-            text-align: left;
-        }
-        .info-placeholder {
-            flex: 2;
-            color: #f0f0f0;
-            text-align: left;
-            padding-left: 10px;
-        }
-
-        .dark-mode .info-placeholder, .dark-mode .info-label, .dark-mode .edit-icon{
-            color: black;
-        }
-
-        .edit-icon {
-            font-family: "Material Symbols Outlined";
-            font-size: 18px;
-            cursor: pointer;
-            color: #ddd; /* Adjust color as desired */
-            padding-left: 10px;
-        }
-
-        .form-select{
-            font-family: inherit;
-            font-size: large;
-            padding: 10px;
-            border-radius: 5px;
-            border: 2px solid rgb(97, 58, 42);;
-            background-color: rgb(97, 58, 42);
-            color: white;
-            width: 245.33px;
-        }
-
-        .submit{
-            padding: 12px;
-            background: rgb(97, 58, 42);
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font: inherit;
-            justify-content: center;
-            cursor: pointer;
-            margin-top: 10px;
-            margin-bottom: 30px;
-        }
-
-        .submit:hover{
-            scale: 1.05;
-            border: solid 1px white;
-        }
-        
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-logged-in">
+<nav class="navbar">
         <img src="./images/ambatugymwhite.png" 
-             data-light="./images/ambatugymwhite.png" 
-             data-dark="./images/ambatugym2.png" 
-             alt="ambatuLOGO">
+        data-light="./images/ambatugymwhite.png" 
+        data-dark="./images/ambatugym2.png" 
+        alt="ambatuLOGO">
         <div class="navbar-brand">
             <h2>AmbatuGYM</h2>
             <button onclick="myFunction()" class="btn-toggle">
-                <span class="material-symbols-outlined">brightness_4</span>
+                <span class="material-symbols-outlined">
+                    brightness_4
+                </span>
             </button>
         </div>
-        <div class="navbar-links">
-            <a href="dashboard.php">Dashboard</a>
-            <a href="exercise.php">Exercises</a>
-            <a href="community.php">Community</a>
-            <div class="profile-container" > <!-- Ensure the container is relatively positioned -->
-                <img id="profilePic" src="./user_pp/<?= $photo; ?> " onclick="toggleDropdown()" class="profile-pic-small">
-                <div id="dropdown" class="dropdown-content">
-                    <a href="./profile.php">Profil</a>
-                    <a href="./logic/logout.php" id="logout">Logout</a>
+        <button class="navbar-toggle" onclick="openNav()">☰</button> <!-- Hamburger icon -->
+            <div class="navbar-links" id="navbarLinks">
+                <a href="dashboard.php">Dashboard</a>
+                <a href="exercise.php">Exercises</a>
+                <a href="community.php">Community</a>
+                <div class="profile-container">
+                    <img src="./user_pp/<?= $_SESSION['user']['profile_photo'] ?>" alt="Profile Picture" class="profile-pic-small" onclick="toggleDropdown()">
+                    <div id="dropdown" class="dropdown-content">
+                        <a href="./profile.php">Profil</a>
+                        <a href="./logic/logout.php" id="logout">Logout</a>
+                    </div>
                 </div>
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="dashboard.php">Dashboard</a>
+                <a href="exercise.php">Exercises</a>
+                <a href="community.php">Community</a>
+                <a href="./logic/logout.php" class="btn-custom" onclick="logout()">Logout</a>
             </div>
-        </div>
     </nav>
-    
     <div class="profile-card">
         <div class="profile-pic-section">
             <form action="profile.php" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -396,6 +205,24 @@ if (isset($_POST['submit'])){
             </form>    
         </div>
     </div>
+    <script>
+        //Function Dropdown Profil
+        function toggleDropdown() {
+        document.getElementById("dropdown").classList.toggle("show");
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-pic')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                        }
+                }
+            }
+        }
+</script>
+    <script src="./scripts/about.js"></script>
     <script src="./scripts/profile.js"></script>
 </body>
 </html>

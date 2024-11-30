@@ -1,0 +1,349 @@
+.dark-mode {
+    background: 
+    linear-gradient(rgb(255, 255, 255), rgba(255, 255, 255, 0.5)), 
+    url('./images/bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.img{
+    width: 40px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.navbar img {
+    /* margin: 10px; */
+    width: 50px;
+    height: 50px;
+}
+
+.brand-text h2{
+    margin: 0;
+}
+
+.brand-text p{
+    margin: 0;
+}
+
+.navbar-item{
+    display: flex;
+    justify-content: space-around;
+    margin-left: auto;
+    width: 500px;
+    /* padding: 5px; */
+    padding-left: 0;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.nav-list{
+    list-style-type: none; 
+}
+
+.nav-list > .nav-link{
+    padding: 15px;
+    border-radius: 10px;
+    /* margin-right: 5px; */
+}
+
+.nav-link:hover{
+    background-color: #613a2a;
+}
+
+.nav-link{
+    transition: background-color 0.2s;
+    background-color: transparent;
+    justify-content: space-evenly;   
+    text-decoration: none;
+    color: white;
+    justify-content: space-evenly;
+    /* list-style-type: none; */
+}
+
+.nav-list img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 40px;
+    background-color: #302019;
+    min-width: 90px;
+    border-radius: 10px;
+    box-shadow: 4px 0px 20px black;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    text-align: center;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s;
+    border-radius: 10px;
+}
+
+#logout{
+    color: red;
+}
+
+.dropdown-content a:hover {
+    background-color: #613a2a;
+    border-radius: 10px;
+}
+
+.show {
+    display: block;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.profile-card {
+    /* padding-left: 2px; */
+    margin-top: 75px;
+    height: 490px;
+    display: flex;
+    /* flex-direction: row; */
+    align-items: center;
+    background-color:rgb(48, 32, 25);
+    border-radius: 20px;
+    padding: 10px 40px 0px 20px; /* Increased padding for extra height */
+    /* max-width: 1000px; */
+    width: 90%; /* Responsive width */
+    min-height: 300px; /* Set a minimum height */
+    box-shadow: 0px 10px 20px black;
+    color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.dark-mode .profile-card {
+    background-color: rgb(255, 241, 224);
+    color: black;
+}
+
+.profile-pic-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    margin-left: 20px;
+    /* width: 20%; */
+
+
+    /* margin-right: 30px; */
+}
+
+.dark-mode .change-pic {
+    color: black;
+}
+
+.profile-pic-placeholder {
+    width: 200px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height */
+    border-radius: 50%; /* Makes the image circular */
+    overflow: hidden; /* Ensures the image stays within the circular border */
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.gambar {
+    /* Sembunyikan teks bawaan "No file chosen" */
+    /* color: transparent;  */
+    display: block;
+    width: 95px;
+    justify-self: center;
+    /* justify-content: center; */
+}
+
+.gambar::file-selector-button {
+    /* Kustomisasi tombol "Choose File" */
+    display: block;
+    margin-bottom: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: "Lexend";
+    left: 30px;
+}
+
+.gambar::file-selector-button:hover {
+    background-color: #0056b3;
+}
+
+/* Atur ulang ukuran elemen input agar tombol sesuai */
+/* .gambar {
+    width: fit-content;
+    padding: 0;
+    border: none;
+} */
+
+.change-pic {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 0.9em;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.profile-info {
+    text-align: center;
+    flex: 1;
+}
+
+.profile-info h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.info-item {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: rgb(97, 58, 42);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.2s ease-in-out;
+    margin: 10px 0;
+}
+
+.info-item input{
+    font-family: inherit;
+    font-size: large;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(97, 58, 42);;
+    background-color: rgb(97, 58, 42);
+    color: white;
+}
+
+.dark-mode .info-item {
+    background-color:  rgb(255, 225, 181);
+}
+
+.info-label {
+    /* flex: 1; */
+    width: 77.57px;
+    font-weight: bold;
+    color: #ddd;
+    text-align: left;
+}
+.info-placeholder {
+    flex: 2;
+    color: #f0f0f0;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.dark-mode .info-placeholder, .dark-mode .info-label, .dark-mode .edit-icon{
+    color: black;
+}
+
+.edit-icon {
+    font-family: "Material Symbols Outlined";
+    font-size: 18px;
+    cursor: pointer;
+    color: #ddd; /* Adjust color as desired */
+    padding-left: 10px;
+}
+
+.form-select{
+    font-family: inherit;
+    font-size: large;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(97, 58, 42);;
+    background-color: rgb(97, 58, 42);
+    color: white;
+    width: 245.33px;
+}
+
+.submit{
+    padding: 12px;
+    background: rgb(97, 58, 42);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font: inherit;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.submit:hover{
+    scale: 1.05;
+    border: solid 1px white;
+}
+
+/*sidenav*/
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.815); /* Black*/
+    backdrop-filter: blur(20px);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.384);
+  }
+  
+  /* The navigation menu links */
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidenav a:hover {
+    color: #5e5e5e;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s;
+    padding: 20px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
