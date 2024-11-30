@@ -5,17 +5,17 @@
     $register_message = ""; 
     
     if(isset($_POST['register'])){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $email = $_POST['email'];
-        $full_name = $_POST['full-name'];
-        $birthdate = $_POST['birth-date'];
-        $weight = $_POST['weight'];
-        $height = $_POST['height'];
-        $goal = $_POST['goal'];
-        $gender = $_POST['gender'];
+        $username = htmlspecialchars($_POST['username']);
+        $password = htmlspecialchars($_POST['password']);
+        $email = htmlspecialchars($_POST['email']);
+        $fullname = htmlspecialchars($_POST['full-name']);
+        $birthdate = htmlspecialchars($_POST['birth-date']);
+        $weight = htmlspecialchars($_POST['weight']);
+        $height = htmlspecialchars($_POST['height']);
+        $goal = htmlspecialchars($_POST['goal']);
+        $gender = htmlspecialchars($_POST['gender']);
         $gambar = (function(){
-            $namaFile = $_FILES['gambar']['name'];
+            $namaFile = htmlspecialchars($_FILES['gambar']['name']);
             $ukuranFile = $_FILES['gambar']['size'];
             $error = $_FILES['gambar']['error'];
             $tmpName = $_FILES['gambar']['tmp_name'];
@@ -23,19 +23,22 @@
             $valid_ext = ['jpg', 'jpeg', 'png'];
             $ekstensi_gambar = explode('.', $namaFile);
             $ekstensi_gambar = strtolower(end($ekstensi_gambar));
+
+            $namaFileBaru = uniqid();
+            $namaFileBaru .= '.';
+            $namaFileBaru .= $ekstensi_gambar;
             
-            move_uploaded_file($tmpName, './user_pp/'.$namaFile);
+            move_uploaded_file($tmpName, './user_pp/'.  $namaFileBaru);
             
-            return $namaFile;
+            return $namaFileBaru;
             
         }) ();
 
-        // Membuat query tanpa bind_param
-        $sql = "INSERT INTO users (users_username, users_password, users_fullname, users_email, users_birthdate, users_weight, users_height, users_gender, goal, users_photo) 
-                VALUES ('$username', '$password', '$full_name', '$email', '$birthdate', '$weight', '$height', '$gender', '$goal', '$gambar')";
+        $sql = "INSERT INTO users (username, password, fullname, email, birthdate, weight, height, gender, goal, profile_photo) 
+                VALUES ('$username', '$password', '$fullname', '$email', '$birthdate', '$weight', '$height', '$gender', '$goal', '$gambar')";
 
         if ($db->query($sql) === TRUE) {
-            $register_message = "Daftar akun berhasil, silahkan login";
+            $register_message = "Account registration successful, please log in";
         } else {
             $register_message = "Error: " . $db->error;
         }
@@ -43,6 +46,7 @@
         $db->close();
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -158,7 +162,7 @@
                 <img src="./images/ambatugymwhite.png" alt="ambatugym" width="50" height="50">
                 <h2 style="margin: 0; margin-left:10px; padding-top: 5px">AmbatuGYM</h2>
             </div>    
-            <a class="tombol-login" href="index.php"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
+            <a class="tombol-login" href="login.php"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
         </div>
       </nav>
 
@@ -223,9 +227,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="inputTujuan" class="form-label">Tujuan</label>
-                    <select name="goal" class="form-select" aria-label="Default select example">
+                    <select name="goal" class="form-select" aria-label="Default select example" required>
                         <option value="" disabled selected>Pilih Tujuan</option>
-                        <option value="lose-weight">Menurunkan berat badan</option>
+                        <option value="lose_weight">Menurunkan berat badan</option>
                         <option value="build_muscle">Membesarkan otot</option>
                         <option value="maintain">Pelihara stamina</option>
                     </select>

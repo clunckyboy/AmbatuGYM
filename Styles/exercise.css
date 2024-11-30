@@ -1,12 +1,6 @@
-/* Pengaturan dasar halaman */
-body {
-    margin: 0;
-    font-family: "Lexend", sans-serif;
-    background-image: url('image.png'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-    color: white;
+
+html {
+    scroll-behavior: smooth;
 }
 
 @keyframes slideIn {
@@ -18,86 +12,125 @@ body {
     }
 }
 
+body{
+    margin: 0;
+    background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.5)),url(../images/bg.jpg);
+    color: white;
+    background-size: cover;
+    background-attachment: fixed;
+    /* transition: all 0.3s ease-in-out; */
+    font-family: "Lexend", sans-serif;
+}
+
 .navbar {
-    animation: 0.5s ease-out 0s 1 slideIn;
-    box-shadow: -10px 2px 20px black;
-    top: 0;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-right: 20px;
     height: 70px;
     position: fixed;
     width: 100%;
     align-items: center;
     display: flex;
-    overflow: hidden;
-    background-color: rgb(48, 32, 25);
+    /* overflow: hidden; */
+    background-color: #302019;
     color: white;
-    z-index: 10; /* Ensure it stays on top */
+    z-index: 1; /*Ensure it stays on top */
+}
+
+.img{
+    width: 40px;
+    height: 50px;
+    margin-right: 20px;
 }
 
 .navbar img {
-    margin: 10px;
+    /* margin: 10px; */
     width: 50px;
     height: 50px;
 }
 
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 4px; 
-}
-
-.navbar-brand h1 {
+.brand-text h2{
     margin: 0;
-    font-weight: bold;
 }
 
-.navbar a {
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0);
-    border-radius: 10px;
-    transition: box-shadow 0.2s, transform 0.01s ease-in-out;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+.brand-text p{
+    margin: 0;
 }
 
-.navbar a:hover {
-    box-shadow: 0px 0px 20px white;
-}
-
-.navbar a:active {
-    transform: scale(0.95);
-    background-color: #f2f2f248;
-}
-
-.navbar-links {
-    margin-right: 30px;
-    padding: 10px;
+.navbar-item{
     display: flex;
+    justify-content: space-evenly;
     margin-left: auto;
-    gap: 10px;
+    width: 500px;
+    padding: 5px;
+    align-items: center;
+    margin-right: 20px;
 }
 
-.navbar-toggle {
-    display: none;
-    background-color: transparent;
-    border: none;
-    font-size: 30px;
+.nav-list{
+    list-style-type: none; 
+}
+
+.nav-list > .nav-link{
+    padding: 15px;
+    border-radius: 5px;
+    /* margin-right: 5px; */
+}
+
+.nav-link:hover{
+    background-color: #613a2a;
+}
+
+.nav-link{
+    justify-content: space-evenly;   
+    text-decoration: none;
     color: white;
+    justify-content: space-evenly;
+    /* list-style-type: none; */
+}
+
+.nav-list img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 5px;
     cursor: pointer;
 }
-.navbar-toggle:hover {
-    box-shadow: 0px 0px 20px white;
-    border-radius: 10px;
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 45px;
+    background-color: #302019;
+    min-width: 90px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    text-align: center;
+    color: white;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+}
+
+#logout{
+    color: red;
+}
+
+.dropdown-content a:hover {
+    background-color: #613a2a;
+}
+
+.show {
+    display: block;
 }
 
 /* Container utama untuk halaman Exercise */
 .exercise-page {
     display: flex;
     gap: 20px;
-    padding: 100px 20px 20px 20px;
+    padding: 80px 20px 20px 20px;
 }
 
 /* Sidebar untuk daftar latihan */
@@ -107,57 +140,65 @@ body {
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0px 10px 20px black;
+    height: 100%;
 }
 
 /* Header "Exercises" */
 .exercise-sidebar h2 {
     color: white;
-    margin-bottom: 10px;
-    text-align: left;
+    /* margin-bottom: 10px; */
+    text-align: center;
     font-weight: bold;
 }
 
 /* Dropdown Kategori Latihan */
 .exercise-category {
     position: relative;
-    margin-bottom: 20px;
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    font: inherit;
+}
+
+.exercise-category button{
+    padding: 10px;
 }
 
 .category-button {
     background-color: rgb(97, 58, 42);
     color: white;
     border: none;
-    padding: 10px;
+    padding: 5px;
     border-radius: 10px;
     cursor: pointer;
     font-size: 14px;
-    width: 100%;
+    width: 190px;
     text-align: center;
 }
 
 .category-options {
+    justify-content: flex-end;
     display: none; /* Hide by default */
     position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: rgb(97, 58, 42);
+    top: 40px;
+    left: 235px;
     border-radius: 10px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-    width: 100%;
+    background-color: rgb(97, 58, 42);
+    /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */
+    width: 52.25%;
     z-index: 1;
 }
 
-.category-button:hover + .category-options,
-.category-options:hover {
-    display: block;
-}
-
 .category-options p {
+    justify-content: end;
+    font-size: 10px;
     margin: 0;
-    padding: 10px;
+    padding: 8px;
     color: white;
     text-align: center;
     cursor: pointer;
+    background-color: rgb(97, 58, 42);
+    border-radius: 10px;
 }
 
 .category-options p:hover {
@@ -171,7 +212,33 @@ body {
     margin: 0;
 }
 
-.exercise-sidebar li {
+.exercise-list{
+    padding-right: 10px;
+    display: flex;
+    height: auto;
+    overflow: auto;
+    overflow-x: hidden;
+    justify-content: center;
+}
+
+.exercise-list::-webkit-scrollbar{
+    width: 3px;
+    border-radius: 15px;
+}
+
+.exercise-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0); 
+}
+
+.exercise-list::-webkit-scrollbar-thumb {
+    background-color: rgba(97, 58, 42, 1); 
+    border-radius: 100px;
+    height: 10px;
+}
+
+
+#exercise-list li{
+    width: 460px;
     background-color: rgb(97, 58, 42);
     margin-bottom: 10px;
     padding: 15px;
@@ -182,9 +249,9 @@ body {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.exercise-sidebar li:hover {
+#exercise-list li:hover {
     box-shadow: 0px 0px 10px white;
-    transform: scale(1.05);
+    /* transform: scale(1.02); */
 }
 
 /* Kontainer detail latihan */
