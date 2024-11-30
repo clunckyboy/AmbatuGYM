@@ -1,3 +1,21 @@
+//DROPDOWN PROFILE PHOTO
+function toggleDropdown() {
+    document.getElementById("dropdown").classList.toggle("show");
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.profile-pic')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                    }
+            }
+        }
+    }
+
+
 // Kode JavaScript untuk mengelola tampilan latihan
 
 const exerciseLinks = document.querySelectorAll('.exercise-sidebar li');
@@ -34,9 +52,9 @@ showExercise('leg-raise');
 
 // Daftar latihan untuk setiap kategori
 const exercisesByCategory = {
-    "kategori-1": ["Burpee", "Jumping Jack", "Mountain Climber", "High Knees", "Skater Jump", "Bodyweight Squat"],
-    "kategori-2": ["Push-Up", "Pull-Up", "Bench Press", "Bicep Curl", "Dumbbell Shoulder Press", "Deadlift"],
-    "kategori-3": ["Jogging di Tempat", "Jump Rope", "Bodyweight Lunges", "Bear Crawl", "Russian Twists", "Step-Up"]
+    "kategori-1": ["Burpee", "Jumping Jack", "Mountain Climber", "High Knees", "Skater Hop", "Bodyweight Squat", "Plank-to-Pushup"],
+    "kategori-2": ["Push-Up", "Pull-Up", "Bench Press", "Bicep Curl", "Dumbbell Shoulder Press", "Deadlift", "Lunges"],
+    "kategori-3": ["Jog in Place", "Jump Rope", "Butt Kick", "Bear Crawl", "Russian Twists", "Step-Up", "Plankhold"]
 };
 
 
@@ -67,7 +85,7 @@ const categoryOptions = document.querySelector('.category-options');
 // Event listener untuk toggle dropdown
 categoryButton.addEventListener('click', () => {
     categoryOptions.style.display = 
-        categoryOptions.style.display === 'block' ? 'none' : 'block';
+        categoryOptions.style.display === 'flex' ? 'none' : 'flex';
 });
 
 // Event listener untuk memilih latihan dari dropdown
