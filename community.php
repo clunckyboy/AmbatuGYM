@@ -42,7 +42,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=brightness_4"/>
     <link rel="icon" type="image/x-icon" href="./images/ambatugymwhite.png">
-    <link rel="stylesheet" href="./Styles/community.css">
+    <link rel="stylesheet" href="./styles/community.css">
+    <link rel="stylesheet" href="./styles/navbar.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Community</title>
@@ -55,6 +56,28 @@
             background-attachment: fixed;
             background-size: cover;
         }
+        @media (max-width: 768px) {
+    body {
+        background-size: contain;
+    }
+
+    .container {
+        flex-direction: column;
+        height: auto; /* Adjust height for smaller screens */
+    }
+
+    .navbar {
+        flex-wrap: wrap; /* Allow wrapping of navbar items */
+    }
+
+    .comment-box {
+        width: 100%; /* Adjust width for smaller screens */
+    }
+
+    .comment-form-section {
+        width: 100%; /* Expand the form width */
+    }
+}
 
         .dark-mode {
             background: 
@@ -279,11 +302,8 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <img src="./images/ambatugymwhite.png" 
-        data-light="./images/ambatugymwhite.png" 
-        data-dark="./images/ambatugym2.png" 
-        alt="ambatuLOGO">
+<nav class="navbar">
+        <img src="./images/ambatugymwhite.png" data-light="./images/ambatugymwhite.png" data-dark="./images/ambatugym2.png" alt="ambatuLOGO">
         <div class="navbar-brand">
             <h2>AmbatuGYM</h2>
             <button onclick="myFunction()" class="btn-toggle">
@@ -293,25 +313,27 @@
             </button>
         </div>
         <button class="navbar-toggle" onclick="openNav()">☰</button> <!-- Hamburger icon -->
-            <div class="navbar-links" id="navbarLinks">
-                <a href="dashboard.php">Dashboard</a>
-                <a href="exercise.php">Exercises</a>
-                <a href="#community">Community</a>
-                <div class="profile-container">
-                    <img src="./user_pp/<?= $_SESSION['user']['profile_photo'] ?>" alt="Profile Picture" class="profile-pic-small" onclick="toggleDropdown()">
-                    <div id="dropdown" class="dropdown-content">
-                        <a href="./profile.php">Profil</a>
-                        <a href="./logic/logout.php" id="logout">Logout</a>
-                    </div>
+        <div class="navbar-links" id="navbarLinks">
+            <a href="dashboard.php">Dashboard</a>
+            <a href="exercise.php">Exercises</a>
+            <a href="community.php">Community</a>
+            <div class="profile-container">
+                <img src="./user_pp/<?= $_SESSION['user']['profile_photo'] ?>" alt="Profile Picture" class="profile-pic-small" onclick="toggleDropdown()">
+                <div id="dropdown" class="dropdown-content">
+                    <a href="./profile.php">Profile</a>
+                    <a href="./logic/logout.php" id="logout">Logout</a>
                 </div>
-            <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="dashboard.php">Dashboard</a>
-                <a href="exercise.php">Exercises</a>
-                <a href="#community">Community</a>
-                <a href="./logic/logout.php" class="btn-custom" onclick="logout()">Logout</a>
             </div>
+        </div>    
     </nav>
+        
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="exercise.php">Exercises</a>
+        <a href="community.php">Community</a>
+        <a href="./logic/logout.php" class="btn-custom" onclick="logout()">Logout</a>
+    </div>
     
     <div class="parent" id="community">
         <div class="container">
@@ -357,7 +379,26 @@
 
             </div>
         </div>
-
+        <script>
+        //Function Dropdown Profil
+        function toggleDropdown() {
+            document.getElementById("dropdown").classList.toggle("show");
+        }
+        
+        window.onclick = function(event) {
+            if (!event.target.matches('.profile-pic-small')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="./scripts/about.js"></script>
+    <script src="./scripts/profile.js"></script>                
     <script src="./scripts/about.js"></script>
     <script src="./scripts/comment.js"></script>
 </body>
