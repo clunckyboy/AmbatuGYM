@@ -1,17 +1,31 @@
 <?php
     session_start();
 
-    $photo = $_SESSION["user"]["profile_photo"];
-    
     if ( !isset($_SESSION["is_login"]) ){
         header("location: login.php");
         exit;
     }
+    
+    require "./database/config.php";
+
+    $query = "SELECT exercise_id AS id,
+                    exercise_name AS name,
+                    description AS deskripsi,
+                    repetisi AS repetisi,
+                    kalori_terbakar AS kalori,
+                    video_url AS video
+                 FROM exercises 
+                 ORDER BY exercise_id";
+    
+    $result = $db->query($query);
+    
+    $rows = [];
+    while($row = $result->fetch_assoc()){
+        $rows[] = $row;
+    }
 
 
-    include "./database/config.php";
-
-?>
+?>    
 
 
 <!DOCTYPE html>
@@ -33,16 +47,16 @@
     </div>
     <ul class="navbar-item">
         <li class="nav-list">
-            <a class="nav-link" href="#dashboard">Dashboard</a>
+            <a class="nav-link" href="dashboard.php">Dashboard</a>
         </li>
         <li class="nav-list">
             <a class="nav-link" href="exercise.php">Exercises</a>
         </li>
         <li class="nav-list">
-            <a class="nav-link" href="community.html">Community</a>
+            <a class="nav-link" href="community.php">Community</a>
         </li>
             <li class="nav-list">
-            <img src="./user_pp/<?= $photo ?> " alt="Profile" onclick="toggleDropdown()" class="profile-pic">
+            <img src="./user_pp/<?= $_SESSION['user']['profile_photo']; ?> " alt="Profile" onclick="toggleDropdown()" class="profile-pic">
             <div id="dropdown" class="dropdown-content">
                 <a href="./profile.php">Profil</a>
                 <a href="./logic/logout.php" id="logout">Logout</a>
@@ -58,7 +72,7 @@
     <div class="exercise-sidebar">
         <div class="exercise-category">
             <h2 style="margin: 0;">Exercises</h2>
-            <button class="category-button">Pilih Jenis Latihan</button>
+            <button class="category-button">Goals</button>
             <div class="category-options">
                 <p data-category="kategori-1">Lose Weight</p>
                 <p data-category="kategori-2">Build Muscle</p>
@@ -72,9 +86,10 @@
                 <li data-exercise="jumping-jack">Jumping Jack</li>
                 <li data-exercise="montain-climber">Montain Climber</li>
                 <li data-exercise="high-knees">High Knees</li>
-                <li data-exercise="skater-jump">Skater Jump</li>
+                <li data-exercise="skater-jump">Skater Hop</li>
                 <li data-exercise="bodyweight-squat">Bodyweight Squat</li>
                 <li data-exercise="plank-to-pushup">Plank to Push-Up</li>
+
             </ul>
         </div>
     </div>
@@ -82,224 +97,265 @@
     <!-- Bagian Detail Latihan -->
     <div class="exercise-details">
         <div id="burpee" class="exercise-content" style="display: none;">
-            <h2>Burpee</h2>
+            <h2> <?= $rows[0]["name"]; ?> </h2>
             <div class="video-container">
                 <img src="./latihan/turun_berat/burpee.gif" alt="Burpee exercise GIF" width="100%">
             </div>
-            <p>Burpee adalah latihan olahraga yang melibatkan hampir seluruh bagian tubuh dan dilakukan secara berulang.</p>
+            <p><?= $rows[0]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>150 cal</span>
-                <span>20 x 3 Reps</span>
+                <span><?= $rows[0]["kalori"]; ?> Cal</span>
+                <span><?= $rows[0]["repetisi"]; ?></span>
             </div>
         </div>
             
         <div id="jumping-jack" class="exercise-content" style="display:none;">
-            <h2>Jumping Jack</h2>
+            <h2><?= $rows[1]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/turun_berat/jumpingjack.gif" alt="Jumping Jack exercise GIF" width="100%">
             </div>
-            <p>Jumping jack adalah latihan kardio yang dilakukan dengan cara melompat sambil mengangkat tangan ke atas dan membuka kaki secara bersamaan.</p>
+            <p><?= $rows[1]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>90 cal</span>
-                <span>50 x 3 Reps</span>
+                <span><?= $rows[1]["kalori"]; ?> Cal</span>
+                <span><?= $rows[1]["repetisi"]; ?></span>
             </div>
         </div>
 
         <div id="mountain-climber" class="exercise-content" style="display:none;">
-            <h2>Mountain Climber</h2>
+            <h2><?= $rows[2]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/turun_berat/mountainclimber.gif" alt="Montain Climber exercise GIF" width="100%">
             </div>
-            <p>Mountain climber adalah gerakan senam yang melatih seluruh tubuh, terutama bagian atas dan bawah, dengan gerakan naik-turun seperti sedang mendaki gunung.</p>
+            <p><?= $rows[2]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>135 cal</span>
-                <span>20 x 3 Reps</span>
+                <span><?= $rows[2]["kalori"]; ?> Cal</span>
+                <span><?= $rows[2]["repetisi"]; ?></span>
             </div>
         </div>
 
         <div id="high-knees" class="exercise-content" style="display: none;">
-            <h2>High Knees</h2>
+            <h2><?= $rows[3]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/turun_berat/highknee.gif" alt="High Knees exercise GIF" width="100%">
             </div>
-            <p>High knees adalah latihan kardio yang dilakukan dengan kecepatan tinggi untuk memperkuat otot kaki, meningkatkan detak jantung, dan meningkatkan fleksibilitas.</p>
+            <p><?= $rows[3]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>105 cal</span>
-                <span>50 x 3 Reps</span>
+                <span><?= $rows[3]["kalori"]; ?> Cal</span>
+                <span><?= $rows[3]["repetisi"]; ?></span>
             </div>
         </div>
 
-        <div id="skater-jump" class="exercise-content" style="display: none;">
-            <h2>Skater Jumps</h2>
+        <div id="skater-hop" class="exercise-content" style="display: none;">
+            <h2><?= $rows[4]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/turun_berat/skaterhop.gif" alt="Skater Jump exercise GIF" width="100%">
             </div>
-            <p>Skater jumps adalah latihan kardio yang melibatkan lompatan untuk menggeser berat badan dari satu sisi ke sisi lain, seperti saat bermain skate.</p>
+            <p><?= $rows[4]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>120 cal</span>
-                <span>30 x 3 Reps</span>
+                <span><?= $rows[4]["kalori"]; ?> Cal</span>
+                <span><?= $rows[4]["repetisi"]; ?></span>
             </div>
         </div>
 
         <div id="bodyweight-squat" class="exercise-content" style="display: none;">
-            <h2>Bodyweight Squat</h2>
+            <h2><?= $rows[5]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/turun_berat/bodyweightsquat.gif" alt="Bodyweight Squat exercise GIF" width="100%">
             </div>
-            <p>Bodyweight squat adalah latihan jongkok yang menggunakan beban tubuh untuk menguatkan bagian bawah tubuh.</p>
+            <p><?= $rows[5]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>90 cal</span>
-                <span>25 x 3 Reps</span>
+                <span><?= $rows[5]["kalori"]; ?> Cal</span>
+                <span><?= $rows[5]["repetisi"]; ?></span>
             </div>
         </div>
+
+        <div id="plank-to-pushup" class="exercise-content" style="display: none;">
+            <h2><?= $rows[6]["name"]; ?></h2>
+            <div class="video-container">
+                <img src="./latihan/turun_berat/plankpushup.gif" alt="Plank to Push-Up exercise GIF" width="100%">
+            </div>
+            <p><?= $rows[6]["deskripsi"]; ?></p>
+            <div class="exercise-info">
+                <span><?= $rows[6]["kalori"]; ?> Cal</span>
+                <span><?= $rows[6]["repetisi"]; ?></span>
+            </div>
+        </div>
+        
 
         <!-- Konten latihan untuk kategori-2 -->
 
         <div id="push-up" class="exercise-content" style="display: none;">
-            <h2>Push-Up</h2>
+            <h2><?= $rows[7]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/besar_otot/pushup.gif" alt="Push-Up exercise GIF" width="100%">
             </div>
-            <p>Latihan push-up dilakukan dengan menekan tubuh ke atas menggunakan lengan dan bahu.</p>
+            <p><?= $rows[7]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>75 kalori</span>
-                <span>15 x 3 Reps</span>
+                <span><?= $rows[7]["kalori"]; ?> Cal</span>
+                <span><?= $rows[7]["repetisi"]; ?></span>
             </div>
         </div>
         
         <div id="pull-up" class="exercise-content" style="display: none;">
-            <h2>Pull-Up</h2>
+            <h2><?= $rows[8]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/besar_otot/pullup.gif" alt="Pull-Up exercise GIF" width="100%">
             </div>
-            <p>Gerakan ini dilakukan dengan menggantung pada palang, lalu menarik tubuh ke atas hingga dagu melewati palang.</p>
+            <p><?= $rows[8]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>60 kalori</span>
-                <span>10 x 3 Reps</span>
+                <span><?= $rows[8]["kalori"]; ?> Cal</span>
+                <span><?= $rows[8]["repetisi"]; ?></span>
             </div>
         </div>
         
         <div id="bench-press" class="exercise-content" style="display: none;">
-            <h2>Bench Press</h2>
+            <h2><?= $rows[9]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/besar_otot/benchpress.gif" alt="Bench Press exercise GIF" width="100%">
             </div>
-            <p>Latihan bench press dilakukan dengan berbaring di bangku dan menekan beban ke atas dan ke bawah.</p>
+            <p><?= $rows[9]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>105 kalori</span>
-                <span>12 x 3 Reps</span>
+                <span><?= $rows[9]["kalori"]; ?> Cal</span>
+                <span><?= $rows[9]["repetisi"]; ?></span>
             </div>
         </div>
         
         <div id="bicep-curl" class="exercise-content" style="display: none;">
-            <h2>Bicep Curl</h2>
+            <h2><?= $rows[10]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/besar_otot/bicepcurl.gif" alt="Bicep Curl exercise GIF" width="100%">
             </div>
-            <p>Latihan ini berfokus pada penguatan otot bicep dengan mengangkat beban di kedua tangan.</p>
+            <p><?= $rows[10]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>45 kalori</span>
-                <span>12 x 3 Reps</span>
+                <span><?= $rows[10]["kalori"]; ?> Cal</span>
+                <span><?= $rows[10]["repetisi"]; ?></span>
             </div>
         </div>
         
         <div id="dumbbell-shoulder-press" class="exercise-content" style="display: none;">
-            <h2>Dumbbell Shoulder Press</h2>
+            <h2><?= $rows[11]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/besar_otot/dumbellshoulderpress.gif" alt="Dumbbell Shoulder Press exercise GIF" width="100%">
             </div>
-            <p>Latihan ini dilakukan dengan menekan dumbbell ke atas untuk melatih bahu dan kekuatan tubuh bagian atas.</p>
+            <p><?= $rows[11]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>60 kalori</span>
-                <span>12 x 3 Reps</span>
+                <span><?= $rows[11]["kalori"]; ?> Cal</span>
+                <span><?= $rows[11]["repetisi"]; ?></span>
+            </div>
+        </div>
+
+        <div id="deadlift" class="exercise-content" style="display: none;">
+            <h2><?= $rows[12]["name"]; ?></h2>
+            <div class="video-container">
+                <img src="./latihan/besar_otot/deadlift.gif" width="100%">
+            </div>
+            <p><?= $rows[12]["deskripsi"]; ?></p>
+            <div class="exercise-info">
+                <span><?= $rows[12]["kalori"]; ?> Cal</span>
+                <span><?= $rows[12]["repetisi"]; ?></span>
             </div>
         </div>
         
-        <div id="deadlift" class="exercise-content" style="display: none;">
-            <h2>Deadlift</h2>
+        <div id="lunges" class="exercise-content" style="display: none;">
+            <h2><?= $rows[13]["name"]; ?></h2>
             <div class="video-container">
-                <img src="./latihan/besar_otot/deadlift.gif" alt="Deadlift exercise GIF" width="100%">
+                <img src="./latihan/besar_otot/lunges.gif" alt="Bodyweight Lunges exercise GIF" width="100%">
             </div>
-            <p>Latihan deadlift dilakukan dengan mengangkat beban dari lantai hingga ke posisi berdiri tegak.</p>
+            <p><?= $rows[13]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>120 kalori</span>
-                <span>10 x 3 Reps</span>
+                <span><?= $rows[13]["kalori"]; ?> Cal</span>
+                <span><?= $rows[13]["repetisi"]; ?></span>
             </div>
         </div>
+        
+
+
         
         <!-- Konten latihan untuk kategori-3 -->
 
-        <div id="jogging-di-tempat" class="exercise-content" style="display: none;">
-            <h2>Jogging di Tempat</h2>
+        <div id="jog-in-place" class="exercise-content" style="display: none;">
+            <h2><?= $rows[14]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/pelihara_stamina/joginplace.gif" alt="Jogging di Tempat exercise GIF" width="100%">
             </div>
-            <p>Latihan ini dilakukan dengan berlari di tempat untuk meningkatkan kebugaran kardiovaskular.</p>
+            <p><?= $rows[14]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>150 kalori</span>
-                <span>5 menit x 3</span>
+                <span><?= $rows[14]["kalori"]; ?> Cal</span>
+                <span><?= $rows[14]["repetisi"]; ?></span>
             </div>
         </div>
         
         <div id="jump-rope" class="exercise-content" style="display: none;">
-            <h2>Jump Rope</h2>
+            <h2><?= $rows[15]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/pelihara_stamina/jumprope.gif" alt="Jump Rope exercise GIF" width="100%">
             </div>
-            <p>Latihan lompat tali untuk membakar kalori dan melatih daya tahan kardiovaskular.</p>
+            <p><?= $rows[15]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>135 kalori</span>
-                <span>1 menit x 3</span>
+                <span><?= $rows[15]["kalori"]; ?> Cal</span>
+                <span><?= $rows[15]["repetisi"]; ?></span>
             </div>
         </div>
         
-        <div id="bodyweight-lunges" class="exercise-content" style="display: none;">
-            <h2>Bodyweight Lunges</h2>
+        <div id="butt-kick" class="exercise-content" style="display: none;">
+            <h2><?= $rows[16]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/pelihara_stamina/buttkick.gif" alt="Bodyweight Lunges exercise GIF" width="100%">
             </div>
-            <p>Latihan ini membantu menguatkan otot paha dan glute dengan melakukan lunge tanpa beban.</p>
+            <p><?= $rows[16]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>60 kalori</span>
-                <span>20 x 3</span>
+                <span><?= $rows[16]["kalori"]; ?> Cal</span>
+                <span><?= $rows[16]["repetisi"]; ?></span>
             </div>
         </div>
         
         <div id="bear-crawl" class="exercise-content" style="display: none;">
-            <h2>Bear Crawl</h2>
+            <h2><?= $rows[17]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/pelihara_stamina/bearcrawl.gif" alt="Bear Crawl exercise GIF" width="100%">
             </div>
-            <p>Latihan ini melibatkan merangkak dengan tangan dan kaki untuk melatih kekuatan dan stabilitas tubuh.</p>
+            <p><?= $rows[17]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>90 kalori</span>
-                <span>30 detik x 3</span>
+                <span><?= $rows[17]["kalori"]; ?> Cal</span>
+                <span><?= $rows[17]["repetisi"]; ?></span>
             </div>
         </div>
         
         <div id="russian-twists" class="exercise-content" style="display: none;">
-            <h2>Russian Twists</h2>
+            <h2><?= $rows[18]["name"]; ?></h2>
             <div class="video-container">
                 <img src="./latihan/pelihara_stamina/russiantwist.gif" alt="Russian Twists exercise GIF" width="100%">
             </div>
-            <p>Latihan ini berfokus pada penguatan otot perut dengan gerakan memutar ke kanan dan kiri.</p>
+            <p><?= $rows[18]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>45 kalori</span>
-                <span>25 x 3</span>
+                <span><?= $rows[18]["kalori"]; ?> Cal</span>
+                <span><?= $rows[18]["repetisi"]; ?></span>
+            </div>
+        </div>
+
+        <div id="step-up" class="exercise-content" style="display: none;">
+            <h2><?= $rows[19]["name"]; ?></h2>
+            <div class="video-container">
+                <img src="./latihan/pelihara_stamina/stepup.gif" alt="Russian Twists exercise GIF" width="100%">
+            </div>
+            <p><?= $rows[19]["deskripsi"]; ?></p>
+            <div class="exercise-info">
+                <span><?= $rows[19]["kalori"]; ?> Cal</span>
+                <span><?= $rows[19]["repetisi"]; ?></span>
             </div>
         </div>
         
-        <div id="step-up" class="exercise-content" style="display: none;">
-            <h2>Step-Up (dengan bench)</h2>
-            <div class="./latihan/pelihara_stamina/video-container">
-                <img src="./latihan/pelihara_stamina/stepup.gif" alt="Step-Up exercise GIF" width="100%">
+        <div id="plankhold" class="exercise-content" style="display: none;">
+            <h2><?= $rows[20]["name"]; ?></h2>
+            <div class="video-container">
+                <img src="./latihan/pelihara_stamina/plankhold.gif" alt="Plank Hold exercise GIF" width="100%">
             </div>
-            <p>Latihan ini dilakukan dengan melangkah naik ke bench atau bangku untuk melatih kekuatan kaki.</p>
+            <p><?= $rows[20]["deskripsi"]; ?></p>
             <div class="exercise-info">
-                <span>75 kalori</span>
-                <span>20 x 3</span>
+                <span><?= $rows[20]["kalori"]; ?> Cal</span>
+                <span><?= $rows[20]["repetisi"]; ?></span>
             </div>
         </div>
+        
         
 
 
@@ -307,7 +363,6 @@
     </div>
 
 </div>
-
     <script src="./scripts/exercise.js"></script>
 </body>
 </html>

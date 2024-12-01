@@ -22,6 +22,10 @@ html {
     }
   }
 
+  #logout {
+    color: red;
+}
+
 .navbar {
     animation: 0.5s ease-out 0s 1 slideIn;
     
@@ -58,7 +62,7 @@ html {
     font-weight: bold;
   }
 
-.navbar a {
+.navbar > a {
     box-shadow: 0px 0px 5px rgba(255, 255, 255, 0);
     border-radius: 10px;
     transition: background-color 0.2s , transform 0.01s ease-in-out;
@@ -106,7 +110,7 @@ html {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    z-index: 1000000; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
     background-color: rgba(0, 0, 0, 0.815); /* Black*/
@@ -155,14 +159,16 @@ html {
 
 /*---------------------------------------------------------------------------*/
 
-.parent .container {
+.container {
     box-shadow: 0px 10px 20px black;
     border-radius: 20px;
     display: flex;
     justify-self: center;
-    max-width: 100%;
+    width: 95%;
+    height: 100%;
+    /* max-width: 100%; */
     background-color: rgb(48, 32, 25);
-    padding: 20px;
+    /* padding: 20px; */
     color: white;
     
     /* Initial state for animation */
@@ -335,16 +341,18 @@ p {
 }
 
 .btn-custom {
-    margin: auto;
+    /* margin: auto; */
     border: 0;
     border-radius: 10px;
     font-family: "Lexend", sans-serif;
     color: white;
+    width: 96%;
     padding: 20px;
     background-color: rgb(97, 58, 42);
     box-shadow: rgba(0, 0, 0, 0);
     transition: transform 0.15s ease-in-out, box-shadow 0.1s;
     text-decoration: none;
+    /* justify-self: center; */
 }
 
 .btn-custom-outline {
@@ -565,9 +573,13 @@ material-symbols-outlined{
     align-items: center; /* Center items vertically */
 }
 
-.navbar-links a {
+.navbar-links > a {
     margin-left: 20px; /* Space between links */
     color: #f2f2f2; /* Link color */
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 10px;
+    /* padding: 15px; */
 }
 
 .navbar-links a:hover {
@@ -585,12 +597,83 @@ material-symbols-outlined{
 }
 
 .profile-container {
-    position: relative;
-    display: inline-block;
+    /* position: relative;
+    display: inline-block; */
+    width: 80px;
+    height: 80px;
 }
 
 .profile-pic-small {
     border-radius: 50%;
     width: 40px; /* Adjust as needed */
     height: 40px; /* Adjust as needed */
+    cursor: pointer;
 }
+.logout-button {
+    display: none;
+    position: absolute;
+    top: 50px; /* Position it below the profile picture */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #f2f2f2;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s, transform 0.1s ease-in-out;
+    z-index: 1000; /* Ensures the button appears above other elements */
+}
+
+.profile-container:hover .logout-button {
+    display: block;
+}
+
+.logout-button:hover {
+    box-shadow: 0px 0px 10px red;
+}
+
+.logout-button:active {
+    transform: scale(0.95);
+}
+
+
+/* Fitu toggle di profile*/
+.info-item {
+    display: flex;
+    align-items: center;
+    position: relative; /* Ensure the dropdown is positioned relative to this item */
+}
+
+.info-placeholder {
+    margin-left: 10px;
+}
+
+.toggle-list {
+    display: none; /* Hide the toggle list by default */
+    position: absolute;
+    top: 100%; /* Position it directly below the info item */
+    left: 0; /* Align to the left of the info item */
+    background-color: #f9f9f9; /* Set a light background color for the list */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    z-index: 10;
+    width: 200px; /* Adjust width as necessary */
+}
+
+.toggle-option {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: #333; /* Set text color for the options */
+}
+
+.toggle-option:hover {
+    background-color: #e0e0e0; /* Change background on hover to a slightly darker shade */
+}
+
+.toggle-option.selected {
+    background-color: #d1e7dd; /* Optionally set a background color for the selected option */
+}
+

@@ -310,7 +310,7 @@
                 <a href="exercise.php">Exercises</a>
                 <a href="#community">Community</a>
                 <a href="./logic/logout.php" class="btn-custom" onclick="logout()">Logout</a>
-              </div>
+            </div>
     </nav>
     
     <div class="parent" id="community">

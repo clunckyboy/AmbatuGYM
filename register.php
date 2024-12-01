@@ -76,23 +76,34 @@
             color: white;
         }
 
+        .navbar h3 {
+            margin: 0;
+            align-content: center;
+        }
+
         .navbar {
             box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.185);
+            padding-right: 10px;
+            padding-left: 10px;
             position: fixed;
             top: 0;
             width: 100%;
             height: 70px;
             background-color: #302019 !important;
+            box-shadow: 0px 10px 20px black;
         }
 
         .btn-ambatugym {
-            border: 2px solid #954928;
-            color: #954928;
+            border: 2px solid #613a2a;
+            color: white;
             transition: transform 0.1s ease-in-out, background-color 0.1s;
             text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            width: 100px;
         }
         .btn-ambatugym:hover {
-            background-color: #954928;
+            background-color: #613a2a;
         }
         
         .form-container {
@@ -106,19 +117,28 @@
 
         .form-control, .form-select {
             transition: transform 0.15s, box-shadow 0.15s;
-            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.695);
+            box-shadow: transparent;
+            background-color: transparent;
+            color: white;
         }
         
         .form-control:focus, .form-select:focus {
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
+            box-shadow: 0px 0px 10px white;
             transform: scale(1.02);
+            background-color: black;
+            border: 1px solid white;
+            color: white;
+        }
+
+        input {
+            color-scheme: dark;
         }
 
         .container-sm {
             margin-top: 6rem;
             margin-bottom: 6rem;
             max-width: 900px;
-            border-radius: 5px;
+            border-radius: 20px;
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.185);
             background-color: #302019 !important;
         }
@@ -127,16 +147,16 @@
             width: 120px;
             height: 50px;
             font-size: large;
-            background-color: #954928;
+            border: 2px solid #613a2a;
+            background-color: transparent;
+            color: white;
             /* color: white; */
-            transition: transform 0.1s ease-in-out, box-shadow 0.15s;
-            box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.695);
+            transition: transform 0.1s ease-in-out, background-color 0.1s;
+            box-shadow: transparent;
+            border-radius: 10px;
         }
         .btn-custom:hover {
-            background-color: #954928;
-            border: 2px solid black;
-            transform: scale(1.05);
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.147);
+            background-color: #613a2a;
         }
         
         .btn-custom:active {
@@ -160,7 +180,7 @@
         <div class="container-fluid">
             <div style="display: flex;">
                 <img src="./images/ambatugymwhite.png" alt="ambatugym" width="50" height="50">
-                <h2 style="margin: 0; margin-left:10px; padding-top: 5px">AmbatuGYM</h2>
+                <h3 style="margin: 0; margin-left:10px; padding-top: 5px">AmbatuGYM</h3>
             </div>    
             <a class="tombol-login" href="login.php"><button class="btn btn-ambatugym" type="submit" >Login</button></a>
         </div>
