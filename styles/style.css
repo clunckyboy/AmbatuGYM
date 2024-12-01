@@ -5,7 +5,6 @@ body{
     font-family: "Lexend", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
-    
 }
 
 html {
@@ -25,7 +24,7 @@ html {
 
 .navbar {
     animation: 0.5s ease-out 0s 1 slideIn;
-
+    
     box-shadow: -10px 2px 20px black;
     top: 0;
     padding-left: 20px;
@@ -42,7 +41,7 @@ html {
 
 }
 
-.navbar > img {
+.navbar img {
     margin: 10px;
     width: 50px;
     height: 50px;
@@ -59,7 +58,7 @@ html {
     font-weight: bold;
   }
 
-.navbar-links > a {
+.navbar a {
     box-shadow: 0px 0px 5px rgba(255, 255, 255, 0);
     border-radius: 10px;
     transition: background-color 0.2s , transform 0.01s ease-in-out;
@@ -71,58 +70,34 @@ html {
     font-size: 17px;
 }
 
-.navbar > a:hover {
+.navbar a:hover {
     background-color: rgb(97, 58, 42);
-    text-decoration: none;
 }
 
-.navbar > a:active {
+.navbar a:active {
     transform: scale(0.95);
     background-color: #f2f2f248;
 }
 
-
 .navbar-links {
-    margin-right: 15px;
-    justify-content: space-evenly;
+    margin-right: 30px;
     padding: 10px;
     display: flex;
     margin-left: auto;
     gap: 10px;
-    height: 70px;
 }
 
-.dropdown-content {
+.navbar-toggle {
     display: none;
-    position: fixed;
-    right: 30px;
-    background-color: #302019;
-    width: 90px;
-    height: 88px;
-    border-radius: 5px;
-    z-index: 100;
-}
-
-.dropdown-content a {
-    text-align: center; 
-    justify-self: start;
+    background-color: transparent;
+    border: none;
+    font-size: 30px;
     color: white;
-    padding: 12px;
-    text-decoration: none;
-    display: block;
-    width: 50px;
+    cursor: pointer;
 }
-
-#logout{
-    color: red;
-}
-
-.dropdown-content a:hover {
-    background-color: #613a2a;
-}
-
-.show {
-    display: block;
+.navbar-toggle:hover {
+    box-shadow: 0px 0px 20px white;
+    border-radius: 10px;
 }
 
 /*--------------------------------SIDE NAVIGATION----------------------------------------------*/
@@ -275,8 +250,6 @@ p {
     margin: 0 auto; /* Centers the profile pictures horizontally */
 }
 
-
-
 .row {
     display: flex;
     justify-content: space-around;
@@ -410,7 +383,9 @@ p {
     color: rgb(0, 0, 0); /* Set default dark mode text color */
 }
 
-
+.dark-mode .navbar a:hover {
+    background-color: rgb(255, 225, 181) ;
+}
 
 .dark-mode .container,
 .dark-mode .navbar {
@@ -458,10 +433,6 @@ p {
 }
 .dark-mode .btn-toggle:hover {
     color: rgb(235, 235, 235);
-}
-
-.dark-mode .navbar a:hover {
-    background-color: rgb(255, 225, 181) ;
 }
 
 .dark-mode .navbar a:hover,
@@ -600,7 +571,7 @@ material-symbols-outlined{
 }
 
 .navbar-links a:hover {
-    text-decoration: underline; /* Underline on hover for links */
+    text-decoration: none; /* Underline on hover for links */
 }
 
 .profile-pic {
@@ -614,134 +585,12 @@ material-symbols-outlined{
 }
 
 .profile-container {
-    display: inline-block;
     position: relative;
+    display: inline-block;
 }
 
-/* Profile Picture Styling */
 .profile-pic-small {
-    width: 10px; 
-    height: 10px; 
     border-radius: 50%;
-    padding: 5px;
-    cursor: pointer;
-}
-
-/* Tooltip Styling */
-.profile-tooltip {
-    padding: 5px;
-    transform: translateY(5px) translateX(-50%); /* Center horizontally and adjust vertically */
-    transition: opacity 0.1s ease-in-out; /* Smooth show/hide */
-    opacity: 0;
-    display: none; /* Hidden by default */
-    flex-direction: column; /* Stack buttons vertically */
-    justify-content: center; /* Center buttons vertically */
-    align-items: center; /* Center buttons horizontally */
-    position: fixed; /* Fixed positioning to avoid getting covered */
-    background-color: rgb(48, 32, 25);
-    color: #fff;
-    border-radius: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    line-height: 1; /* Ensures no extra space from line height */
-    margin: 0; /* Removes any default margins */
-    font-size: 14px; /* Adjust font size as needed for fit */
-    left: 50%; /* Center horizontally */
-    top: 100%; /* Adjust this as needed for position */
-}
-
-.dark-mode .profile-tooltip {
-    background-color: rgb(255, 241, 224) ;
-}
-
-.dark-mode .profile-tooltip a {
-    color: black;
-    background-color: rgb(255, 225, 181);
-}
-
-.profile-tooltip[style*="display: block"] {
-    opacity: 1;
-}
-
-.profile-tooltip a {
-    display: block;
-    color: #fff;
-    
-    margin: 5px 0; /* Add spacing between buttons */
-}
-
-.profile-tooltip a:hover {
-    text-decoration: none;
-    background-color: rgb(97, 58, 42);
-}
-
-
-
-.profile-tooltip .profile-button{
-    padding: 10px;
-    color: white;
-    background-color: rgb(48, 32, 25);
-    border-radius: 10px;
-    padding: 5px 10px; /* Optional for better sizing */
-    text-decoration: none;
-    margin-top: 10px;
-
-}
-
-.profile-tooltip .logout-button {
-    color: white;
-    background-color: red;
-    border-radius: 10px;
-    border: 1px solid white; /* Thicker border */
-    padding: 5px 10px; /* Optional for better sizing */
-    text-decoration: none;
-    margin-top: 10px;
-
-}
-
-.profile-tooltip .logout-button:hover {
-    color: red;
-    background-color: white;
-    border: 1px solid red; /* Optional hover effect */
-    text-decoration: none;
-
-}
-
-
-/* Fitu toggle di profile*/
-.info-item {
-    display: flex;
-    align-items: center;
-    position: relative; /* Ensure the dropdown is positioned relative to this item */
-}
-
-.info-placeholder {
-    margin-left: 10px;
-}
-
-.toggle-list {
-    display: none; /* Hide the toggle list by default */
-    position: absolute;
-    top: 100%; /* Position it directly below the info item */
-    left: 0; /* Align to the left of the info item */
-    background-color: #f9f9f9; /* Set a light background color for the list */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    z-index: 10;
-    width: 200px; /* Adjust width as necessary */
-}
-
-.toggle-option {
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    color: #333; /* Set text color for the options */
-}
-
-.toggle-option:hover {
-    background-color: #e0e0e0; /* Change background on hover to a slightly darker shade */
-}
-
-.toggle-option.selected {
-    background-color: #d1e7dd; /* Optionally set a background color for the selected option */
+    width: 40px; /* Adjust as needed */
+    height: 40px; /* Adjust as needed */
 }
