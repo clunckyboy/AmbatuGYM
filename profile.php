@@ -114,15 +114,25 @@ if (isset($_POST['submit'])){
             min-height: 100vh;
             margin: 0;
         }
+
+        @media (max-width: 600px) {
+            
+            
+            .navbar-links {
+                display: none;
+            }
+
+            .profile-card {
+                display: block;
+
+            }
+        }
     </style>
 </head>
 
 <body>
-<nav class="navbar">
-        <img src="./images/ambatugymwhite.png" 
-        data-light="./images/ambatugymwhite.png" 
-        data-dark="./images/ambatugym2.png" 
-        alt="ambatuLOGO">
+    <nav class="navbar">
+        <img src="./images/ambatugymwhite.png" data-light="./images/ambatugymwhite.png" data-dark="./images/ambatugym2.png" alt="ambatuLOGO">
         <div class="navbar-brand">
             <h2>AmbatuGYM</h2>
             <button onclick="myFunction()" class="btn-toggle">
@@ -132,25 +142,28 @@ if (isset($_POST['submit'])){
             </button>
         </div>
         <button class="navbar-toggle" onclick="openNav()">☰</button> <!-- Hamburger icon -->
-            <div class="navbar-links" id="navbarLinks">
-                <a href="dashboard.php">Dashboard</a>
-                <a href="exercise.php">Exercises</a>
-                <a href="community.php">Community</a>
-                <div class="profile-container">
-                    <img src="./user_pp/<?= $_SESSION['user']['profile_photo'] ?>" alt="Profile Picture" class="profile-pic-small" onclick="toggleDropdown()">
-                    <div id="dropdown" class="dropdown-content">
-                        <a href="./profile.php">Profil</a>
-                        <a href="./logic/logout.php" id="logout">Logout</a>
-                    </div>
+        <div class="navbar-links" id="navbarLinks">
+            <a href="dashboard.php">Dashboard</a>
+            <a href="exercise.php">Exercises</a>
+            <a href="community.php">Community</a>
+            <div class="profile-container">
+                <img src="./user_pp/<?= $_SESSION['user']['profile_photo'] ?>" alt="Profile Picture" class="profile-pic-small" onclick="toggleDropdown()">
+                <div id="dropdown" class="dropdown-content">
+                    <a href="./profile.php">Profil</a>
+                    <a href="./logic/logout.php" id="logout">Logout</a>
                 </div>
-            <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="dashboard.php">Dashboard</a>
-                <a href="exercise.php">Exercises</a>
-                <a href="community.php">Community</a>
-                <a href="./logic/logout.php" class="btn-custom" onclick="logout()">Logout</a>
             </div>
+        </div>    
     </nav>
+        
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="exercise.php">Exercises</a>
+        <a href="community.php">Community</a>
+        <a href="./logic/logout.php" class="btn-custom" onclick="logout()">Logout</a>
+    </div>
+
     <div class="profile-card">
         <div class="profile-pic-section">
             <form action="profile.php" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -205,23 +218,25 @@ if (isset($_POST['submit'])){
             </form>    
         </div>
     </div>
+
     <script>
         //Function Dropdown Profil
         function toggleDropdown() {
-        document.getElementById("dropdown").classList.toggle("show");
+            document.getElementById("dropdown").classList.toggle("show");
         }
+        
         window.onclick = function(event) {
-            if (!event.target.matches('.profile-pic')) {
+            if (!event.target.matches('.profile-pic-small')) {
                 var dropdowns = document.getElementsByClassName("dropdown-content");
                 for (var i = 0; i < dropdowns.length; i++) {
                     var openDropdown = dropdowns[i];
                     if (openDropdown.classList.contains('show')) {
                         openDropdown.classList.remove('show');
-                        }
+                    }
                 }
             }
         }
-</script>
+    </script>
     <script src="./scripts/about.js"></script>
     <script src="./scripts/profile.js"></script>
 </body>
