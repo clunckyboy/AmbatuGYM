@@ -561,7 +561,6 @@ material-symbols-outlined{
 }
 
 .navbar-links {
-    display: flex; /* Flexbox layout for navbar links */
     align-items: center; /* Center items vertically */
 }
 
