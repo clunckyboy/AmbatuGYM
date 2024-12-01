@@ -62,7 +62,7 @@ html {
     font-weight: bold;
   }
 
-.navbar a {
+.navbar > a {
     box-shadow: 0px 0px 5px rgba(255, 255, 255, 0);
     border-radius: 10px;
     transition: background-color 0.2s , transform 0.01s ease-in-out;
@@ -576,6 +576,10 @@ material-symbols-outlined{
 .navbar-links > a {
     margin-left: 20px; /* Space between links */
     color: #f2f2f2; /* Link color */
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 10px;
+    /* padding: 15px; */
 }
 
 .navbar-links a:hover {
@@ -593,8 +597,10 @@ material-symbols-outlined{
 }
 
 .profile-container {
-    position: relative;
-    display: inline-block;
+    /* position: relative;
+    display: inline-block; */
+    width: 80px;
+    height: 80px;
 }
 
 .profile-pic-small {
