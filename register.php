@@ -188,74 +188,74 @@
 
       <div class="container-sm p-4 bg-body-tertiary">
         <div class="mb-3">
-            <h1 class="text-center">Buat Akun</h1>
+            <h1 class="text-center">Create An Account!</h1>
         </div>
         <!-- <div class="mb-4"> -->
         <hr>
-        <h4>Informasi Akun</h4>
+        <h4>Account Info</h4>
         <p style="color: green;"><i><?=$register_message?></i></p>
         <form action="" method="POST" id="form" enctype="multipart/form-data" autocomplete="off">
                 <div class="mb-3">
                     <label for="inputEmail" class="form-label">E-mail</label>
-                    <input name="email" type="email" class="form-control" id="inputEmail" placeholder="cth: JohnAmba69@gmail.com" required>
+                    <input name="email" type="email" class="form-control" id="inputEmail" placeholder="eg: JohnAmba69@gmail.com" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputUsername" class="form-label">Username</label>
-                    <input name="username" type="username" class="form-control" id="inputUsername" placeholder="Masukkan Username" required>
+                    <input name="username" type="username" class="form-control" id="inputUsername" placeholder="Insert Username" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">Password</label>
-                    <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Harus memiliki huruf, angka, dan karakter spesial! (cth: !@#$%^&*)" aria-describedby="passHelp" required>
+                    <input name="password" type="password" class="form-control" id="inputPassword" placeholder="Must have letters, numbers, and special characters! (eg: !@#$%^&*)" aria-describedby="passHelp" required>
                 </div>
                 <div class="mb-3">
                     <label for="inputPasswordConfirm" class="form-label">Password Confirm</label>
-                    <p id="confirmMessage" style="color: red; margin: 0; display: none;">Password tidak sama</p>
+                    <p id="confirmMessage" style="color: red; margin: 0; display: none;">Password is not the same</p>
                     <input type="password" class="form-control" id="inputPasswordConfirm" required>
                 </div>
         
         <hr>
-            <h4>Data Diri</h4>
+            <h4>Biodata</h4>
 
                 <div class="mb-3">
-                    <label for="foto-profil" style="margin-bottom: 5px;">Masukkann foto profil</label>
+                    <label for="foto-profil" style="margin-bottom: 5px;">Insert a profile picture</label>
                     <br>
                     <input type="file" name="gambar" id="" accept=".jpg, .jpeg, .png" required>
                 </div>
                 <div class="mb-3">
-                    <label for="inputFullName" class="form-label">Nama Lengkap</label>
-                    <input name="full-name" type="text" class="form-control" id="inputFullName" placeholder="Masukkan nama lengkap" required>
+                    <label for="inputFullName" class="form-label">Full Name</label>
+                    <input name="full-name" type="text" class="form-control" id="inputFullName" placeholder="Insert full name" required>
                 </div>
                 <div class="mb-3">
-                    <label for="inputGender" class="form-label">Jenis Kelamin</label>
+                    <label for="inputGender" class="form-label">Gender</label>
                     <select name="gender" class="form-select" taria-label="Default select example">
-                        <option value="" disabled selected>Jenis Kelamin</option>
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
+                        <option value="" disabled selected>Unspecified</option>
+                        <option value="Laki-laki">Male</option>
+                        <option value="Perempuan">Female</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="inputDOB" class="form-label">Tanggal Lahir</label>
+                    <label for="inputDOB" class="form-label">Date of Birth</label>
                     <input name="birth-date" type="date" class="form-control" id="inputDOB" required>
                 </div>
                 <div class="mb-3">
-                    <label for="inputBerat" class="form-label">Berat Badan (KG)</label>
+                    <label for="inputBerat" class="form-label">Weight (KG)</label>
                     <input name="weight" type="number" class="form-control" id="inputBerat" required>
                 </div>
                 <div class="mb-3">
-                    <label for="inputTinggi" class="form-label">Tinggi Badan (CM)</label>
+                    <label for="inputTinggi" class="form-label">Height (CM)</label>
                     <input name="height" type="number" class="form-control" id="inputTinggi" required>
                 </div>
                 <div class="mb-3">
-                    <label for="inputTujuan" class="form-label">Tujuan</label>
+                    <label for="inputTujuan" class="form-label">Goals</label>
                     <select name="goal" class="form-select" aria-label="Default select example" required>
-                        <option value="" disabled selected>Pilih Tujuan</option>
-                        <option value="lose_weight">Menurunkan berat badan</option>
-                        <option value="build_muscle">Membesarkan otot</option>
-                        <option value="maintain">Pelihara stamina</option>
+                        <option value="" disabled selected>Select a goal</option>
+                        <option value="lose_weight">Reduce weight</option>
+                        <option value="build_muscle">Muscle gains</option>
+                        <option value="maintain">Maintain stamina</option>
                     </select>
                 </div>
                 <div class="container text-center mt-4">
-                    <button class="btn btn-custom" name="register" type="submit">Daftar</button>
+                    <button class="btn btn-custom" name="register" type="submit">Register</button>
                 </div>
         </form>
             
