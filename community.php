@@ -64,6 +64,11 @@ $komen = query("SELECT
         @media (max-width: 768px) {
             body {
                 background-size: contain;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;     /* Tinggi viewport penuh */
+                margin: 0;
             }
 
             body .dark-mode {
@@ -71,12 +76,17 @@ $komen = query("SELECT
             }
 
             
+            .parent {
+                margin: auto;
+            }
+
             .container {
                 flex-direction: column;
-                height: auto;
+                min-width: 90%;
                 /* Adjust height for smaller screens */
                 margin: 0;
-                padding: 0;
+                /* /* padding: 10px; */
+                padding-top: 10px !important;
                 /* Remove margins to utilize full screen width */
                 /* Add padding for better spacing */
             }
@@ -131,6 +141,7 @@ $komen = query("SELECT
                 overflow-y: auto; /* Allow vertical scrolling */
                 overflow-x: hidden; 
                 height: 400px;
+                padding-top: 5px;
                 /* Full width for comments section */
                 /* Add padding for better spacing */ 
                 /* Allow height to adjust based on content */
@@ -200,10 +211,6 @@ $komen = query("SELECT
         .show {
             display: block;
         }
-
-
-
-
 
         /* COMMUNITY CARD */
 
@@ -395,6 +402,8 @@ $komen = query("SELECT
             background-color: rgb(0, 0, 0);
             transform: scale(0.96);
         }
+
+
     </style>
 </head>
 
