@@ -70,11 +70,9 @@
 
 <body>
     <nav class="navbar">
-        <!-- <a href="./logic/logout.php">logout</a> -->
-        <a class="img" href="#top"><img src="./images/ambatugymwhite.png" alt=""></a>
         <div class="brand-text">
+            <a class="img" href="#top"><img src="./images/ambatugymwhite.png" alt=""></a>
             <h2>AmbatuGYM</h2>
-            <!-- <p>Fitness and Health Tracker</p> -->
         </div>
         <ul class="navbar-item">
             <li class="nav-list">
@@ -94,6 +92,14 @@
                 </div>
             </li>
         </ul>
+        <button class="navbar-toggle" onclick="openNav()">☰</button>
+        <div id="mySidenav" class="sidenav" style="margin-top: 60px;">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a href="dashboard.php">Dashboard</a>
+            <a href="exercise.php">Exercises</a>
+            <a href="community.php">Community</a>
+            <a href="./logic/logout.php" style="color: red;" onclick="logout()">Logout</a>
+        </div>
     </nav>
 
     <main>
@@ -254,9 +260,19 @@
                     var openDropdown = dropdowns[i];
                     if (openDropdown.classList.contains('show')) {
                         openDropdown.classList.remove('show');
-                        }
+                    }
                 }
             }
+        }
+
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("mySidenav").style.display = "block";
+            
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.display = "none";
         }
 
         //function untuk pop up daily training
