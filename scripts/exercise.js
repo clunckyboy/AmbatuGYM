@@ -18,6 +18,16 @@ function toggleDropdown() {
 
 // Kode JavaScript untuk mengelola tampilan latihan
 
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("mySidenav").style.display = "block";
+    
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.display = "none";
+}
+
 const exerciseLinks = document.querySelectorAll('.exercise-sidebar li');
 const exerciseContents = document.querySelectorAll('.exercise-content');
 
