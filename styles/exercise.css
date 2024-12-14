@@ -1,3 +1,39 @@
+@keyframes slideIn {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  #logout {
+    color: red;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 html {
     scroll-behavior: smooth;
@@ -46,6 +82,11 @@ body{
     /* margin: 10px; */
     width: 50px;
     height: 50px;
+}
+
+.brand-text {
+    display: flex;
+    align-items: center;
 }
 
 .brand-text h2{
@@ -125,6 +166,57 @@ body{
 .show {
     display: block;
 }
+
+.navbar-toggle {
+    display: none;
+}
+
+.sidenav {
+    display: none;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.815);
+    backdrop-filter: blur(20px);
+    overflow-x: hidden;
+    padding-top: 70px;
+    transition: 0.5s;
+    box-shadow: 2px 4px 20px rgba(0, 0, 0, 0.384);
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #ffffff;
+    display: block;
+    transition: 0.3s;
+}
+
+
+.sidenav a:hover {
+    color: #5e5e5e;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+
+
+
+
+
+
+
 
 /* Container utama untuk halaman Exercise */
 .exercise-page {
@@ -314,5 +406,22 @@ body{
     .exercise-details {
         width: 100%;
     }
-    
+
+    .navbar-item {
+        display: none;
+    }
+
+    .navbar-toggle {
+        display: block;
+        margin-right: 30px;
+        background-color: transparent;
+        border: none;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .navbar {
+        justify-content: space-between;
+    }
 }
