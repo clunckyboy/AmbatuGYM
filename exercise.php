@@ -41,8 +41,8 @@
 <body>
 
 <nav class="navbar">
-    <a class="img" href="#top"><img src="./images/ambatugymwhite.png" alt=""></a>
     <div class="brand-text">
+        <a class="img" href="#top"><img src="./images/ambatugymwhite.png" alt=""></a>
         <h2>AmbatuGYM</h2>
     </div>
     <ul class="navbar-item">
@@ -50,7 +50,7 @@
             <a class="nav-link" href="dashboard.php">Dashboard</a>
         </li>
         <li class="nav-list">
-            <a class="nav-link" href="exercise.php">Exercises</a>
+            <a class="nav-link" href="#">Exercises</a>
         </li>
         <li class="nav-list">
             <a class="nav-link" href="community.php">Community</a>
@@ -63,6 +63,14 @@
             </div>
         </li>
     </ul>
+    <button class="navbar-toggle" onclick="openNav()">☰</button>
+    <div id="mySidenav" class="sidenav" style="margin-top: 60px;">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="dashboard.php">Dashboard</a>
+        <a href="#">Exercises</a>
+        <a href="community.php">Community</a>
+        <a href="./logic/logout.php" style="color: red;" onclick="logout()">Logout</a>
+    </div>
 </nav>
 
 

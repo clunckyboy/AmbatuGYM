@@ -423,7 +423,7 @@ $komen = query("SELECT
         <div class="navbar-links" id="navbarLinks">
             <a href="dashboard.php">Dashboard</a>
             <a href="exercise.php">Exercises</a>
-            <a href="community.php">Community</a>
+            <a href="#">Community</a>
             <div class="profile-container">
                 <img src="./user_pp/<?= $_SESSION['user']['profile_photo'] ?>" alt="Profile Picture"
                     class="profile-pic-small" onclick="toggleDropdown()">
@@ -439,7 +439,7 @@ $komen = query("SELECT
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="dashboard.php">Dashboard</a>
         <a href="exercise.php">Exercises</a>
-        <a href="community.php">Community</a>
+        <a href="#">Community</a>
         <a href="./logic/logout.php" style="color: red;" onclick="logout()">Logout</a>
     </div>
 
